@@ -1,0 +1,4 @@
+interface:
+  display_name: "Experience Reconstruction"
+  short_description: "Build complete UI and device interaction journeys"
+  default_prompt: "Use $reconstruct-experience to handle the relevant part of this reconstruction using explicit evidence and scoped acceptance criteria."

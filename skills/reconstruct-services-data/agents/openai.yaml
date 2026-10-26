@@ -1,0 +1,4 @@
+interface:
+  display_name: "Services and Data Reconstruction"
+  short_description: "Build domain contracts and durable state changes"
+  default_prompt: "Use $reconstruct-services-data to handle the relevant part of this reconstruction using explicit evidence and scoped acceptance criteria."
