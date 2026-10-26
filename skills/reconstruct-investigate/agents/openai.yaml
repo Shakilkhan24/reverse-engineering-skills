@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reference Investigator"
+  short_description: "Discover reference behavior from bounded evidence"
+  default_prompt: "Use $reconstruct-investigate to handle the relevant part of this reconstruction using explicit evidence and scoped acceptance criteria."

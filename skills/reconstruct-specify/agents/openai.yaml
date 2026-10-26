@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reconstruction Specification"
+  short_description: "Turn evidence into contracts and coherent slices"
+  default_prompt: "Use $reconstruct-specify to handle the relevant part of this reconstruction using explicit evidence and scoped acceptance criteria."
