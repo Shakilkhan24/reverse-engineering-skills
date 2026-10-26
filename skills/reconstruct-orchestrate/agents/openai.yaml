@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reconstruction Coordinator"
+  short_description: "Coordinate evidence, slices, and verification"
+  default_prompt: "Use $reconstruct-orchestrate to handle the relevant part of this reconstruction using explicit evidence and scoped acceptance criteria."

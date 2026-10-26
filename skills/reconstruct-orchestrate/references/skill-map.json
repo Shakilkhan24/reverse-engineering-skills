@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "version": "1.0.0",
+  "skills": [
+    {
+      "name": "reconstruct-orchestrate",
+      "purpose": "Scope, route, integrate, and preserve project state",
+      "activate_when": "An identified reconstruction spans workstreams or needs resuming",
+      "prerequisites": [
+        "Target/outcome and workspace context"
+      ],
+      "outputs": [
+        "Scope",
+        "selected workstreams",
+        "checkpoint",
+        "bounded delivery report"
+      ],
+      "requires_skills": []
+    },
+    {
+      "name": "reconstruct-investigate",
+      "purpose": "Resolve reference behavior from evidence",
+      "activate_when": "Relevant behavior is uncertain, stale, or contradictory",
+      "prerequisites": [
+        "Explicit target",
+        "bounded question",
+        "access boundary"
+      ],
+      "outputs": [
+        "Evidence",
+        "feature map",
+        "unknowns"
+      ],
+      "requires_skills": [
+        "reconstruct-orchestrate"
+      ]
+    },
+    {
+      "name": "reconstruct-specify",
+      "purpose": "Define contracts and replacement architecture",
+      "activate_when": "Evidence or user outcomes need testable requirements",
+      "prerequisites": [
+        "Outcome",
+        "evidence and unknowns",
+        "repository constraints"
+      ],
+      "outputs": [
+        "Requirements",
+        "scenarios",
+        "decisions",
+        "slice backlog"
+      ],
+      "requires_skills": [
+        "reconstruct-orchestrate"
+      ]
+    },
+    {
+      "name": "reconstruct-experience",
+      "purpose": "Implement UI and device journeys",
+      "activate_when": "Accepted scope includes interface or interaction changes",
+      "prerequisites": [
+        "Behavior/state contract",
+        "environment and assets"
+      ],
+      "outputs": [
+        "Working experience",
+        "interaction evidence",
+        "accessibility findings"
+      ],
+      "requires_skills": [
+        "reconstruct-orchestrate"
+      ]
+    },
+    {
+      "name": "reconstruct-services-data",
+      "purpose": "Implement domain operations and durable state",
+      "activate_when": "Accepted scope includes APIs, persistence, jobs, or integrations",
+      "prerequisites": [
+        "Interface/state contract",
+        "ownership and invariants"
+      ],
+      "outputs": [
+        "Working slice",
+        "migration and recovery strategy",
+        "tests"
+      ],
+      "requires_skills": [
+        "reconstruct-orchestrate"
+      ]
+    },
+    {
+      "name": "reconstruct-assure",
+      "purpose": "Review consequential security and failure risks",
+      "activate_when": "Trust boundaries, sensitive data, consequential effects, or review requested",
+      "prerequisites": [
+        "Risk scope",
+        "flows and constraints"
+      ],
+      "outputs": [
+        "Threats",
+        "safeguards",
+        "risk findings"
+      ],
+      "requires_skills": [
+        "reconstruct-orchestrate"
+      ]
+    },
+    {
+      "name": "reconstruct-verify",
+      "purpose": "Evaluate finite acceptance and compatibility claims",
+      "activate_when": "A running slice or completion claim needs checking",
+      "prerequisites": [
+        "Scenarios",
+        "candidate identity",
+        "oracle and fixtures"
+      ],
+      "outputs": [
+        "Executed results",
+        "discrepancies",
+        "bounded verification report"
+      ],
+      "requires_skills": [
+        "reconstruct-orchestrate"
+      ]
+    },
+    {
+      "name": "reconstruct-operate",
+      "purpose": "Prepare reproducible delivery and recovery",
+      "activate_when": "Deployment, packaging, telemetry, capacity, or operations are in scope",
+      "prerequisites": [
+        "Destination",
+        "build/config contract",
+        "risk requirements"
+      ],
+      "outputs": [
+        "Release artifacts",
+        "runbooks",
+        "operational evidence"
+      ],
+      "requires_skills": [
+        "reconstruct-orchestrate"
+      ]
+    }
+  ]
+}
