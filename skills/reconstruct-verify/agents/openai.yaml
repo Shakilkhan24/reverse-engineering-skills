@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reconstruction Verification"
+  short_description: "Test compatibility and preserve executed evidence"
+  default_prompt: "Use $reconstruct-verify to handle the relevant part of this reconstruction using explicit evidence and scoped acceptance criteria."

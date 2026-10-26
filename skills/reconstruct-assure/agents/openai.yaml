@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reconstruction Assurance"
+  short_description: "Review material security and reliability risks"
+  default_prompt: "Use $reconstruct-assure to handle the relevant part of this reconstruction using explicit evidence and scoped acceptance criteria."
