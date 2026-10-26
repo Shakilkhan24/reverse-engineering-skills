@@ -1,0 +1,1 @@
+Help me reconstruct the export behavior of LedgerDesk. The only reference material I have is a text note: the screenshot shows an Export CSV button next to a list of invoices. I cannot provide a login or application package. For this session deliver a scoped reconstruction specification and evidence record; do not implement the app. Browser and REA access are unavailable.

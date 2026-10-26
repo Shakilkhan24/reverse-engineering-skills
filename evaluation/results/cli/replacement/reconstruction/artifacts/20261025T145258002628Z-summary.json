@@ -1,0 +1,42 @@
+{
+  "scenarios_passed": 7,
+  "scenarios_total": 7,
+  "paired_invocations": 78,
+  "results": {
+    "S-001": {
+      "result": "PASS",
+      "comparisons": 18,
+      "errors": []
+    },
+    "S-002": {
+      "result": "PASS",
+      "comparisons": 7,
+      "errors": []
+    },
+    "S-003": {
+      "result": "PASS",
+      "comparisons": 15,
+      "errors": []
+    },
+    "S-004": {
+      "result": "PASS",
+      "comparisons": 12,
+      "errors": []
+    },
+    "S-005": {
+      "result": "PASS",
+      "comparisons": 10,
+      "errors": []
+    },
+    "S-006": {
+      "result": "PASS",
+      "comparisons": 6,
+      "errors": []
+    },
+    "S-007": {
+      "result": "PASS",
+      "comparisons": 10,
+      "errors": []
+    }
+  }
+}

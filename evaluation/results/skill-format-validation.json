@@ -1,0 +1,50 @@
+[
+  {
+    "skill": "reconstruct-assure",
+    "exit_code": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  },
+  {
+    "skill": "reconstruct-experience",
+    "exit_code": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  },
+  {
+    "skill": "reconstruct-investigate",
+    "exit_code": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  },
+  {
+    "skill": "reconstruct-operate",
+    "exit_code": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  },
+  {
+    "skill": "reconstruct-orchestrate",
+    "exit_code": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  },
+  {
+    "skill": "reconstruct-services-data",
+    "exit_code": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  },
+  {
+    "skill": "reconstruct-specify",
+    "exit_code": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  },
+  {
+    "skill": "reconstruct-verify",
+    "exit_code": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  }
+]

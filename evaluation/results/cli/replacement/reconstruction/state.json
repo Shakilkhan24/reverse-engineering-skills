@@ -1,0 +1,478 @@
+{
+  "schema_version": 1,
+  "project": {
+    "target": "/tmp/reconstruction-eval-hqb9cfqq/cli/reference.py",
+    "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+    "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+    "scope_accepted": true
+  },
+  "evidence": [
+    {
+      "id": "E-001",
+      "classification": "OBSERVED",
+      "claim": "The inspected source defines argparse options, SQLite schema, JSON outputs, mutations, and error codes as recorded in scope.md.",
+      "source": "artifacts/reference-source.txt:1-24 (copy of target ../reference.py from replacement directory)",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "captured_at": "2026-10-25T14:50:15.873457+00:00",
+      "method": "Read the complete 1171-byte Python source and bind it by SHA-256.",
+      "limitations": "Static inspection establishes source contents; runtime checks are separate.",
+      "confidence": "high",
+      "freshness": "current"
+    },
+    {
+      "id": "E-002",
+      "classification": "OBSERVED",
+      "claim": "Eight reference invocations exhibit empty listing, validation failure, successful/idempotent insertion, conflict, persisted listing, successful deletion, and absent deletion.",
+      "source": "artifacts/discovery.json",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "captured_at": "2026-10-25T14:50:15.873457+00:00",
+      "method": "Execute the specified reference with a new synthetic SQLite fixture in isolated replacement/fixtures/discovery.",
+      "limitations": "Single local Python 3.12 / SQLite runtime; not all inputs or concurrent interleavings.",
+      "confidence": "high",
+      "freshness": "current"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "R-001",
+      "description": "Preserve argparse grammar, help, diagnostics, and parser exit codes.",
+      "dimension": "CLI",
+      "priority": "high",
+      "status": "VERIFIED",
+      "claim_type": "equivalence",
+      "required": true,
+      "evidence": [
+        "E-001",
+        "E-002"
+      ],
+      "decisions": [
+        "D-001"
+      ],
+      "implementation": [
+        "replacement.py:main"
+      ],
+      "scenarios": [
+        "S-001"
+      ]
+    },
+    {
+      "id": "R-002",
+      "description": "Create and reuse the observed SQLite schema, including before semantic validation.",
+      "dimension": "persistence",
+      "priority": "high",
+      "status": "VERIFIED",
+      "claim_type": "equivalence",
+      "required": true,
+      "evidence": [
+        "E-001",
+        "E-002"
+      ],
+      "decisions": [
+        "D-001"
+      ],
+      "implementation": [
+        "replacement.py:main"
+      ],
+      "scenarios": [
+        "S-002"
+      ]
+    },
+    {
+      "id": "R-003",
+      "description": "Preserve put validation, exact strings, idempotency, conflicts, and persistence.",
+      "dimension": "domain",
+      "priority": "high",
+      "status": "VERIFIED",
+      "claim_type": "equivalence",
+      "required": true,
+      "evidence": [
+        "E-001",
+        "E-002"
+      ],
+      "decisions": [
+        "D-001"
+      ],
+      "implementation": [
+        "replacement.py:main"
+      ],
+      "scenarios": [
+        "S-003"
+      ]
+    },
+    {
+      "id": "R-004",
+      "description": "List items using SQLite key order and default JSON formatting; ignore optional extra positional arguments.",
+      "dimension": "output",
+      "priority": "high",
+      "status": "VERIFIED",
+      "claim_type": "equivalence",
+      "required": true,
+      "evidence": [
+        "E-001",
+        "E-002"
+      ],
+      "decisions": [
+        "D-001"
+      ],
+      "implementation": [
+        "replacement.py:main"
+      ],
+      "scenarios": [
+        "S-004"
+      ]
+    },
+    {
+      "id": "R-005",
+      "description": "Preserve remove validation, row-count result, duplicate removal, and ignored optional value.",
+      "dimension": "domain",
+      "priority": "high",
+      "status": "VERIFIED",
+      "claim_type": "equivalence",
+      "required": true,
+      "evidence": [
+        "E-001",
+        "E-002"
+      ],
+      "decisions": [
+        "D-001"
+      ],
+      "implementation": [
+        "replacement.py:main"
+      ],
+      "scenarios": [
+        "S-005"
+      ]
+    },
+    {
+      "id": "R-006",
+      "description": "Use compatible SQLite files and preserve terminal SQLite failure behavior.",
+      "dimension": "storage interoperability",
+      "priority": "high",
+      "status": "VERIFIED",
+      "claim_type": "equivalence",
+      "required": true,
+      "evidence": [
+        "E-001",
+        "E-002"
+      ],
+      "decisions": [
+        "D-001"
+      ],
+      "implementation": [
+        "replacement.py:main"
+      ],
+      "scenarios": [
+        "S-006",
+        "S-007"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D-001",
+      "decision": "Use the standard-library argparse, sqlite3, and json modules with their reference defaults and matching operation order.",
+      "rationale": "They reproduce the observed grammar, storage format, collation, transactions, and output without added dependencies. Preserve the simple conflict check and insert-or-ignore behavior; no stronger concurrency guarantee is claimed.",
+      "evidence": [
+        "E-001",
+        "E-002"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "S-001",
+      "requirement": "R-001",
+      "description": "Compare help, missing/invalid options, extra positional arguments, abbreviations, option placement, and -- handling.",
+      "expected": "Exact stdout/stderr bytes and exit codes after normalizing only entrypoint basename; parse failures create no database."
+    },
+    {
+      "id": "S-002",
+      "requirement": "R-002",
+      "description": "Run list, invalid put/remove, and parser failure on distinct fresh paths; inspect table schema and state.",
+      "expected": "Reference and replacement match database existence, schema SQL, rows, response bytes, and codes."
+    },
+    {
+      "id": "S-003",
+      "requirement": "R-003",
+      "description": "Sequentially insert, retry, conflict, and use empty, Unicode, whitespace, escaped, and SQL-like strings across processes.",
+      "expected": "Outputs, return codes, stored rows, and schema match reference after every command."
+    },
+    {
+      "id": "S-004",
+      "requirement": "R-004",
+      "description": "Populate mixed-case, numeric-looking, Unicode, whitespace keys and list with zero, one, and two optional operands.",
+      "expected": "Byte-for-byte JSON and SQLite state match, retaining ordered keys and escaped strings."
+    },
+    {
+      "id": "S-005",
+      "requirement": "R-005",
+      "description": "Remove present, missing, empty, and absent keys; repeat removal and supply unused value.",
+      "expected": "Exact JSON, codes, durable state, and schema match reference."
+    },
+    {
+      "id": "S-006",
+      "requirement": "R-006",
+      "description": "Open corrupt database, missing parent path, and incompatible existing schema.",
+      "expected": "Return code, stdout, terminal exception class/message, and resulting data state match. Traceback source paths/lines are implementation-specific."
+    },
+    {
+      "id": "S-007",
+      "requirement": "R-006",
+      "description": "Alternate writes and reads by the reference and replacement on the same database, with a paired reference-only control database.",
+      "expected": "All output and logical database state match the reference-only control across process boundaries."
+    }
+  ],
+  "runs": [
+    {
+      "id": "T-20261025T145258002628Z-S-001",
+      "scenario": "S-001",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "b506d6cc20d9b5d89a380acab21a5fcb3704f8d019be1ffac6088b5caa2b508b",
+      "executed_at": "2026-10-25T14:52:58.124631+00:00",
+      "command": "python3 check_compatibility.py (scenario S-001)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145258002628Z-S-001.json",
+        "sha256": "f46c8b597f7f96788073af089d9b957a74d55bb8a7b6b8e713390bd3e4d61b51"
+      }
+    },
+    {
+      "id": "T-20261025T145258002628Z-S-002",
+      "scenario": "S-002",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "f525fdf896845db65ae66f64d526d6bb7634a74e940a7d855927b05cf62bf53c",
+      "executed_at": "2026-10-25T14:52:59.390521+00:00",
+      "command": "python3 check_compatibility.py (scenario S-002)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145258002628Z-S-002.json",
+        "sha256": "9b7e9392bdd57772f0743ad6b45e67d3b2a2bc05a78d23d55b4a92cce0d2b93c"
+      }
+    },
+    {
+      "id": "T-20261025T145258002628Z-S-003",
+      "scenario": "S-003",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "4b1cc84b868052026ecd9fc88585ae88175fe64ea821e42d8b36ef5a75a5897f",
+      "executed_at": "2026-10-25T14:53:00.011603+00:00",
+      "command": "python3 check_compatibility.py (scenario S-003)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145258002628Z-S-003.json",
+        "sha256": "10b33727b2f083ba69d3b9cb54aa08ef2e09e006bd9d265b1c1c0e7e44e7065c"
+      }
+    },
+    {
+      "id": "T-20261025T145258002628Z-S-004",
+      "scenario": "S-004",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "e38a0bcb61540626a7f82a186470446744d4e8ed272352afb92c4b0a4e86cbe7",
+      "executed_at": "2026-10-25T14:53:01.103489+00:00",
+      "command": "python3 check_compatibility.py (scenario S-004)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145258002628Z-S-004.json",
+        "sha256": "ffd78d1e1f708c4f616764c049c6836e1b5472d43e1e25b85b99fcc7db64f777"
+      }
+    },
+    {
+      "id": "T-20261025T145258002628Z-S-005",
+      "scenario": "S-005",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "21b83c32aab7bb904ba5f85022bd45561fdf580e39b065e197941217c9ab637d",
+      "executed_at": "2026-10-25T14:53:02.059598+00:00",
+      "command": "python3 check_compatibility.py (scenario S-005)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145258002628Z-S-005.json",
+        "sha256": "0d7e45c27df06577f507b481869f2fc103a1498b62c47cebcc4573dafd5991cf"
+      }
+    },
+    {
+      "id": "T-20261025T145258002628Z-S-006",
+      "scenario": "S-006",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "f1deeb03f3e75bfa7ff558ca27c25026415f0a8188ff75f9a3bea6feec9bd267",
+      "executed_at": "2026-10-25T14:53:02.895931+00:00",
+      "command": "python3 check_compatibility.py (scenario S-006)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145258002628Z-S-006.json",
+        "sha256": "1e6ad9430d22d682628441fe25a2a7d6f1d1eec315ae059d27cb7582793ec342"
+      }
+    },
+    {
+      "id": "T-20261025T145258002628Z-S-007",
+      "scenario": "S-007",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "e10801bd5800215fde12b88cc40d29f6bd66bc9041a42f4e72ad93694123dcb1",
+      "executed_at": "2026-10-25T14:53:04.134643+00:00",
+      "command": "python3 check_compatibility.py (scenario S-007)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145258002628Z-S-007.json",
+        "sha256": "d86d8011c75996a1ae22a43daf92a3f2c0c2bb18f892a2a27624dc548c92c07f"
+      }
+    },
+    {
+      "id": "T-20261025T145528258831Z-S-001",
+      "scenario": "S-001",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "11b922baf1fe24ae7e0fea870456d8a28d74a5cdf430a924837e8235d379b519",
+      "executed_at": "2026-10-25T14:55:28.368013+00:00",
+      "command": "python3 check_compatibility.py (scenario S-001)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145528258831Z-S-001.json",
+        "sha256": "f9682cdc5cb76d68e7e9b36d5bb925720c11e1fa66f65bda95ec7c2b0f8acfe3"
+      }
+    },
+    {
+      "id": "T-20261025T145528258831Z-S-002",
+      "scenario": "S-002",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "57303aa1ec9cfc633db9ec75854a45e9a52d50f4daa1d19a10e6f694e096212b",
+      "executed_at": "2026-10-25T14:55:29.632452+00:00",
+      "command": "python3 check_compatibility.py (scenario S-002)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145528258831Z-S-002.json",
+        "sha256": "224f77c53700908b1639122293363e58912543db579587e2bf4198eb505ae109"
+      }
+    },
+    {
+      "id": "T-20261025T145528258831Z-S-003",
+      "scenario": "S-003",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "c7c835c174ea67e20e172038036f38285398473701d37880dc4be117be6c26c1",
+      "executed_at": "2026-10-25T14:55:30.228565+00:00",
+      "command": "python3 check_compatibility.py (scenario S-003)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145528258831Z-S-003.json",
+        "sha256": "aaf38b30326124db2f56e0e9f647a8d48756c5525529f61e039010d8d140c10f"
+      }
+    },
+    {
+      "id": "T-20261025T145528258831Z-S-004",
+      "scenario": "S-004",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "62fd6a2417c0175e9064a81cd5c6b08ca745ee82eeb914199d06b23683e5903c",
+      "executed_at": "2026-10-25T14:55:31.281329+00:00",
+      "command": "python3 check_compatibility.py (scenario S-004)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145528258831Z-S-004.json",
+        "sha256": "a306d3239a30b5e56fc3134f6110679db885516c4a0a8949531b632db7ca3289"
+      }
+    },
+    {
+      "id": "T-20261025T145528258831Z-S-005",
+      "scenario": "S-005",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "5071372e1bb4fc85ba7ee4984ebe2a86264ef34b90e65c4cd9a1bd0e522b617e",
+      "executed_at": "2026-10-25T14:55:32.164015+00:00",
+      "command": "python3 check_compatibility.py (scenario S-005)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145528258831Z-S-005.json",
+        "sha256": "f49f8a810e76db01827ffbd5c63f7703112d7e8972d896722d643ae9ca156c27"
+      }
+    },
+    {
+      "id": "T-20261025T145528258831Z-S-006",
+      "scenario": "S-006",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "35081bab96555cbb6c5ed932806f7d0ab4174c5ee2c9b20d277adcb481057ab3",
+      "executed_at": "2026-10-25T14:55:32.934169+00:00",
+      "command": "python3 check_compatibility.py (scenario S-006)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145528258831Z-S-006.json",
+        "sha256": "a51631a969f1d3f4f27f453df5f88b686b0bbb4bbf27ea98840997b0c60467ca"
+      }
+    },
+    {
+      "id": "T-20261025T145528258831Z-S-007",
+      "scenario": "S-007",
+      "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+      "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+      "contract_sha256": "df409dd002c8e0ed90dd07d6b6f6ee32f07be038e2ee8d17150b8f479439246a",
+      "executed_at": "2026-10-25T14:55:34.019020+00:00",
+      "command": "python3 check_compatibility.py (scenario S-007)",
+      "environment": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39; Python 3.12.3; SQLite 3.45.1; C.UTF-8; shared basename keyvalue.py; standard-library subprocess and file fixtures",
+      "result": "PASS",
+      "comparison": "equivalent",
+      "artifact": {
+        "path": "artifacts/20261025T145528258831Z-S-007.json",
+        "sha256": "c8ee81207efde4ba64f9ee1042862e0e16dbacc5f04075408a2b94a25da6fef6"
+      }
+    }
+  ],
+  "unknowns": [
+    {
+      "id": "U-001",
+      "description": "Concurrent races, filesystem lock timeouts, crash durability, other Python/SQLite versions, and exotic pre-existing schemas are not exhaustively tested.",
+      "severity": "normal",
+      "status": "deferred",
+      "requirements": [],
+      "evidence": [
+        "E-001"
+      ],
+      "next_action": "If those deployment conditions become required, add controlled interleaving/runtime-specific comparisons before extending the claim.",
+      "rationale": "User scope is a local CLI; the finite standard-environment compatibility checks and observed default SQLite behavior define this delivery."
+    }
+  ],
+  "discrepancies": [],
+  "checkpoint": {
+    "summary": "Delivered replacement and evaluation report. Seven current differential scenarios pass across 78 paired CLI invocations; six requirements verified. Earlier passing run retained after source-range metadata correction invalidated its fingerprints.",
+    "next_action": "No required work remains. On changed target, code, or contract, review scope and rerun check_compatibility.py, then helper validate/report/gate.",
+    "blockers": []
+  },
+  "record_corrections": [
+    {
+      "field": "E-001.source",
+      "reason": "Final line-count check corrected the source range from 1-23 to 1-24. Source content and product code did not change; fresh fingerprints and rerun required.",
+      "previous_runs_retained": true
+    }
+  ]
+}

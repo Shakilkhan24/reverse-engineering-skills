@@ -1,0 +1,7 @@
+{
+  "status": "complete",
+  "completed_independent_trial": "results/cli/replacement/evaluation-result.md",
+  "completed_sequential_trial": "results/missing-access/evaluation-result.md",
+  "validation_report": "../docs/validation-report.md",
+  "interrupted_attempts": "Temporary partial attempts lost during continuation are not counted as completed trials."
+}

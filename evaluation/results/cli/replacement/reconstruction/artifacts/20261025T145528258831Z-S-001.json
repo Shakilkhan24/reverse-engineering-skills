@@ -1,0 +1,965 @@
+{
+  "scenario": "S-001",
+  "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+  "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+  "contract_sha256": "11b922baf1fe24ae7e0fea870456d8a28d74a5cdf430a924837e8235d379b519",
+  "executed_at": "2026-10-25T14:55:28.368013+00:00",
+  "harness_sha256": "2e6be202bcfc948c456f5946d2299341603d4d8855a12d00ff285e3a68ff2337",
+  "helper_sha256": "eb0e35a1b340b2be8b3f10cf1fc58fc4802467558d5fa62ba58a4e1a71484ef1",
+  "fixture_root": "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001",
+  "result": "PASS",
+  "steps": [
+    {
+      "args": [],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: the following arguments are required: --db, action\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: the following arguments are required: --db, action\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--help"
+        ],
+        "returncode": 0,
+        "stdout": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\n\npositional arguments:\n  {put,list,remove}\n  key\n  value\n\noptions:\n  -h, --help         show this help message and exit\n  --db DB\n",
+        "stderr": "",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--help"
+        ],
+        "returncode": 0,
+        "stdout": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\n\npositional arguments:\n  {put,list,remove}\n  key\n  value\n\noptions:\n  -h, --help         show this help message and exit\n  --db DB\n",
+        "stderr": "",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "-h"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "-h"
+        ],
+        "returncode": 0,
+        "stdout": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\n\npositional arguments:\n  {put,list,remove}\n  key\n  value\n\noptions:\n  -h, --help         show this help message and exit\n  --db DB\n",
+        "stderr": "",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "-h"
+        ],
+        "returncode": 0,
+        "stdout": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\n\npositional arguments:\n  {put,list,remove}\n  key\n  value\n\noptions:\n  -h, --help         show this help message and exit\n  --db DB\n",
+        "stderr": "",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-3.sqlite"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: the following arguments are required: action\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-3.sqlite"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: the following arguments are required: action\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "list"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: the following arguments are required: --db\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "list"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: the following arguments are required: --db\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: argument --db: expected one argument\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: argument --db: expected one argument\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "bogus"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-6.sqlite",
+          "bogus"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: argument action: invalid choice: 'bogus' (choose from 'put', 'list', 'remove')\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-6.sqlite",
+          "bogus"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: argument action: invalid choice: 'bogus' (choose from 'put', 'list', 'remove')\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list",
+        "a",
+        "b",
+        "c"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-7.sqlite",
+          "list",
+          "a",
+          "b",
+          "c"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: unrecognized arguments: c\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-7.sqlite",
+          "list",
+          "a",
+          "b",
+          "c"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: unrecognized arguments: c\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list",
+        "--unknown"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-8.sqlite",
+          "list",
+          "--unknown"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: unrecognized arguments: --unknown\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-8.sqlite",
+          "list",
+          "--unknown"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: unrecognized arguments: --unknown\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--d",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--d",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-9.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--d",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-9.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db=<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db=/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-10.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db=/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-10.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "list",
+        "--db",
+        "<DB>"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "list",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-11.sqlite"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "list",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-11.sqlite"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "put",
+        "--db",
+        "<DB>",
+        "k",
+        "v"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "put",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-12.sqlite",
+          "k",
+          "v"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: unrecognized arguments: k v\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "put",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-12.sqlite",
+          "k",
+          "v"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: unrecognized arguments: k v\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "--",
+        "put",
+        "-key",
+        "-value"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-13.sqlite",
+          "--",
+          "put",
+          "-key",
+          "-value"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"-key\", \"value\": \"-value\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "-key",
+              "-value"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-13.sqlite",
+          "--",
+          "put",
+          "-key",
+          "-value"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"-key\", \"value\": \"-value\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "-key",
+              "-value"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "k",
+        "--"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-14.sqlite",
+          "put",
+          "k",
+          "--"
+        ],
+        "returncode": 2,
+        "stdout": "{\"error\": \"key and value required\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-14.sqlite",
+          "put",
+          "k",
+          "--"
+        ],
+        "returncode": 2,
+        "stdout": "{\"error\": \"key and value required\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "-1",
+        "-2"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-15.sqlite",
+          "put",
+          "-1",
+          "-2"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"-1\", \"value\": \"-2\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "-1",
+              "-2"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-15.sqlite",
+          "put",
+          "-1",
+          "-2"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"-1\", \"value\": \"-2\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "-1",
+              "-2"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "PUT"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-16.sqlite",
+          "PUT"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: argument action: invalid choice: 'PUT' (choose from 'put', 'list', 'remove')\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-16.sqlite",
+          "PUT"
+        ],
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "usage: keyvalue.py [-h] --db DB {put,list,remove} [key] [value]\nkeyvalue.py: error: argument action: invalid choice: 'PUT' (choose from 'put', 'list', 'remove')\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list",
+        "unused",
+        "ignored"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/reference/case-17.sqlite",
+          "list",
+          "unused",
+          "ignored"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145528258831Z/S-001/replacement/case-17.sqlite",
+          "list",
+          "unused",
+          "ignored"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    }
+  ],
+  "errors": []
+}

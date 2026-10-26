@@ -1,0 +1,74 @@
+[
+  {
+    "args": [
+      "list"
+    ],
+    "returncode": 0,
+    "stdout": "[]\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "put"
+    ],
+    "returncode": 2,
+    "stdout": "{\"error\": \"key and value required\"}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "put",
+      "a",
+      "1"
+    ],
+    "returncode": 0,
+    "stdout": "{\"key\": \"a\", \"value\": \"1\"}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "put",
+      "a",
+      "1"
+    ],
+    "returncode": 0,
+    "stdout": "{\"key\": \"a\", \"value\": \"1\"}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "put",
+      "a",
+      "2"
+    ],
+    "returncode": 3,
+    "stdout": "{\"error\": \"key conflict\"}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "list"
+    ],
+    "returncode": 0,
+    "stdout": "[{\"key\": \"a\", \"value\": \"1\"}]\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "remove",
+      "a"
+    ],
+    "returncode": 0,
+    "stdout": "{\"removed\": true}\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "remove",
+      "a"
+    ],
+    "returncode": 0,
+    "stdout": "{\"removed\": false}\n",
+    "stderr": ""
+  }
+]

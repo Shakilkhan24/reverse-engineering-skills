@@ -1,0 +1,372 @@
+{
+  "scenario": "S-006",
+  "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+  "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+  "contract_sha256": "f1deeb03f3e75bfa7ff558ca27c25026415f0a8188ff75f9a3bea6feec9bd267",
+  "executed_at": "2026-10-25T14:53:02.895931+00:00",
+  "harness_sha256": "2e6be202bcfc948c456f5946d2299341603d4d8855a12d00ff285e3a68ff2337",
+  "helper_sha256": "eb0e35a1b340b2be8b3f10cf1fc58fc4802467558d5fa62ba58a4e1a71484ef1",
+  "fixture_root": "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006",
+  "result": "PASS",
+  "steps": [
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/corrupt.sqlite",
+          "list"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py\", line 9, in <module>\n    c.execute('create table if not exists items (key text primary key, value text not null)')\nsqlite3.DatabaseError: file is not a database\n",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "error": "DatabaseError: file is not a database"
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/corrupt.sqlite",
+          "list"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py\", line 56, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py\", line 16, in main\n    connection.execute(\nsqlite3.DatabaseError: file is not a database\n",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "error": "DatabaseError: file is not a database"
+        }
+      },
+      "exception_comparison": true,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>/missing.sqlite",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/missing-parent.sqlite/missing.sqlite",
+          "list"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py\", line 8, in <module>\n    c=sqlite3.connect(a.db)\n      ^^^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: unable to open database file\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/missing-parent.sqlite/missing.sqlite",
+          "list"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py\", line 56, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py\", line 15, in main\n    connection = sqlite3.connect(args.db)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: unable to open database file\n",
+        "state": {
+          "exists": false
+        }
+      },
+      "exception_comparison": true,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/directory.sqlite",
+          "list"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py\", line 8, in <module>\n    c=sqlite3.connect(a.db)\n      ^^^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: unable to open database file\n",
+        "state": {
+          "exists": true,
+          "kind": "directory"
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/directory.sqlite",
+          "list"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py\", line 56, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py\", line 15, in main\n    connection = sqlite3.connect(args.db)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: unable to open database file\n",
+        "state": {
+          "exists": true,
+          "kind": "directory"
+        }
+      },
+      "exception_comparison": true,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/schema.sqlite",
+          "list"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py\", line 19, in <module>\n    print(json.dumps([{'key':k,'value':v} for k,v in c.execute('select key,value from items order by key')]))\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: no such column: key\n",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (other text)"
+            ]
+          ],
+          "rows": [
+            [
+              "retained"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/schema.sqlite",
+          "list"
+        ],
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py\", line 56, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py\", line 38, in main\n    for key, value in connection.execute(\n                      ^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: no such column: key\n",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (other text)"
+            ]
+          ],
+          "rows": [
+            [
+              "retained"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": true,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/integer.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"number\", \"value\": 7}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value integer)"
+            ]
+          ],
+          "rows": [
+            [
+              "number",
+              7
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/integer.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"number\", \"value\": 7}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value integer)"
+            ]
+          ],
+          "rows": [
+            [
+              "number",
+              7
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "number",
+        "7"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/reference/integer.sqlite",
+          "put",
+          "number",
+          "7"
+        ],
+        "returncode": 3,
+        "stdout": "{\"error\": \"key conflict\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value integer)"
+            ]
+          ],
+          "rows": [
+            [
+              "number",
+              7
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-006/replacement/integer.sqlite",
+          "put",
+          "number",
+          "7"
+        ],
+        "returncode": 3,
+        "stdout": "{\"error\": \"key conflict\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value integer)"
+            ]
+          ],
+          "rows": [
+            [
+              "number",
+              7
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    }
+  ],
+  "errors": []
+}

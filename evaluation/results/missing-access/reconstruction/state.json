@@ -1,0 +1,320 @@
+{
+  "schema_version": 1,
+  "project": {
+    "target": "LedgerDesk invoice export described by a user note",
+    "target_version": "note-sha256:9eaf718cbb1a5a443124f168e72bdb8a7e43974fa2ffb683f9060b9bb4e5f32e",
+    "replacement_revision": "UNSET",
+    "scope_accepted": true
+  },
+  "evidence": [
+    {
+      "id": "E-001",
+      "classification": "DOCUMENTED",
+      "claim": "The user reports an Export CSV button next to an invoice list; no screenshot itself was supplied.",
+      "source": "artifacts/source-note.txt",
+      "target_version": "note-sha256:9eaf718cbb1a5a443124f168e72bdb8a7e43974fa2ffb683f9060b9bb4e5f32e",
+      "captured_at": "2026-10-26T04:13:35.708490+00:00",
+      "method": "Read the supplied text note and hash its bytes. No application or image inspected.",
+      "limitations": "Establishes the contents of a user report, not original UI or export behavior; application identity/version unknown.",
+      "confidence": "high",
+      "freshness": "current"
+    },
+    {
+      "id": "E-002",
+      "classification": "ASSUMED",
+      "claim": "The provisional independent export contract in specification.md supplies testable future design choices.",
+      "source": "specification.md",
+      "target_version": "note-sha256:9eaf718cbb1a5a443124f168e72bdb8a7e43974fa2ffb683f9060b9bb4e5f32e",
+      "captured_at": "2026-10-26T04:13:35.708490+00:00",
+      "method": "Explicit independent design proposal; no reference execution.",
+      "limitations": "Not evidence of LedgerDesk schema, API, filtering, permissions, file bytes, or runtime behavior.",
+      "confidence": "low",
+      "freshness": "current"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "R-001",
+      "description": "Expose the reported Export CSV entry point near the invoice list.",
+      "dimension": "interaction",
+      "priority": "normal",
+      "status": "BLOCKED",
+      "claim_type": "equivalence",
+      "required": false,
+      "defer_reason": "This session requests specification/evidence only; application implementation and empirical acceptance are outside its scope.",
+      "evidence": [
+        "E-001"
+      ],
+      "decisions": [
+        "D-001"
+      ],
+      "implementation": [],
+      "scenarios": [
+        "S-001"
+      ]
+    },
+    {
+      "id": "R-002",
+      "description": "Export exactly a frozen ordered snapshot explicitly supplied by the host.",
+      "dimension": "data scope",
+      "priority": "normal",
+      "status": "ASSUMED",
+      "claim_type": "independent",
+      "required": false,
+      "defer_reason": "This session requests specification/evidence only; application implementation and empirical acceptance are outside its scope.",
+      "evidence": [
+        "E-002"
+      ],
+      "decisions": [
+        "D-002"
+      ],
+      "implementation": [],
+      "scenarios": [
+        "S-002"
+      ]
+    },
+    {
+      "id": "R-003",
+      "description": "Serialize an explicitly agreed column projection using the provisional CSV byte contract.",
+      "dimension": "file contract",
+      "priority": "normal",
+      "status": "ASSUMED",
+      "claim_type": "independent",
+      "required": false,
+      "defer_reason": "This session requests specification/evidence only; application implementation and empirical acceptance are outside its scope.",
+      "evidence": [
+        "E-002"
+      ],
+      "decisions": [
+        "D-003"
+      ],
+      "implementation": [],
+      "scenarios": [
+        "S-003"
+      ]
+    },
+    {
+      "id": "R-004",
+      "description": "Fail before offering a file if export authority or field access is unavailable.",
+      "dimension": "authorization",
+      "priority": "high",
+      "status": "BLOCKED",
+      "claim_type": "independent",
+      "required": false,
+      "defer_reason": "This session requests specification/evidence only; application implementation and empirical acceptance are outside its scope.",
+      "evidence": [
+        "E-002"
+      ],
+      "decisions": [
+        "D-004"
+      ],
+      "implementation": [],
+      "scenarios": [
+        "S-004"
+      ]
+    },
+    {
+      "id": "R-005",
+      "description": "Make completion, cancellation and failure distinguishable without mutating invoices.",
+      "dimension": "failure behavior",
+      "priority": "normal",
+      "status": "ASSUMED",
+      "claim_type": "independent",
+      "required": false,
+      "defer_reason": "This session requests specification/evidence only; application implementation and empirical acceptance are outside its scope.",
+      "evidence": [
+        "E-002"
+      ],
+      "decisions": [
+        "D-005"
+      ],
+      "implementation": [],
+      "scenarios": [
+        "S-005"
+      ]
+    },
+    {
+      "id": "R-006",
+      "description": "Keep duplicate in-flight activation within one export attempt.",
+      "dimension": "interaction state",
+      "priority": "normal",
+      "status": "ASSUMED",
+      "claim_type": "independent",
+      "required": false,
+      "defer_reason": "This session requests specification/evidence only; application implementation and empirical acceptance are outside its scope.",
+      "evidence": [
+        "E-002"
+      ],
+      "decisions": [
+        "D-006"
+      ],
+      "implementation": [],
+      "scenarios": [
+        "S-006"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D-001",
+      "decision": "Expose the reported Export CSV entry point near the invoice list.",
+      "rationale": "See specification.md for provisional boundaries; original implementation remains unknown.",
+      "evidence": [
+        "E-001"
+      ]
+    },
+    {
+      "id": "D-002",
+      "decision": "Export exactly a frozen ordered snapshot explicitly supplied by the host.",
+      "rationale": "See specification.md for provisional boundaries; original implementation remains unknown.",
+      "evidence": [
+        "E-002"
+      ]
+    },
+    {
+      "id": "D-003",
+      "decision": "Serialize an explicitly agreed column projection using the provisional CSV byte contract.",
+      "rationale": "See specification.md for provisional boundaries; original implementation remains unknown.",
+      "evidence": [
+        "E-002"
+      ]
+    },
+    {
+      "id": "D-004",
+      "decision": "Fail before offering a file if export authority or field access is unavailable.",
+      "rationale": "See specification.md for provisional boundaries; original implementation remains unknown.",
+      "evidence": [
+        "E-002"
+      ]
+    },
+    {
+      "id": "D-005",
+      "decision": "Make completion, cancellation and failure distinguishable without mutating invoices.",
+      "rationale": "See specification.md for provisional boundaries; original implementation remains unknown.",
+      "evidence": [
+        "E-002"
+      ]
+    },
+    {
+      "id": "D-006",
+      "decision": "Keep duplicate in-flight activation within one export attempt.",
+      "rationale": "See specification.md for provisional boundaries; original implementation remains unknown.",
+      "evidence": [
+        "E-002"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "S-001",
+      "requirement": "R-001",
+      "description": "Obtain an identified screenshot or authorized runtime and compare the entry point.",
+      "expected": "Compare label and association only after a real reference is provided."
+    },
+    {
+      "id": "S-002",
+      "requirement": "R-002",
+      "description": "Supply rows A then B, change host rows after activation.",
+      "expected": "Output uses precisely A then B from the captured snapshot; no implicit pagination or selection expansion."
+    },
+    {
+      "id": "S-003",
+      "requirement": "R-003",
+      "description": "Supply known synthetic text with commas, quotes, Unicode and embedded newline.",
+      "expected": "Agreed columns round-trip without coercion; CRLF records, UTF-8 without BOM, quote every field and double embedded quotes."
+    },
+    {
+      "id": "S-004",
+      "requirement": "R-004",
+      "description": "Supply a future denied actor and restricted field fixture.",
+      "expected": "No unauthorized bytes are offered; enforcement depends on a defined host authority model."
+    },
+    {
+      "id": "S-005",
+      "requirement": "R-005",
+      "description": "Inject serialization or delivery failure and then retry.",
+      "expected": "No false success or partial file; invoices unchanged; retry captures fresh snapshot."
+    },
+    {
+      "id": "S-006",
+      "requirement": "R-006",
+      "description": "Activate twice during serialization, then again after completion.",
+      "expected": "One in-flight attempt; an explicit later activation starts a new attempt."
+    }
+  ],
+  "runs": [],
+  "unknowns": [
+    {
+      "id": "U-001",
+      "description": "Product identity, version and actual screenshot are unavailable.",
+      "severity": "high",
+      "status": "open",
+      "requirements": [
+        "R-001"
+      ],
+      "evidence": [
+        "E-001"
+      ],
+      "next_action": "Inspect one supplied image or authorized capture with version context if access becomes available."
+    },
+    {
+      "id": "U-002",
+      "description": "Original row selection, pagination and filtering scope are unknown.",
+      "severity": "normal",
+      "status": "open",
+      "requirements": [
+        "R-002"
+      ],
+      "evidence": [
+        "E-001"
+      ],
+      "next_action": "Compare a synthetic paged/filtered reference export if later authorized."
+    },
+    {
+      "id": "U-003",
+      "description": "Original CSV columns, filename, locale, encoding and bytes are unknown.",
+      "severity": "high",
+      "status": "open",
+      "requirements": [
+        "R-003"
+      ],
+      "evidence": [
+        "E-001"
+      ],
+      "next_action": "Inspect one genuine synthetic reference export and its fixture; settle column projection before implementation."
+    },
+    {
+      "id": "U-004",
+      "description": "Original actor roles, permissions and trusted enforcement point are unknown.",
+      "severity": "high",
+      "status": "open",
+      "requirements": [
+        "R-004"
+      ],
+      "evidence": [
+        "E-001"
+      ],
+      "next_action": "Resolve authority model before implementing host integration; do not infer it from a visible button."
+    },
+    {
+      "id": "U-005",
+      "description": "Original error, timing, cancellation and duplicate behavior are unknown.",
+      "severity": "normal",
+      "status": "open",
+      "requirements": [
+        "R-005",
+        "R-006"
+      ],
+      "evidence": [
+        "E-001"
+      ],
+      "next_action": "Use a bounded authorized recording or test if access becomes available."
+    }
+  ],
+  "discrepancies": [],
+  "checkpoint": {
+    "summary": "Document-only scope delivered: one reported control, six provisional future requirements, six planned scenarios, five unknowns; no app implementation or product test executions.",
+    "next_action": "Read scope.md, evidence.md, specification.md and this ledger; seek new evidence only if it becomes available. Do not implement without a later implementation request.",
+    "blockers": []
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "installed_at_recorded": "2026-10-25T14:57:25.948334+00:00",
+  "destination": "/home/shakil_linux24/.agents/skills",
+  "skill_count": 8,
+  "files": [
+    {
+      "path": "reconstruct-orchestrate/SKILL.md",
+      "sha256": "08df33a7f9e45ab25fb0694208af023ccd9ee8cc48d5aaba94ad2a3977d92f99"
+    },
+    {
+      "path": "reconstruct-orchestrate/agents/openai.yaml",
+      "sha256": "91219ef382fb077b808e7846412ac043fe58976a21943f68994086574e77fc8d"
+    },
+    {
+      "path": "reconstruct-orchestrate/references/common-contract.md",
+      "sha256": "1bb8facf74f40eb1744c296e446b2859ac8e133db0cde7f7a14c40407a445f0e"
+    },
+    {
+      "path": "reconstruct-orchestrate/references/routing.md",
+      "sha256": "362c571d7b1173b02ccc27ddfe60f5603af416fff9a3ac317da9f63b6eb35f77"
+    },
+    {
+      "path": "reconstruct-orchestrate/references/skill-map.json",
+      "sha256": "00bebfb5146f8ba5c1a8916a22d552a8013d0aa334dfba90131afe95168775ad"
+    },
+    {
+      "path": "reconstruct-orchestrate/references/state-format.md",
+      "sha256": "34011c35aea03a06cc424cfa8f188b5a806f7a09f7fa0c38f1373f963ac31a16"
+    },
+    {
+      "path": "reconstruct-orchestrate/references/templates.md",
+      "sha256": "a9304581f10fdfad11b56ebb35c52641c97cbe36860944e8ed5da18fd1b29d29"
+    },
+    {
+      "path": "reconstruct-orchestrate/scripts/project_state.py",
+      "sha256": "eb0e35a1b340b2be8b3f10cf1fc58fc4802467558d5fa62ba58a4e1a71484ef1"
+    },
+    {
+      "path": "reconstruct-investigate/SKILL.md",
+      "sha256": "eb72584166f0651d31c33314d0ab5975feac5cf7e54cb2e8ad2057ba07556b4b"
+    },
+    {
+      "path": "reconstruct-investigate/agents/openai.yaml",
+      "sha256": "e09d38a3b3782ee13fa7f07dd3ba102ab919ef6b3e89da2f8ae486a5b1e898b1"
+    },
+    {
+      "path": "reconstruct-investigate/references/target-routes.md",
+      "sha256": "caab6e953b5358afd0946793c7d8ed07ad9e09f22c64f0aee7d328d560b04849"
+    },
+    {
+      "path": "reconstruct-specify/SKILL.md",
+      "sha256": "eb4483ce6e0551df00caf7907134275567c6fcba51d21f603311552efa550fdf"
+    },
+    {
+      "path": "reconstruct-specify/agents/openai.yaml",
+      "sha256": "e990e92442868e35f7f036f8d348e8773684f4fd2a5484651a345c8db626a97d"
+    },
+    {
+      "path": "reconstruct-experience/SKILL.md",
+      "sha256": "f7caa36f19fdf42dc0dbada65bce734ffa52d661c11e34aea48acf3d54edfc26"
+    },
+    {
+      "path": "reconstruct-experience/agents/openai.yaml",
+      "sha256": "4ac02f2e1ec944a24f0827cfa256e5a3dfa9934a1125734718c4d5b3770f2a5d"
+    },
+    {
+      "path": "reconstruct-services-data/SKILL.md",
+      "sha256": "98c76cb61cebe5f4d69f66fad54e2b625a190835817e656067e052ce02b94f5c"
+    },
+    {
+      "path": "reconstruct-services-data/agents/openai.yaml",
+      "sha256": "56f6be3e50642bd7187c6dc83e1fee2cc8d47af58e46bf030701266862033a7e"
+    },
+    {
+      "path": "reconstruct-services-data/references/conditional-workflows.md",
+      "sha256": "4f6d87a4fa76eaf3b1404820f6d4346360dc8940fbdf75a0bbca42807a4021be"
+    },
+    {
+      "path": "reconstruct-assure/SKILL.md",
+      "sha256": "cb1d618bd00b2fec62bc8632dd95aa2ba6d8b4b12d9ab1c0b49a937ef0426069"
+    },
+    {
+      "path": "reconstruct-assure/agents/openai.yaml",
+      "sha256": "8d135de67d0b5224f93c0db896b1c85991df8bb2b5444ca9be261e4bb8fbceb7"
+    },
+    {
+      "path": "reconstruct-verify/SKILL.md",
+      "sha256": "3f307e20c5a7bc9687c41acf1ff66a8064c25bad363394ac7ecb3a88656fdb49"
+    },
+    {
+      "path": "reconstruct-verify/agents/openai.yaml",
+      "sha256": "05e9555906252c1f521749cfdb081a184664b5da2feb38f6b1acd89b29ee859b"
+    },
+    {
+      "path": "reconstruct-operate/SKILL.md",
+      "sha256": "81d539785d0f1bdf3c288932bb69cbad1a023716d091e43be48aa6348647ec43"
+    },
+    {
+      "path": "reconstruct-operate/agents/openai.yaml",
+      "sha256": "8da8551ad2bce2436c47a6fdcc884cabd620698dd58fe0e952048994f0006c92"
+    }
+  ],
+  "all_file_hashes_match_source": true,
+  "group_world_writable_files": false,
+  "host_discovery_test": "Observed all eight reconstruct-* skills in the active host skill catalog on the continued session.",
+  "rechecked_at": "2026-10-26T04:15:26.562263+00:00"
+}

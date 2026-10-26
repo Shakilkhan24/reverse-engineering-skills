@@ -1,0 +1,860 @@
+{
+  "scenario": "S-007",
+  "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+  "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+  "contract_sha256": "e10801bd5800215fde12b88cc40d29f6bd66bc9041a42f4e72ad93694123dcb1",
+  "executed_at": "2026-10-25T14:53:04.134643+00:00",
+  "harness_sha256": "2e6be202bcfc948c456f5946d2299341603d4d8855a12d00ff285e3a68ff2337",
+  "helper_sha256": "eb0e35a1b340b2be8b3f10cf1fc58fc4802467558d5fa62ba58a4e1a71484ef1",
+  "fixture_root": "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007",
+  "result": "PASS",
+  "steps": [
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "shared",
+        "first"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "put",
+          "shared",
+          "first"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"shared\", \"value\": \"first\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "put",
+          "shared",
+          "first"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"shared\", \"value\": \"first\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"shared\", \"value\": \"first\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"shared\", \"value\": \"first\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "second",
+        "next"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "put",
+          "second",
+          "next"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"second\", \"value\": \"next\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ],
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "put",
+          "second",
+          "next"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"second\", \"value\": \"next\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ],
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"second\", \"value\": \"next\"}, {\"key\": \"shared\", \"value\": \"first\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ],
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"second\", \"value\": \"next\"}, {\"key\": \"shared\", \"value\": \"first\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ],
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "shared",
+        "other"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "put",
+          "shared",
+          "other"
+        ],
+        "returncode": 3,
+        "stdout": "{\"error\": \"key conflict\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ],
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "put",
+          "shared",
+          "other"
+        ],
+        "returncode": 3,
+        "stdout": "{\"error\": \"key conflict\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ],
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"second\", \"value\": \"next\"}, {\"key\": \"shared\", \"value\": \"first\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ],
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"second\", \"value\": \"next\"}, {\"key\": \"shared\", \"value\": \"first\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ],
+            [
+              "shared",
+              "first"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "remove",
+        "shared"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "remove",
+          "shared"
+        ],
+        "returncode": 0,
+        "stdout": "{\"removed\": true}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "remove",
+          "shared"
+        ],
+        "returncode": 0,
+        "stdout": "{\"removed\": true}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"second\", \"value\": \"next\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \"second\", \"value\": \"next\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "second",
+              "next"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "remove",
+        "second"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "remove",
+          "second"
+        ],
+        "returncode": 0,
+        "stdout": "{\"removed\": true}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "remove",
+          "second"
+        ],
+        "returncode": 0,
+        "stdout": "{\"removed\": true}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-007/replacement/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": []
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    }
+  ],
+  "errors": []
+}

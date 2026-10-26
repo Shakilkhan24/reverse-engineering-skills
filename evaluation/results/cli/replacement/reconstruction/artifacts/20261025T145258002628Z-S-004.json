@@ -1,0 +1,1529 @@
+{
+  "scenario": "S-004",
+  "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+  "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+  "contract_sha256": "e38a0bcb61540626a7f82a186470446744d4e8ed272352afb92c4b0a4e86cbe7",
+  "executed_at": "2026-10-25T14:53:01.103489+00:00",
+  "harness_sha256": "2e6be202bcfc948c456f5946d2299341603d4d8855a12d00ff285e3a68ff2337",
+  "helper_sha256": "eb0e35a1b340b2be8b3f10cf1fc58fc4802467558d5fa62ba58a4e1a71484ef1",
+  "fixture_root": "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004",
+  "result": "PASS",
+  "steps": [
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "z",
+        "value-z"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "put",
+          "z",
+          "value-z"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"z\", \"value\": \"value-z\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "put",
+          "z",
+          "value-z"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"z\", \"value\": \"value-z\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "A",
+        "value-A"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "put",
+          "A",
+          "value-A"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"A\", \"value\": \"value-A\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "put",
+          "A",
+          "value-A"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"A\", \"value\": \"value-A\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "a",
+        "value-a"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "put",
+          "a",
+          "value-a"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"a\", \"value\": \"value-a\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "put",
+          "a",
+          "value-a"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"a\", \"value\": \"value-a\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "10",
+        "value-10"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "put",
+          "10",
+          "value-10"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"10\", \"value\": \"value-10\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "put",
+          "10",
+          "value-10"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"10\", \"value\": \"value-10\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "2",
+        "value-2"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "put",
+          "2",
+          "value-2"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"2\", \"value\": \"value-2\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "put",
+          "2",
+          "value-2"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"2\", \"value\": \"value-2\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "\u00e9",
+        "value-\u00e9"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "put",
+          "\u00e9",
+          "value-\u00e9"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"\\u00e9\", \"value\": \"value-\\u00e9\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "put",
+          "\u00e9",
+          "value-\u00e9"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"\\u00e9\", \"value\": \"value-\\u00e9\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "\u65e5\u672c",
+        "value-\u65e5\u672c"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "put",
+          "\u65e5\u672c",
+          "value-\u65e5\u672c"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"\\u65e5\\u672c\", \"value\": \"value-\\u65e5\\u672c\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "put",
+          "\u65e5\u672c",
+          "value-\u65e5\u672c"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"\\u65e5\\u672c\", \"value\": \"value-\\u65e5\\u672c\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        " ",
+        "value- "
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "put",
+          " ",
+          "value- "
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \" \", \"value\": \"value- \"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "put",
+          " ",
+          "value- "
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \" \", \"value\": \"value- \"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "put",
+        "B",
+        "value-B"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "put",
+          "B",
+          "value-B"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"B\", \"value\": \"value-B\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "B",
+              "value-B"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "put",
+          "B",
+          "value-B"
+        ],
+        "returncode": 0,
+        "stdout": "{\"key\": \"B\", \"value\": \"value-B\"}\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "B",
+              "value-B"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \" \", \"value\": \"value- \"}, {\"key\": \"10\", \"value\": \"value-10\"}, {\"key\": \"2\", \"value\": \"value-2\"}, {\"key\": \"A\", \"value\": \"value-A\"}, {\"key\": \"B\", \"value\": \"value-B\"}, {\"key\": \"a\", \"value\": \"value-a\"}, {\"key\": \"z\", \"value\": \"value-z\"}, {\"key\": \"\\u00e9\", \"value\": \"value-\\u00e9\"}, {\"key\": \"\\u65e5\\u672c\", \"value\": \"value-\\u65e5\\u672c\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "B",
+              "value-B"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "list"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \" \", \"value\": \"value- \"}, {\"key\": \"10\", \"value\": \"value-10\"}, {\"key\": \"2\", \"value\": \"value-2\"}, {\"key\": \"A\", \"value\": \"value-A\"}, {\"key\": \"B\", \"value\": \"value-B\"}, {\"key\": \"a\", \"value\": \"value-a\"}, {\"key\": \"z\", \"value\": \"value-z\"}, {\"key\": \"\\u00e9\", \"value\": \"value-\\u00e9\"}, {\"key\": \"\\u65e5\\u672c\", \"value\": \"value-\\u65e5\\u672c\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "B",
+              "value-B"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list",
+        "ignored"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "list",
+          "ignored"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \" \", \"value\": \"value- \"}, {\"key\": \"10\", \"value\": \"value-10\"}, {\"key\": \"2\", \"value\": \"value-2\"}, {\"key\": \"A\", \"value\": \"value-A\"}, {\"key\": \"B\", \"value\": \"value-B\"}, {\"key\": \"a\", \"value\": \"value-a\"}, {\"key\": \"z\", \"value\": \"value-z\"}, {\"key\": \"\\u00e9\", \"value\": \"value-\\u00e9\"}, {\"key\": \"\\u65e5\\u672c\", \"value\": \"value-\\u65e5\\u672c\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "B",
+              "value-B"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "list",
+          "ignored"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \" \", \"value\": \"value- \"}, {\"key\": \"10\", \"value\": \"value-10\"}, {\"key\": \"2\", \"value\": \"value-2\"}, {\"key\": \"A\", \"value\": \"value-A\"}, {\"key\": \"B\", \"value\": \"value-B\"}, {\"key\": \"a\", \"value\": \"value-a\"}, {\"key\": \"z\", \"value\": \"value-z\"}, {\"key\": \"\\u00e9\", \"value\": \"value-\\u00e9\"}, {\"key\": \"\\u65e5\\u672c\", \"value\": \"value-\\u65e5\\u672c\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "B",
+              "value-B"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    },
+    {
+      "args": [
+        "--db",
+        "<DB>",
+        "list",
+        "ignored",
+        "also ignored"
+      ],
+      "reference": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/reference/database.sqlite",
+          "list",
+          "ignored",
+          "also ignored"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \" \", \"value\": \"value- \"}, {\"key\": \"10\", \"value\": \"value-10\"}, {\"key\": \"2\", \"value\": \"value-2\"}, {\"key\": \"A\", \"value\": \"value-A\"}, {\"key\": \"B\", \"value\": \"value-B\"}, {\"key\": \"a\", \"value\": \"value-a\"}, {\"key\": \"z\", \"value\": \"value-z\"}, {\"key\": \"\\u00e9\", \"value\": \"value-\\u00e9\"}, {\"key\": \"\\u65e5\\u672c\", \"value\": \"value-\\u65e5\\u672c\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "B",
+              "value-B"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "replacement": {
+        "command": [
+          "/usr/bin/python3",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/keyvalue.py",
+          "--db",
+          "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/fixtures/20261025T145258002628Z/S-004/replacement/database.sqlite",
+          "list",
+          "ignored",
+          "also ignored"
+        ],
+        "returncode": 0,
+        "stdout": "[{\"key\": \" \", \"value\": \"value- \"}, {\"key\": \"10\", \"value\": \"value-10\"}, {\"key\": \"2\", \"value\": \"value-2\"}, {\"key\": \"A\", \"value\": \"value-A\"}, {\"key\": \"B\", \"value\": \"value-B\"}, {\"key\": \"a\", \"value\": \"value-a\"}, {\"key\": \"z\", \"value\": \"value-z\"}, {\"key\": \"\\u00e9\", \"value\": \"value-\\u00e9\"}, {\"key\": \"\\u65e5\\u672c\", \"value\": \"value-\\u65e5\\u672c\"}]\n",
+        "stderr": "",
+        "state": {
+          "exists": true,
+          "kind": "file",
+          "schema": [
+            [
+              "index",
+              "sqlite_autoindex_items_1",
+              "items",
+              null
+            ],
+            [
+              "table",
+              "items",
+              "items",
+              "CREATE TABLE items (key text primary key, value text not null)"
+            ]
+          ],
+          "rows": [
+            [
+              " ",
+              "value- "
+            ],
+            [
+              "10",
+              "value-10"
+            ],
+            [
+              "2",
+              "value-2"
+            ],
+            [
+              "A",
+              "value-A"
+            ],
+            [
+              "B",
+              "value-B"
+            ],
+            [
+              "a",
+              "value-a"
+            ],
+            [
+              "z",
+              "value-z"
+            ],
+            [
+              "\u00e9",
+              "value-\u00e9"
+            ],
+            [
+              "\u65e5\u672c",
+              "value-\u65e5\u672c"
+            ]
+          ]
+        }
+      },
+      "exception_comparison": false,
+      "mismatches": []
+    }
+  ],
+  "errors": []
+}

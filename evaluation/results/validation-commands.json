@@ -1,0 +1,33 @@
+{
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-5.15.153.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "results": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "/mnt/c/users/user/onedrive/desktop/revrs_skls",
+      "recorded_at": "2026-10-25T14:57:26.173809+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_collision_preflight_leaves_other_skills_untouched (test_install.InstallTests.test_collision_preflight_leaves_other_skills_untouched) ... ok\ntest_complete_copy_and_reinstallation_refusal (test_install.InstallTests.test_complete_copy_and_reinstallation_refusal) ... ok\ntest_dangling_symlink_is_also_a_collision (test_install.InstallTests.test_dangling_symlink_is_also_a_collision) ... ok\ntest_destination_inside_source_is_rejected_before_recursive_copy (test_install.InstallTests.test_destination_inside_source_is_rejected_before_recursive_copy) ... ok\ntest_dry_run_has_no_filesystem_side_effect (test_install.InstallTests.test_dry_run_has_no_filesystem_side_effect) ... ok\ntest_missing_skill_does_not_partially_install (test_install.InstallTests.test_missing_skill_does_not_partially_install) ... ok\ntest_world_writable_source_modes_are_not_propagated (test_install.InstallTests.test_world_writable_source_modes_are_not_propagated) ... ok\ntest_artifact_path_traversal_and_external_symlink_fail (test_project_state.ProjectStateTests.test_artifact_path_traversal_and_external_symlink_fail) ... ok\ntest_assumptions_inferences_unknowns_do_not_prove_equivalence (test_project_state.ProjectStateTests.test_assumptions_inferences_unknowns_do_not_prove_equivalence) ... ok\ntest_cli_report_incomplete_is_success_but_gate_fails (test_project_state.ProjectStateTests.test_cli_report_incomplete_is_success_but_gate_fails) ... ok\ntest_cli_reports_bad_json_and_unknown_scenario (test_project_state.ProjectStateTests.test_cli_reports_bad_json_and_unknown_scenario) ... ok\ntest_contract_edit_invalidates_previous_success (test_project_state.ProjectStateTests.test_contract_edit_invalidates_previous_success) ... ok\ntest_current_fully_linked_record_passes_finite_gate (test_project_state.ProjectStateTests.test_current_fully_linked_record_passes_finite_gate) ... ok\ntest_different_target_with_same_version_invalidates_previous_run (test_project_state.ProjectStateTests.test_different_target_with_same_version_invalidates_previous_run) ... ok\ntest_empty_acceptance_or_no_implementation_cannot_be_verified (test_project_state.ProjectStateTests.test_empty_acceptance_or_no_implementation_cannot_be_verified) ... ok\ntest_empty_accepted_scope_never_passes (test_project_state.ProjectStateTests.test_empty_accepted_scope_never_passes) ... ok\ntest_every_acceptance_scenario_is_required (test_project_state.ProjectStateTests.test_every_acceptance_scenario_is_required) ... ok\ntest_high_gap_blocks_even_if_deferred_and_low_gap_remains_visible (test_project_state.ProjectStateTests.test_high_gap_blocks_even_if_deferred_and_low_gap_remains_visible) ... ok\ntest_independent_design_can_be_tested_without_equivalence_claim (test_project_state.ProjectStateTests.test_independent_design_can_be_tested_without_equivalence_claim) ... ok\ntest_init_refuses_existing_directory_without_touching_content (test_project_state.ProjectStateTests.test_init_refuses_existing_directory_without_touching_content) ... ok\ntest_latest_current_failure_wins_even_when_list_is_out_of_order (test_project_state.ProjectStateTests.test_latest_current_failure_wins_even_when_list_is_out_of_order) ... ok\ntest_latest_skipped_or_blocked_run_never_passes (test_project_state.ProjectStateTests.test_latest_skipped_or_blocked_run_never_passes) ... ok\ntest_latest_tie_uses_last_record (test_project_state.ProjectStateTests.test_latest_tie_uses_last_record) ... ok\ntest_malformed_types_report_errors_instead_of_crashing (test_project_state.ProjectStateTests.test_malformed_types_report_errors_instead_of_crashing) ... ok\ntest_missing_links_duplicate_ids_and_orphans_fail (test_project_state.ProjectStateTests.test_missing_links_duplicate_ids_and_orphans_fail) ... ok\ntest_missing_tampered_or_absent_artifact_cannot_pass (test_project_state.ProjectStateTests.test_missing_tampered_or_absent_artifact_cannot_pass) ... ok\ntest_not_comparable_result_never_establishes_equivalence (test_project_state.ProjectStateTests.test_not_comparable_result_never_establishes_equivalence) ... ok\ntest_optional_resolution_evidence_is_validated_for_open_gaps (test_project_state.ProjectStateTests.test_optional_resolution_evidence_is_validated_for_open_gaps) ... ok\ntest_resolved_high_gap_requires_current_resolution_evidence (test_project_state.ProjectStateTests.test_resolved_high_gap_requires_current_resolution_evidence) ... ok\ntest_scenario_fixture_digest_change_invalidates_previous_run (test_project_state.ProjectStateTests.test_scenario_fixture_digest_change_invalidates_previous_run) ... ok\ntest_stale_or_wrong_version_evidence_blocks (test_project_state.ProjectStateTests.test_stale_or_wrong_version_evidence_blocks) ... ok\ntest_status_change_does_not_change_contract_fingerprint (test_project_state.ProjectStateTests.test_status_change_does_not_change_contract_fingerprint) ... ok\ntest_target_and_replacement_changes_invalidate_runs (test_project_state.ProjectStateTests.test_target_and_replacement_changes_invalidate_runs) ... ok\ntest_tool_blocker_is_visible_and_blocks_readiness (test_project_state.ProjectStateTests.test_tool_blocker_is_visible_and_blocks_readiness) ... ok\ntest_unaccepted_scope_and_unset_revision_block (test_project_state.ProjectStateTests.test_unaccepted_scope_and_unset_revision_block) ... ok\n\n----------------------------------------------------------------------\nRan 35 tests in 0.048s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "tools/validate_library.py"
+      ],
+      "cwd": "/mnt/c/users/user/onedrive/desktop/revrs_skls",
+      "recorded_at": "2026-10-25T14:57:27.446477+00:00",
+      "exit_code": 0,
+      "stdout": "PASS: skill discovery, metadata, dependencies and local references\n",
+      "stderr": ""
+    }
+  ]
+}

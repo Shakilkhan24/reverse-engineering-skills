@@ -1,0 +1,151 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/mnt/c/Users/User/OneDrive/Desktop/REVRS_SKLS/skills/reconstruct-orchestrate/scripts/project_state.py",
+    "report",
+    "/tmp/reconstruction-eval-hqb9cfqq/cli/replacement/reconstruction/state.json"
+  ],
+  "returncode": 0,
+  "stdout": {
+    "valid": true,
+    "ready": true,
+    "target": "/tmp/reconstruction-eval-hqb9cfqq/cli/reference.py",
+    "target_version": "sha256:ee8071e68c18a9b37e027f624991ad63f8505bc49c30824becbbc4535c6a07ba",
+    "replacement_revision": "sha256:297478500d1b923d0e736609c0daf7bb1c5f8498cec271e5a069a6a528f760e6",
+    "coverage": {
+      "required_requirements": 6,
+      "verified_required_requirements": 6,
+      "required_scenarios": 7,
+      "passing_current_required_scenarios": 7
+    },
+    "requirements": [
+      {
+        "id": "R-001",
+        "required": true,
+        "claim_type": "equivalence",
+        "declared_status": "VERIFIED",
+        "verified": true,
+        "reasons": [],
+        "scenarios": [
+          {
+            "id": "S-001",
+            "passed": true,
+            "run": "T-20261025T145528258831Z-S-001",
+            "reason": null
+          }
+        ],
+        "defer_reason": null
+      },
+      {
+        "id": "R-002",
+        "required": true,
+        "claim_type": "equivalence",
+        "declared_status": "VERIFIED",
+        "verified": true,
+        "reasons": [],
+        "scenarios": [
+          {
+            "id": "S-002",
+            "passed": true,
+            "run": "T-20261025T145528258831Z-S-002",
+            "reason": null
+          }
+        ],
+        "defer_reason": null
+      },
+      {
+        "id": "R-003",
+        "required": true,
+        "claim_type": "equivalence",
+        "declared_status": "VERIFIED",
+        "verified": true,
+        "reasons": [],
+        "scenarios": [
+          {
+            "id": "S-003",
+            "passed": true,
+            "run": "T-20261025T145528258831Z-S-003",
+            "reason": null
+          }
+        ],
+        "defer_reason": null
+      },
+      {
+        "id": "R-004",
+        "required": true,
+        "claim_type": "equivalence",
+        "declared_status": "VERIFIED",
+        "verified": true,
+        "reasons": [],
+        "scenarios": [
+          {
+            "id": "S-004",
+            "passed": true,
+            "run": "T-20261025T145528258831Z-S-004",
+            "reason": null
+          }
+        ],
+        "defer_reason": null
+      },
+      {
+        "id": "R-005",
+        "required": true,
+        "claim_type": "equivalence",
+        "declared_status": "VERIFIED",
+        "verified": true,
+        "reasons": [],
+        "scenarios": [
+          {
+            "id": "S-005",
+            "passed": true,
+            "run": "T-20261025T145528258831Z-S-005",
+            "reason": null
+          }
+        ],
+        "defer_reason": null
+      },
+      {
+        "id": "R-006",
+        "required": true,
+        "claim_type": "equivalence",
+        "declared_status": "VERIFIED",
+        "verified": true,
+        "reasons": [],
+        "scenarios": [
+          {
+            "id": "S-006",
+            "passed": true,
+            "run": "T-20261025T145528258831Z-S-006",
+            "reason": null
+          },
+          {
+            "id": "S-007",
+            "passed": true,
+            "run": "T-20261025T145528258831Z-S-007",
+            "reason": null
+          }
+        ],
+        "defer_reason": null
+      }
+    ],
+    "unresolved": [
+      {
+        "kind": "unknowns",
+        "id": "U-001",
+        "description": "Concurrent races, filesystem lock timeouts, crash durability, other Python/SQLite versions, and exotic pre-existing schemas are not exhaustively tested.",
+        "severity": "normal",
+        "status": "deferred",
+        "requirements": [],
+        "evidence": [
+          "E-001"
+        ],
+        "next_action": "If those deployment conditions become required, add controlled interleaving/runtime-specific comparisons before extending the claim.",
+        "rationale": "User scope is a local CLI; the finite standard-environment compatibility checks and observed default SQLite behavior define this delivery."
+      }
+    ],
+    "blockers": [],
+    "next_action": "No required work remains. On changed target, code, or contract, review scope and rerun check_compatibility.py, then helper validate/report/gate.",
+    "limitation": "Finite recorded-scope gate; not global fidelity, proof of record authenticity, complete discovery, or automatic production approval."
+  },
+  "stderr": ""
+}
