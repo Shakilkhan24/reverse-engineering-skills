@@ -1,0 +1,19 @@
+test_01_persistence_after_reopen (test_relaydesk.ContractTests.test_01_persistence_after_reopen) ... ok
+test_02_same_key_replays_one_ticket_and_event (test_relaydesk.ContractTests.test_02_same_key_replays_one_ticket_and_event) ... ok
+test_03_changed_payload_conflicts (test_relaydesk.ContractTests.test_03_changed_payload_conflicts) ... ok
+test_04_cross_workspace_read_and_write_denied (test_relaydesk.ContractTests.test_04_cross_workspace_read_and_write_denied) ... ok
+test_05_stale_version_rejected (test_relaydesk.ContractTests.test_05_stale_version_rejected) ... ok
+test_06_invalid_transition_preserves_state (test_relaydesk.ContractTests.test_06_invalid_transition_preserves_state) ... ok
+test_07_precommit_fault_rolls_back_every_record (test_relaydesk.ContractTests.test_07_precommit_fault_rolls_back_every_record) ... ok
+test_08_provider_ack_gap_survives_reopen (test_relaydesk.ContractTests.test_08_provider_ack_gap_survives_reopen) ... ok
+test_09_provider_failure_leaves_pending_work (test_relaydesk.ContractTests.test_09_provider_failure_leaves_pending_work) ... ok
+test_10_overlapping_duplicate_requests (test_relaydesk.ContractTests.test_10_overlapping_duplicate_requests) ... ok
+test_11_overlapping_versioned_updates (test_relaydesk.ContractTests.test_11_overlapping_versioned_updates) ... ok
+test_12_validation_boundaries (test_relaydesk.ContractTests.test_12_validation_boundaries) ... ok
+test_13_key_scope_is_actor_and_workspace (test_relaydesk.ContractTests.test_13_key_scope_is_actor_and_workspace) ... ok
+test_14_replay_returns_original_response_after_transition (test_relaydesk.ContractTests.test_14_replay_returns_original_response_after_transition) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.751s
+
+OK

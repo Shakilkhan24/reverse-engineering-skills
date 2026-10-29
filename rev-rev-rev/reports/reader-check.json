@@ -1,0 +1,47 @@
+{
+  "executed_at_utc": "2026-10-29T06:37:46.901Z",
+  "book_sha256": "cfcf0fab97bf4b3bec429e66c82030604498ca570c831fae2a81c65d80ae3d6a",
+  "cases": [
+    {
+      "slow": 0,
+      "mean": 105,
+      "p50": 100,
+      "p95": 100,
+      "p99": 200,
+      "result": "PASS"
+    },
+    {
+      "slow": 1,
+      "mean": 119,
+      "p50": 100,
+      "p95": 200,
+      "p99": 200,
+      "result": "PASS"
+    },
+    {
+      "slow": 5,
+      "mean": 175,
+      "p50": 100,
+      "p95": 200,
+      "p99": 1500,
+      "result": "PASS"
+    },
+    {
+      "slow": 6,
+      "mean": 189,
+      "p50": 100,
+      "p95": 1500,
+      "p99": 1500,
+      "result": "PASS"
+    },
+    {
+      "slow": 20,
+      "mean": 385,
+      "p50": 100,
+      "p95": 1500,
+      "p99": 1500,
+      "result": "PASS"
+    }
+  ],
+  "scope": "Actual embedded JavaScript with a DOM stub; numeric checks only, no browser rendering."
+}

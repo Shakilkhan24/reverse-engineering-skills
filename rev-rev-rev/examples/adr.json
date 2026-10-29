@@ -1,0 +1,9 @@
+{
+  "id":"ADR-001",
+  "status":"accepted_for_teaching_lab",
+  "decision":"SQLite service layer + transactional outbox + fake provider",
+  "context":"একজন শিক্ষার্থী যেন network service ছাড়াই failure sequence চালাতে পারেন",
+  "alternatives":["in-memory dictionary", "PostgreSQL + real queue"],
+  "consequences":["Durability বোঝাতে file database", "Production throughput সম্পর্কে দাবি করা যাবে না", "Real provider-এর idempotency আলাদাভাবে যাচাই করতে হবে"],
+  "revisit_when":"বাস্তব multi-instance deployment scope-এ এলে"
+}

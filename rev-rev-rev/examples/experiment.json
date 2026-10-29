@@ -1,0 +1,12 @@
+{
+  "id": "EXP-001",
+  "synthetic": true,
+  "question": "Replay এবং নতুন submission আলাদা হয় কি?",
+  "hypotheses": ["H1: প্রতি request নতুন ticket", "H2: একই key ও payload deduplicate হয়"],
+  "controls": {"actor":"alice","workspace":"ws_a","title":"Login failure"},
+  "vary": "idempotency key",
+  "steps": ["key=k1 দিয়ে create", "k1 ও একই payload দিয়ে retry", "k2 দিয়ে একই title create"],
+  "observe": ["response IDs", "ticket count", "outbox count"],
+  "expected_under_H2": {"first_two_same_id":true,"final_ticket_count":2},
+  "limitations": ["Sequential experiment; overlapping requests আলাদা পরীক্ষা প্রয়োজন"]
+}

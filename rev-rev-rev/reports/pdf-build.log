@@ -1,0 +1,5 @@
+Using fontTools instead of HarfBuzz-Subset for font "DejaVu Sans". This will be unsupported in future versions of WeasyPrint. Please install HarfBuzz-Subset >= 4.1.0 with your package manager.
+Using fontTools instead of HarfBuzz-Subset for font "BookBengali". This will be unsupported in future versions of WeasyPrint. Please install HarfBuzz-Subset >= 4.1.0 with your package manager.
+Using fontTools instead of HarfBuzz-Subset for font "BookBengali". This will be unsupported in future versions of WeasyPrint. Please install HarfBuzz-Subset >= 4.1.0 with your package manager.
+Using fontTools instead of HarfBuzz-Subset for font "DejaVu Sans Mono". This will be unsupported in future versions of WeasyPrint. Please install HarfBuzz-Subset >= 4.1.0 with your package manager.
+Using fontTools instead of HarfBuzz-Subset for font "DejaVu Sans". This will be unsupported in future versions of WeasyPrint. Please install HarfBuzz-Subset >= 4.1.0 with your package manager.

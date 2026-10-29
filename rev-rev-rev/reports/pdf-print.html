@@ -1,0 +1,3371 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8">
+<title>দেখা থেকে জানা: Reverse Engineering-এর বাংলা দৃশ্যপাঠ</title><meta name="author" content="বাংলা দৃশ্যপাঠ">
+<meta name="description" content="সম্পূর্ণ ২৪ অধ্যায়, চার পরিশিষ্ট ও ৩৬টি diagram-সহ বাংলা Reverse Engineering tutorial।"></head><body>
+<section class="cover" id="top"><p class="edition">THE EVIDENCE-DRIVEN BUILDER</p>
+<h1>দেখা থেকে জানা</h1><h2>Reverse Engineering-এর<br>বাংলা দৃশ্যপাঠ</h2><div class="rule"></div>
+<p class="subtitle">সফটওয়্যারের দৃশ্যমান চেহারা থেকে অদৃশ্য আচরণ বোঝা—গল্প, উদাহরণ, পরীক্ষা ও AI agent-এর সঙ্গে কাজের একটি ব্যবহারিক বই।</p>
+<p class="counts">২৪ অধ্যায় · ৩৬ visual · চার পরিশিষ্ট<br>Python lab · JSON ও SQL · অনুশীলন ও উত্তর</p>
+<p class="foot">দ্বিতীয় সংস্করণ · দৃশ্য ও উদাহরণ<br>সম্পূর্ণ PDF · অক্টোবর ২০২৬</p></section>
+<section class="front"><h1>এই PDF কীভাবে পড়বে</h1>
+<p>এই সংস্করণে সব ২৪টি অধ্যায়, চারটি পরিশিষ্ট, ৩৬টি ছবি, chart ও diagram, code examples এবং workbook-এর সব উত্তর রয়েছে। নতুন ২২টি দৃশ্যে বাংলা লেবেল আছে। বাংলা font PDF-এর মধ্যে সংযুক্ত।</p>
+<p>দৃশ্যটি দেখে পরের ফল অনুমান করো। তারপর ছবির নিচের ছোট উদাহরণটি পড়ো। API, SQL বা design-এর বিশদ অংশ চাইলে দ্বিতীয়বার পড়ার সময় খুলতে পারো।</p>
+<p>পরের সূচিতে অধ্যায়ের নাম বা পৃষ্ঠা নম্বরে চাপলে সেই অধ্যায়ে যেতে পারবে। PDF reader-এর Bookmarks panel থেকেও অধ্যায় ও উপশিরোনাম খোলা যায়।</p>
+<h2>তিনটি পড়ার পথ</h2><p><strong>শুরু থেকে:</strong> ১ → ৩ → ৫ → ৬ → ৭; তারপর ১৬-এর lab।<br>
+<strong>AI দিয়ে project:</strong> ১ → ৩ → ১৬ → ১৭ → ১৯ → ২১।<br>
+<strong>Backend ও reliability:</strong> ৮ → ৯ → ১০ → ১২ → ১৩ → ১৪ → ২০।</p>
+<h2>ছবি, interactive উদাহরণ ও code</h2><p>চার্টগুলো vector আকারে রাখা হয়েছে। HTML-এর latency slider-এর বদলে PDF-তে কয়েকটি স্থির ফল দেওয়া আছে। Workbook-এর ভাঁজ করা উত্তরগুলো PDF-তে খোলা অবস্থায় আছে।</p>
+<p>পূর্ণ lab source, JSON/CSV, templates, chapter source ও build scripts <a href="#resource-pack">সংযুক্ত resource pack</a>-এ আছে। PDF reader attachment না দেখালে PDF-এর পাশের <code>RelayDesk-Book-Resources.zip</code> ব্যবহার করো।</p>
+<h2>প্রমাণের পরিচয়</h2><p>Conceptual diagram, synthetic data ও executed local lab result আলাদা। কাল্পনিক RelayDesk-এর উদাহরণ বাস্তব কোনো সেবার আবিষ্কৃত অভ্যন্তরীণ বিবরণ নয়।</p></section>
+<section class="front toc"><h1>অধ্যায়সূচি</h1><ol><li><a href="#01-surface-system">01 · চেহারার নিচে যে সিস্টেম</a></li><li><a href="#02-reconnaissance">02 · অজানা রিপোজিটরিতে প্রথম অভিযান</a></li><li><a href="#03-evidence">03 · প্রমাণের খাতা ও অনুমানের সীমানা</a></li><li><a href="#04-product-map">04 · পাতার তালিকা থেকে আচরণের মানচিত্র</a></li><li><a href="#05-experiments">05 · গোয়েন্দার মতো পরীক্ষা সাজাও</a></li><li><a href="#06-ui-state">06 · একটি বাটনের আট রকম জীবন</a></li><li><a href="#07-api-contract">07 · API-এর প্রতিশ্রুতি পড়তে শেখা</a></li><li><a href="#08-domain-rules">08 · ব্যবসার নিয়মকে পরীক্ষাযোগ্য করা</a></li><li><a href="#09-data-lifecycle">09 · ডেটার মালিক, কপি ও বিদায়</a></li><li><a href="#10-time-concurrency">10 · একই সময়ে দুজন: সময়ের ফাঁদ</a></li><li><a href="#11-network">11 · নেটওয়ার্কের চিহ্ন কী বলে</a></li><li><a href="#12-security">12 · পরিচয় আছে, অনুমতি আছে কি</a></li><li><a href="#13-observability">13 · সিস্টেমের গল্প শোনার যন্ত্র</a></li><li><a href="#14-performance">14 · গড়ের আড়ালে ধীর মানুষগুলো</a></li><li><a href="#15-architecture">15 · প্রয়োজন থেকে স্থাপত্য</a></li><li><a href="#16-vertical-lab">16 · একটি সম্পূর্ণ slice ও চলমান lab</a></li><li><a href="#17-verification">17 · দুই সিস্টেমের মুখোমুখি পরীক্ষা</a></li><li><a href="#18-four-worlds">18 · দোকান, সম্পাদক, AI ও অফলাইন জীবন</a></li><li><a href="#19-agent-direction">19 · AI agent-কে কার্যকরভাবে পরিচালনা</a></li><li><a href="#20-production">20 · চালু হয়েছে থেকে চালিয়ে রাখা</a></li><li><a href="#21-fidelity">21 · কতটা হলো: সৎ হিসাবের ভাষা</a></li><li><a href="#22-practice-plan">22 · ৩০ দিনের কাজভিত্তিক অনুশীলন</a></li><li><a href="#23-daily-loop">23 · প্রতিদিনের ছোট engineering সভা</a></li><li><a href="#24-field-guide">24 · মাঠের খাতা: ২৫টি স্মরণসূত্র</a></li><li><a href="#A-glossary">A · বাংলা–ইংরেজি ধারণার অভিধান</a></li><li><a href="#B-workbook">B · অনুশীলন, উত্তর ও capstone rubric</a></li><li><a href="#C-prompts">C · সরাসরি ব্যবহারযোগ্য agent prompts</a></li><li><a href="#D-sources">D · উৎস, সীমা ও মূল লেখার মানচিত্র</a></li><li><a href="#resource-pack">সংযুক্ত ব্যবহারিক উপকরণ</a></li></ol></section>
+<section class="chapter" id="01-surface-system"><p class="small">ভিত্তি</p><h1>০১ · চেহারার নিচে যে সিস্টেম</h1>
+<p>রাত ২টা ১৭। আরিফ AI-কে বলল, “এই support app-টা বানাও।” একটু পর sidebar, ticket list, search—সব হাজির। সে আনন্দে চা আনতে গেল। ফিরে এসে refresh দিল। Ticket উধাও। চা গরম, database ঠান্ডা—কারণ database-ই ছিল না!</p>
+<p>নীরা বলল, “তোমার বাটন একটি ছবি বদলেছে। আমরা চেয়েছিলাম একটি নির্ভরযোগ্য ঘটনা ঘটুক।” এই বইয়ে তাদের সঙ্গে আমরা <strong>RelayDesk</strong> নামের কাল্পনিক support system তৈরি করার যুক্তি শিখব। আরিফের ভুলগুলো তোমার অনুশীলনের সুযোগ। এখানে কোনো বাস্তব RelayDesk সেবার গোপন তথ্য আবিষ্কারের দাবি নেই।</p>
+<h2>দৃশ্য ১: একই স্ক্রিন, আলাদা সত্য</h2>
+<p><img alt="দুটি একই ticket list; refresh-এর পরে A খালি, B-তে t_101 রয়ে গেছে" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/15-refresh-reveal.svg"></p>
+<p>ওপরের দুই screen-এ তফাত নেই। নিচে Refresh-এর ফল দেখা যাচ্ছে। অ্যাপ A-তে ticket উধাও; B-তে নতুন read-এ সেটি পাওয়া গেছে। প্রথম screenshot থেকে এই পার্থক্যটি ধরতে পারতে?</p>
+<p>এবার নিজের app-এ একই খেলা: একটি item তৈরি করো, তার ID লিখে রাখো, তারপর page আবার খোলো। “দেখাচ্ছে” থেকে “ফিরে পাওয়া যাচ্ছে”—দুটি ছোট কিন্তু আলাদা observation হলো।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ঘটনা</th>
+<th>সংস্করণ A</th>
+<th>সংস্করণ B</th>
+<th>কী পরীক্ষা করবে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create চাপলে ticket দেখা যায়</td>
+<td>browser memory-তে object</td>
+<td>server-confirmed record</td>
+<td>নতুন session-এ পড়া</td>
+</tr>
+<tr>
+<td>আরেক workspace-এর ID দেওয়া</td>
+<td>সব record ফেরত</td>
+<td>permission যাচাই</td>
+<td>অন্য test actor দিয়ে read</td>
+</tr>
+<tr>
+<td>response হারিয়ে retry</td>
+<td>নতুন ticket</td>
+<td>একই logical operation replay</td>
+<td>count ও ID তুলনা</td>
+</tr>
+<tr>
+<td>email provider বন্ধ</td>
+<td>save-ও ব্যর্থ</td>
+<td>ticket থাকে, delivery pending</td>
+<td>আলাদা failure injection</td>
+</tr>
+</tbody>
+</table></div>
+<p>এই টেবিলের B আমাদের সম্ভাব্য design; original-এর আবিষ্কৃত আচরণ নয়। কোনো ছোট prototype-এ A-ও যথার্থ হতে পারে, যদি scope-এ persistence না থাকে। ভুলটি হলো scope না বলে “সব complete” ঘোষণা করা।</p>
+<p><img alt="দৃশ্যমান UI থেকে data ও recovery পর্যন্ত আচরণের স্তর" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/01-system-layers.svg"></p>
+<p><strong>ছবি পড়ো:</strong> ওপরের স্তর দেখা সহজ; নিচের স্তরের জন্য আলাদা প্রশ্ন প্রয়োজন। বাক্সের আকার complexity-এর শতাংশ বোঝায় না। কোনো সর্বজনীন “৫% UI, ৯৫% backend” মাপ এখানে নেই।</p>
+<h2>Reverse engineering বলতে এখানে কী বোঝাচ্ছি</h2>
+<p>একটি অজানা সফটওয়্যারের <strong>পর্যবেক্ষণযোগ্য নিয়ম</strong> বুঝে একটি পরীক্ষাযোগ্য model তৈরি করা। তারপর সেই model অনুযায়ী replacement বানানো হলো reconstruction। Source analysis, browser observation, protocol inspection ও binary analysis প্রমাণের ভিন্ন পথ; সব কাজেই সব পথ দরকার হয় না।</p>
+<p>এই বইয়ের কেন্দ্র product behavior এবং AI-assisted reconstruction। Assembly, exploit development বা firmware decompilation-এর পূর্ণ কোর্স এটি নয়। ওই পথে গেলেও “প্রমাণ কোথায়?” প্রশ্নটি কাজে লাগবে।</p>
+<p><strong>Behavioral equivalence</strong> মানে নির্দিষ্ট input, state ও condition-এ দরকারি output সমতুল্য। Original PostgreSQL ব্যবহার করেছে কি না অজানা হলেও replacement SQLite দিয়ে একটি ছোট শিক্ষামূলক contract পূরণ করতে পারে। একই technology ব্যবহার করলেই একই আচরণ হবে, এমন নিশ্চয়তাও নেই।</p>
+<h2>নিজের fidelity চুক্তি বানাও</h2>
+<p>ধরা যাক, তোমার লক্ষ্য শুধু ticket তৈরি ও পড়া। তাহলে লিখতে পারো:</p>
+<pre><code class="language-text">Included: create, list, refresh persistence, workspace isolation
+Visual target: layout ও readable states
+Excluded: real email, billing, mobile offline sync
+Critical gate: অন্য workspace-এর ticket প্রকাশ পাবে না
+Evidence boundary: অনুমোদিত demo accounts এবং local repository
+</code></pre>
+<p>এবার এই scope ধরে চারটি check চালাবে: create, list, reload এবং অন্য workspace দিয়ে read। Email পাঠানোর কাজটি এই iteration-এ নেই।</p>
+<h2>ক্ষুদ্র dry run</h2>
+<ol start="১">
+<li>একটি ticket তৈরি করলে UI-তে <code>t_101</code> এলো। লিখলে: “এই session-এ item দৃশ্যমান।”  </li>
+<li>Refresh-এর পরও item আছে। লিখলে: “এই reload-এ state টিকে আছে।”  </li>
+<li>Browser storage মুছে অন্য অনুমোদিত session-এ একই ID এলো। Server persistence-এর পক্ষে evidence আরও শক্ত হলো।  </li>
+<li>তবু “database engine PostgreSQL” বলা গেল না। Observable ফল দিয়ে অদৃশ্য implementation-এর সব পথ আলাদা করা যায় না।</li>
+</ol>
+<p><strong>নিজে করো—Q01:</strong> success toast দেখেছ। “ডেটা স্থায়ী হয়েছে” দাবিটি যাচাই করতে পরের দুটি পরীক্ষা কী হবে? <a href="#B-workbook">উত্তর পরে দেখো</a>।</p></section><section class="chapter" id="02-reconnaissance"><p class="small">ভিত্তি</p><h1>০২ · অজানা রিপোজিটরিতে প্রথম অভিযান</h1>
+<p>নীরা আরিফকে একটি repository দিল। “প্রথম আধঘণ্টায় কিছু বানাবে না; কী আছে বোঝো।” আরিফের AI ইতিমধ্যে <code>NewSuperTicketEngineFinalV2</code> নামের পরিকল্পনা করছিল। নীরা বলল, “নামের মধ্যে Final থাকলে investigation শেষ হয় না।”</p>
+<h2>প্রথম ৩০ মিনিটের অভিযান</h2>
+<p><img alt="Repository-র পাঁচটি file বা folder এবং প্রত্যেকটিতে খোঁজার নির্দিষ্ট প্রশ্ন" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/16-repository-map.svg"></p>
+<p>ধরো, <code>TicketForm</code> সঠিক payload পাঠাচ্ছে। Handler-ও চলছে। কিন্তু <code>TicketService</code> শুধু একটি memory array-তে item যোগ করে। এখন refresh bug-এর জন্য sidebar rewrite করতে হবে? পথ ধরে পড়লে কাজটি service-এর persistence অংশে এসে ছোট হয়ে যায়।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>সময়</th>
+<th>কাজ</th>
+<th>হাতে আসবে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>০–৫ মিনিট</td>
+<td>instructions, README, git status</td>
+<td>নিয়ম ও existing changes</td>
+</tr>
+<tr>
+<td>৫–১২ মিনিট</td>
+<td>package/config/test structure</td>
+<td>কীভাবে build ও run হয়</td>
+</tr>
+<tr>
+<td>১২–২০ মিনিট</td>
+<td>একটি workflow-এর call path</td>
+<td>UI → handler → service → store</td>
+</tr>
+<tr>
+<td>২০–৩০ মিনিট</td>
+<td>ছোট baseline check</td>
+<td>command, result, known failure</td>
+</tr>
+</tbody>
+</table></div>
+<p>এটি অনুশীলনের সময়বণ্টন, সব repository-এর deadline নয়। বড় project-এ একই প্রশ্নের উত্তর পেতে বেশি সময় লাগবে।</p>
+<pre><code class="language-bash">pwd
+git status --short
+rg --files -g 'AGENTS.md' -g 'README*' -g 'package.json' -g 'pyproject.toml'
+rg -n 'createTicket|create_ticket|TicketService' src tests
+</code></pre>
+<p>শেষ command-এর directory নিজের repository অনুযায়ী বদলাবে। এখানে <code>rg</code> কেবল text খোঁজে; matching symbol দেখেই runtime call প্রমাণ হয় না। Call site, route registration ও tests মিলিয়ে দেখতে হবে। <code>.env</code>-এর secret value report-এ কপি না করে প্রয়োজনীয় configuration <strong>নাম</strong> লিখবে।</p>
+<h2>একটি request-এর পায়ের ছাপ</h2>
+<pre><code class="language-text">TicketForm.onSubmit
+  → POST /tickets
+  → route handler
+  → TicketService.create
+  → repository.insert
+  → response mapper
+</code></pre>
+<p>এটি একটি candidate call chain। প্রতিটি arrow-এর পাশে file path বা runtime evidence যোগ করো। Source-এ function আছে কিন্তু route-এ ব্যবহার হয় না—এমন code-কে active behavior বললে ভুল model তৈরি হবে।</p>
+<h2>Tool নির্বাচন: প্রশ্ন আগে</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>তোমার প্রশ্ন</th>
+<th>উপযোগী evidence source</th>
+<th>কী জানা যাবে না</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Browser কী request পাঠায়?</td>
+<td>DevTools network capture</td>
+<td>অদেখা server internals</td>
+</tr>
+<tr>
+<td>Permission check কোথায়?</td>
+<td>authorized source + execution</td>
+<td>unexecuted branch ঠিক কি না</td>
+</tr>
+<tr>
+<td>Packaged app-এ কী আছে?</td>
+<td>উপযুক্ত artifact inspection</td>
+<td>সব remote backend rule</td>
+</tr>
+<tr>
+<td>Refresh-এ কী থাকে?</td>
+<td>controlled UI/API observation</td>
+<td>backup recovery guarantee</td>
+</tr>
+</tbody>
+</table></div>
+<p>REA বা অন্য tool-এর নাম বড় হলেই তার capability অসীম হয় না। Tool unavailable হলে “source inspect করা যায়নি” লিখে browser evidence নিয়ে এগোনো যায়। Tool চালানো ও প্রশ্নের উত্তর পাওয়া একই ঘটনা নয়।</p>
+<h2>Baseline খাতা</h2>
+<pre><code class="language-json">{
+  "target": "local teaching checkout",
+  "command": "python3 -m unittest discover -s tests",
+  "execution_status": "NOT_RUN",
+  "reason": "example record; replace after actual execution",
+  "existing_changes": "inspect before editing",
+  "next_action": "locate test entry point"
+}
+</code></pre>
+<p><code>NOT_RUN</code> ইচ্ছাকৃত। বানানো output দিয়ে baseline পূরণ করলে পরের improvement-এর হিসাবও বানানো হয়ে যায়। Test fail করলে আগে দেখো failure আগেই ছিল কি না। নতুন code-কে সব দোষ দেওয়া বা সব পুরোনো failure উপেক্ষা করা—দুটিই diagnosis নষ্ট করে।</p>
+<p><strong>নিজে করো—Q02:</strong> code-এ একটি <code>TicketService</code> পেয়েছ। Agent দ্বিতীয় service বানাতে চায়। সিদ্ধান্ত নেওয়ার আগে কোন তিনটি তথ্য চাইবে? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="03-evidence"><p class="small">ভিত্তি</p><h1>০৩ · প্রমাণের খাতা ও অনুমানের সীমানা</h1>
+<p>আরিফ বলল, “Assign করার পর নাম বদলেছে, কাজেই database update হয়েছে।” নীরা বলল, “তোমার বাক্যের প্রথম অংশ observation; দ্বিতীয় অংশ আরও প্রমাণ চায়।” এক বাক্যে দুই ধরনের জ্ঞান লুকিয়ে ছিল।</p>
+<h2>ছয়টি ঘর, ছয়টি অর্থ</h2>
+<p><img alt="নীরার নাম UI-তে দেখা গেছে; persistence এখনও পরীক্ষা বাকি এবং database vendor অজানা" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/17-evidence-sort.svg"></p>
+<p>একই দৃশ্য থেকে তিনটি বাক্য বের হলো। প্রথমটি এখনই খাতায় লেখা যায়। দ্বিতীয়টির জন্য নতুন read দরকার। তৃতীয়টির উত্তর screen-এ নেই। নিচের ছয়টি label এই বাক্যগুলোকে গুছিয়ে রাখার নামমাত্র।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>শ্রেণি</th>
+<th>সাধারণ ভাষায়</th>
+<th>RelayDesk উদাহরণ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OBSERVED</code></td>
+<td>সরাসরি দেখেছি</td>
+<td>request body-তে <code>assignee_id</code> ছিল</td>
+</tr>
+<tr>
+<td><code>DERIVED</code></td>
+<td>দেখা data থেকে হিসাব</td>
+<td>১০টির মধ্যে ৮টির error shape এক</td>
+</tr>
+<tr>
+<td><code>INFERRED</code></td>
+<td>evidence-সমর্থিত ব্যাখ্যা</td>
+<td>request path-এ কোনো permission enforcement আছে</td>
+</tr>
+<tr>
+<td><code>ASSUMED</code></td>
+<td>কাজের জন্য ধরে নিচ্ছি</td>
+<td>replacement-এ single region যথেষ্ট</td>
+</tr>
+<tr>
+<td><code>UNKNOWN</code></td>
+<td>এখনো জানি না</td>
+<td>original queue provider</td>
+</tr>
+<tr>
+<td><code>CONTRADICTED</code></td>
+<td>নতুন evidence-এ আগের দাবি টেকেনি</td>
+<td>“search সঙ্গে সঙ্গে update হয়”</td>
+</tr>
+</tbody>
+</table></div>
+<p>এই শ্রেণিগুলো quality rank নয়। সুন্দরভাবে লেখা <code>UNKNOWN</code> অনেক সময় ভিত্তিহীন <code>OBSERVED</code>-এর চেয়ে মূল্যবান। আর <code>DERIVED</code> দাবি নির্ভর করে input data ও calculation ঠিক থাকার ওপর।</p>
+<p><img alt="একটি claim থেকে evidence, requirement, implementation ও test result-এর সংযোগ" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/02-evidence-chain.svg"></p>
+<p><strong>ছবি পড়ো:</strong> প্রতিটি node-এর নিজস্ব ID আছে। শেষ test পাস হলেও প্রথম evidence-এর scope বেড়ে যায় না। Local lab-এর result দিয়ে real target-এর contract প্রমাণিত হয় না।</p>
+<h2>একটি ভালো record খুলে দেখা</h2>
+<pre><code class="language-json">{
+  "id": "E-017",
+  "question": "Assignment reload-এর পর থাকে?",
+  "classification": "OBSERVED",
+  "context": {"build": "demo-v3", "actor": "member_A", "workspace": "ws_a"},
+  "method": "assign → hard reload → read details",
+  "finding": "নতুন assignee দেখা গেছে",
+  "limitations": ["দ্বিতীয় device পরীক্ষা হয়নি", "concurrent update হয়নি"],
+  "artifact": "captures/E-017.json",
+  "requirement": "REQ-ASSIGN-02"
+}
+</code></pre>
+<p>এটি শিক্ষামূলক record; ওই capture এই repository-তে নেই। বাস্তবে artifact path সত্যিই থাকা চাই। এই বইয়ের থাকা উদাহরণটি <a href="#resource-pack" title="Companion resource: examples/evidence.json" class="source-link">examples/evidence.json</a>, যা local lab report-এর দিকে নির্দেশ করে।</p>
+<h2>Confidence নিয়ে একটি সতর্ক হিসাব</h2>
+<p>“Confidence ৯৭%”—কীসের probability? কোন model? কোন sampling process? উত্তর না থাকলে সংখ্যাটি সাজসজ্জা। বরং লেখো: “একই build-এ তিন account-এ পুনরাবৃত্ত হয়েছে; permission revoke case অদেখা।” এতে reader জানবে কোথায় বিশ্বাস করবেন, কোথায় পরীক্ষা করবেন।</p>
+<p>দুটি observer একই ফল পেয়েছেন বলেই independent evidence হয় না। দুজন যদি একই cached response দেখেন, তাদের ভুলও একই উৎস থেকে আসতে পারে। Evidence-এর <strong>স্বাধীনতা</strong> এবং <strong>প্রাসঙ্গিকতা</strong> গুরুত্বপূর্ণ।</p>
+<h2>দাবি বদলানোর dry run</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ধাপ</th>
+<th>কী পাওয়া গেল</th>
+<th>খাতায় কী বদলাবে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>১</td>
+<td>Update-এর পর search-এ পুরোনো title</td>
+<td><code>OBSERVED</code> timing record</td>
+</tr>
+<tr>
+<td>২</td>
+<td>২ সেকেন্ড পরে নতুন title</td>
+<td>immediate consistency claim <code>CONTRADICTED</code></td>
+</tr>
+<tr>
+<td>৩</td>
+<td>দুই session-এ একই delay</td>
+<td>async projection একটি <code>INFERRED</code> explanation</td>
+</tr>
+<tr>
+<td>৪</td>
+<td>worker code পাওয়া যায়নি</td>
+<td>queue technology <code>UNKNOWN</code> থাকবে</td>
+</tr>
+</tbody>
+</table></div>
+<p>Search delay দেখেই “Elasticsearch আছে” লেখা যায় না। একই ফল database replica, cache, debounce, periodic refresh বা index pipeline থেকেও আসতে পারে।</p>
+<h2>Traceability: AI-কে accountable করার সহজ পথ</h2>
+<pre><code class="language-text">E-017 → REQ-ASSIGN-02 → ADR-004 → assignment_service.py
+      → TEST-RELOAD-02 → RUN-2026-10-29
+</code></pre>
+<p>Source evidence নেই, কিন্তু product requirement আছে? সেটিও বৈধ requirement। উৎস লিখবে <code>product decision</code>। Source fidelity এবং replacement improvement যেন এক ঘরে মিশে না যায়।</p>
+<p><strong>নিজে করো—Q03:</strong> <code>Server: nginx</code> header দেখে “backend Python” লিখলে কোন শ্রেণি হওয়া উচিত? ওই claim-এর সমস্যাটি কী? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="04-product-map"><p class="small">ভিত্তি</p><h1>০৪ · পাতার তালিকা থেকে আচরণের মানচিত্র</h1>
+<p>“Dashboard, Tickets, Settings—তিন page। তিন দিনে শেষ?” আরিফের হিসাব মন্দ নয়, যদি page-গুলো ক্যালেন্ডারের পাতা হয়। Software page-এর মধ্যে অনেক state, permission ও failure লুকিয়ে থাকে।</p>
+<h2>একটি feature card</h2>
+<p><img alt="Draft লেখা, request পাঠানো, server response পাওয়া এবং নতুন read—ticket journey-এর চারটি snapshot" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/18-journey-strip.svg"></p>
+<p>দ্বিতীয় frame-এ network কেটে দাও। User শুধু জানেন তিনি পাঠিয়েছেন; ticket তৈরি হয়েছে কি না এখনও জানেন না। তাই feature card-এ “create” লিখলেই শেষ হয় না—এই মাঝের অবস্থাটি থেকে ফেরার পথও লাগে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ক্ষেত্র</th>
+<th>Assign Ticket-এর প্রস্তাবিত contract</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Actor</td>
+<td>workspace-এর assignment permission থাকা member</td>
+</tr>
+<tr>
+<td>Entry point</td>
+<td>ticket details-এর assignee menu</td>
+</tr>
+<tr>
+<td>Preconditions</td>
+<td>ticket আছে; assignee একই workspace-এর eligible member</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>ticket ID, assignee ID, expected version</td>
+</tr>
+<tr>
+<td>Durable result</td>
+<td>assignee বদলাবে; version বাড়বে</td>
+</tr>
+<tr>
+<td>Side effect</td>
+<td>activity; notification pending হতে পারে</td>
+</tr>
+<tr>
+<td>Failure</td>
+<td>forbidden, invalid assignee, stale version</td>
+</tr>
+<tr>
+<td>Recovery</td>
+<td>conflict-এ নতুন state পড়ে সিদ্ধান্ত</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td>অন্য member দিয়ে read, refresh, invalid actor, stale write</td>
+</tr>
+</tbody>
+</table></div>
+<p>Card-এর প্রত্যেক requirement-এর source যোগ করতে হবে। এই card আমাদের teaching design; মূল target-এর প্রত্যক্ষ evidence নয়।</p>
+<h2>Dependency-র তিন রং</h2>
+<pre><code class="language-text">Identity → Authorization → Domain validation → Ticket write
+                                                   │
+                                      একই transaction-এ outbox
+                                                   │
+                                              পরে worker
+                                                ↙     ↘
+                                       notification   search projection
+</code></pre>
+<p><strong>আগে দরকার:</strong> identity ও authorization। <strong>একসঙ্গে commit দরকার:</strong> ticket ও সংশ্লিষ্ট outbox record, যদি সেই pattern বাছাই করো। <strong>পরে হতে পারে:</strong> notification বা search update, যদি contract eventual consistency অনুমোদন করে।</p>
+<p>সব arrow এক ধরনের relationship নয়। “A ছাড়া B শুরু হয় না”, “A ও B atomically commit হয়”, “A থেকে B পরে derive হয়”—আলাদা লিখলে architecture discussion অনেক নির্দিষ্ট হয়।</p>
+<h2>Journey matrix বানাও</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Journey</th>
+<th>New member</th>
+<th>Existing member</th>
+<th>Revoked member</th>
+<th>Network failure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create</td>
+<td>onboarding policy</td>
+<td>allowed</td>
+<td>reject</td>
+<td>outcome uncertain হলে reconcile</td>
+</tr>
+<tr>
+<td>Assign</td>
+<td>role-dependent</td>
+<td>permission-dependent</td>
+<td>reject</td>
+<td>current assignee যাচাই</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>tenant scoped</td>
+<td>tenant scoped</td>
+<td>access removed</td>
+<td>stale/error state</td>
+</tr>
+</tbody>
+</table></div>
+<p>এখানে <code>role-dependent</code> মানে কাজ অসম্পূর্ণ নয়; rule এখনো নির্দিষ্ট করতে হবে। Matrix-এর ফাঁকা ঘর investigation-এর কাজ প্রকাশ করে।</p>
+<h2>Scope ছোট করার ভালো পদ্ধতি</h2>
+<p>প্রথম slice-এ attachment বাদ দিতে পারো। কিন্তু attachment button রেখে fake upload success দেখানো হলে reader ভুল contract শিখবে। Scope-এ বাদ দেওয়া outcome UI-তেও সত্যভাবে প্রকাশ করতে হবে।</p>
+<p>একটি dependency graph থেকে plan বের করো: create ticket পরীক্ষা করতে authentication-এর production provider দরকার নাও হতে পারে; lab-এ trusted actor fixture যথেষ্ট। কিন্তু fixture-কে বাস্তব login security বলা যাবে না।</p>
+<p><strong>নিজে করো—Q04:</strong> “Search” feature-এর জন্য তিনটি hidden dependency ও দুটি failure case লেখো। <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="05-experiments"><p class="small">ভিত্তি</p><h1>০৫ · গোয়েন্দার মতো পরীক্ষা সাজাও</h1>
+<p>আরিফ দুবার click করল, একটি ticket দেখল। “Server deduplicate করে!” নীরা browser network panel খুলল। দ্বিতীয় request-ই যায়নি। গোয়েন্দা একটি সন্দেহভাজনকে না দেখেই নির্দোষ ঘোষণা করেছিল।</p>
+<h2>প্রশ্নকে hypothesis-এ ভাঙো</h2>
+<p><img alt="দুই click-এর একটি ঘটনায় এক request, অন্য ঘটনায় দুই request; দুটিতেই list-এ একটি ticket" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/19-two-clicks.svg"></p>
+<p>দুইবার click করে একটি card দেখলে ছবির A ও B—দুটিই সম্ভব। Network log খুলে request গুনলেই তাদের আলাদা করা শুরু হয়। এরপর persisted ID ও count দেখবে; list-ও duplicate লুকিয়ে রাখতে পারে।</p>
+<p>প্রশ্ন: একই submission আবার এলে কী হয়?</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Hypothesis</th>
+<th>কী ব্যাখ্যা করে</th>
+<th>আলাদা করার পরীক্ষা</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1: client দ্বিতীয় click আটকায়</td>
+<td>একটি visible ticket</td>
+<td>actual request count</td>
+</tr>
+<tr>
+<td>H2: server একই operation replay করে</td>
+<td>দুই request, এক record</td>
+<td>same key + payload</td>
+</tr>
+<tr>
+<td>H3: UI duplicate লুকায়</td>
+<td>list-এ একটি item</td>
+<td>authorized API count/IDs</td>
+</tr>
+<tr>
+<td>H4: কেবল sequential retry নিরাপদ</td>
+<td>ধীরে retry-এ এক record</td>
+<td>overlapping requests</td>
+</tr>
+</tbody>
+</table></div>
+<p>“আরও screenshot” সব hypothesis আলাদা করবে না। কী মাপলে ব্যাখ্যাগুলো আলাদা ফল predict করে, সেই observation খোঁজো।</p>
+<h2>EXP-001: শুকনো মহড়া</h2>
+<p>নিচের ফল <strong>কল্পিত expected result</strong>, real capture নয়।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ধাপ</th>
+<th>Actor</th>
+<th>Key</th>
+<th>Title</th>
+<th>H2 হলে response</th>
+<th style="text-align: right;">মোট ticket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>১</td>
+<td>alice</td>
+<td>k1</td>
+<td>Login failure</td>
+<td>t1</td>
+<td style="text-align: right;">১</td>
+</tr>
+<tr>
+<td>২</td>
+<td>alice</td>
+<td>k1</td>
+<td>Login failure</td>
+<td>t1 replay</td>
+<td style="text-align: right;">১</td>
+</tr>
+<tr>
+<td>৩</td>
+<td>alice</td>
+<td>k2</td>
+<td>Login failure</td>
+<td>t2</td>
+<td style="text-align: right;">২</td>
+</tr>
+<tr>
+<td>৪</td>
+<td>alice</td>
+<td>k1</td>
+<td>Changed title</td>
+<td>conflict</td>
+<td style="text-align: right;">২</td>
+</tr>
+</tbody>
+</table></div>
+<p>Control: একই workspace, actor, application version। Variable: key; চতুর্থ ধাপে payload mismatch আলাদা subcase। Observe: request সংখ্যা, response ID, persisted count, outbox count। Reset: প্রতিটি independent run-এর আগে নতুন fixture। পূর্ণ card: <a href="#resource-pack" title="Companion resource: examples/experiment.json" class="source-link">experiment.json</a>।</p>
+<h2>কোন পরীক্ষা আগে করবে</h2>
+<p><img alt="পাঁচটি কাল্পনিক investigation-এর effort ও priority তুলনা" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/03-experiment-priority.svg"></p>
+<p><strong>ছবি পড়ো:</strong> toy score = impact × uncertainty ÷ effort। Impact ১–৫, uncertainty ০–১, effort ঘণ্টায়। এটি সিদ্ধান্ত-সহায়ক অনুমান, পরিসংখ্যানগত probability বা universal law নয়। Tenant leak-এর মতো critical boundary score কম হলেও release gate থাকতে পারে।</p>
+<p>মূল লেখায় impact, uncertainty, consequence ও information gain-সহ সমৃদ্ধ heuristic আছে। কাজে impact ও consequence একই অর্থে ব্যবহার করলে double-counting হয়। তাই এই চার্টে ছোট model নিয়েছি; বেশি factor নিলে প্রত্যেকটির পৃথক অর্থ লিখতে হবে।</p>
+<h2>গভীরে যাও: information gain-এর অর্থ</h2>
+<p>ধরো, H1 ও H2 দুটিই বর্তমান screenshot-এর সঙ্গে মিলে যায়। নতুন screenshot দুটির জন্যই একই রকম হবে; তাই আলাদা করার ক্ষমতা কম। Network request count H1-এর ক্ষেত্রে ১ এবং H2-এর ক্ষেত্রে ২ predict করলে পরীক্ষাটি বেশি তথ্যবহুল।</p>
+<p>Formal probability model থাকলে entropy দিয়ে uncertainty মাপা যায়। এখানে probability distribution নেই; তাই “information gain ৮৭%” বানাচ্ছি না। <strong>Competing explanation বাদ দেওয়ার ক্ষমতা</strong> হিসেবে ধারণাটি ব্যবহার করছি।</p>
+<h2>Experiment নষ্ট হওয়ার চারটি পথ</h2>
+<ul>
+<li>একই সঙ্গে role, payload ও environment বদলালে ফলের কারণ আলাদা করা কঠিন।</li>
+<li>প্রথম run-এর data পরের run-এ থাকলে duplicate policy ভুল বোঝা যায়।</li>
+<li>UI cache-কে durable store মনে করলে wrong oracle হয়।</li>
+<li>একটি timeout-কে server failure ধরে নিলে ইতিমধ্যে committed operation চোখ এড়িয়ে যায়।</li>
+</ul>
+<p><strong>নিজে করো—Q05:</strong> search stale। Cache delay ও asynchronous index—এই দুই explanation আলাদা করতে কী evidence চাইবে? শুধু delay দিয়ে কী বলতে পারবে না? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="06-ui-state"><p class="small">আচরণ</p><h1>০৬ · একটি বাটনের আট রকম জীবন</h1>
+<p>আরিফ একটি সবুজ toast বানিয়েছে: “Saved!” Request তখনও যাচ্ছে। নীরা বলল, “তোমার toast ভবিষ্যৎ বলতে পারে। আমাদের server পারে না।”</p>
+<h2>Submit-এর state machine</h2>
+<p><img alt="এক form-এর লেখা, loading, validation error, confirmed, outcome unknown ও conflict অবস্থার ছয়টি UI mockup" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/20-ui-contact-sheet.svg"></p>
+<p>তুমি user হলে ৩ নম্বরে title লিখতে। ৪ নম্বরে ticket খুলতে। কিন্তু ৫ নম্বরে আবার নতুন ticket বানানোর আগে আগেরটির ফল খুঁজতে। এই ছোট UI পার্থক্যের পেছনেই নিচের state machine।</p>
+<p><strong>একবার নিজে বলো:</strong> ৫ নম্বর screen থেকে input মুছে দিলে কী হারাবে? উত্তরটি শুধু text নয়—pending operation-এর সঙ্গে user-এর সম্পর্কও হারাতে পারে।</p>
+<p><img alt="Idle, validating, submitting, success, conflict এবং outcome unknown অবস্থার সম্পর্ক" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/04-ui-state.svg"></p>
+<p><strong>ছবি পড়ো:</strong> response পাওয়া এবং operation হওয়া আলাদা ঘটনা। Timeout-এর পরে এখানে <code>outcome_unknown</code> আছে। Server commit করেছে কি না জানা না থাকলে “ব্যর্থ” বলে নতুন operation তৈরি করানো duplicate ঘটাতে পারে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>বর্তমান state</th>
+<th>ঘটনা</th>
+<th>পরের state</th>
+<th>UI কী বলবে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>idle</td>
+<td>Submit</td>
+<td>validating</td>
+<td>input পরীক্ষা</td>
+</tr>
+<tr>
+<td>validating</td>
+<td>empty title</td>
+<td>validation_error</td>
+<td>field-এর কাছে কারণ</td>
+</tr>
+<tr>
+<td>validating</td>
+<td>valid</td>
+<td>submitting</td>
+<td>কাজ চলছে</td>
+</tr>
+<tr>
+<td>submitting</td>
+<td>confirmed response</td>
+<td>success</td>
+<td>server-confirmed ফল</td>
+</tr>
+<tr>
+<td>submitting</td>
+<td>stale version</td>
+<td>conflict</td>
+<td>নতুন state পড়ে সিদ্ধান্ত</td>
+</tr>
+<tr>
+<td>submitting</td>
+<td>response timeout</td>
+<td>outcome_unknown</td>
+<td>“ফল যাচাই করা হচ্ছে”</td>
+</tr>
+<tr>
+<td>outcome_unknown</td>
+<td>safe replay confirms</td>
+<td>success</td>
+<td>আগের operation-এর ফল</td>
+</tr>
+<tr>
+<td>outcome_unknown</td>
+<td>still unresolved</td>
+<td>outcome_unknown</td>
+<td>request reference ও recovery</td>
+</tr>
+</tbody>
+</table></div>
+<p>UI disabled করলেই duplicate-এর সব উৎস বন্ধ হয় না। Browser retry, app reconnect বা অন্য client একই operation পাঠাতে পারে। Server contract-এর প্রয়োজন এখানেই।</p>
+<h2>চার ধরনের state-এর ছোট নাটক</h2>
+<pre><code class="language-json">{
+  "local_ui": {"menu_open": true},
+  "server": {"assignee": "nira", "version": 8},
+  "client_cache": {"assignee": "arif", "version": 7},
+  "derived": {"assigned_to_nira_count": 12}
+}
+</code></pre>
+<p>Menu খোলা local UI state। Assignee-এর durable truth server-এর। Cache পুরোনো হলে list ভুল দেখাতে পারে। Count কোন projection থেকে এসেছে, তা জানা না থাকলে ১২ ঠিক কি না বলা যাবে না। “সব state reset করে দাও” সমাধানে unsaved draft-ও হারাতে পারে।</p>
+<h2>Optimistic update-এর dry run</h2>
+<ol start="১">
+<li>Server version ৭; assignee আরিফ।  </li>
+<li>Client নীরাকে নির্বাচন করে; UI সাময়িকভাবে নীরা দেখায়।  </li>
+<li>Server conflict দেয়, কারণ অন্য actor version ৮ করেছে।  </li>
+<li>Client নিজের pending change আলাদা রাখে, current state আনে এবং conflict দেখায়।  </li>
+<li>User নতুন state দেখে পুনরায় প্রয়োগ করবেন কি না ঠিক করেন।</li>
+</ol>
+<p>Blind rollback-ও বিপজ্জনক: এই সময়ে অন্য successful update এসে থাকলে পুরো পুরোনো object বসিয়ে সেটি মুছে দিতে পারো। Mutation identity ও version মিলিয়ে cache update করা প্রয়োজন।</p>
+<h2>Visual comparison-কে পুনরাবৃত্তিযোগ্য করো</h2>
+<p>একই viewport, font, browser, data, role, locale এবং loading state ব্যবহার করো। Random avatar ও চলমান clock screenshot diff-এ noise তৈরি করে। Normalize করতে পারো, কিন্তু actual error message বা permission-dependent button বাদ দেবে না।</p>
+<p>Mouse বাদ দিয়ে Tab, Enter, Space ও Escape দিয়ে journey চালাও। Keyboard দিয়ে কার্যকারিতা পাওয়া accessibility-এর একটি মৌলিক দাবি; শুধু tab order পরীক্ষা পূর্ণ accessibility audit নয়। <a href="https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html">W3C keyboard guidance</a>।</p>
+<p>বাংলা UI-তে দীর্ঘ label, mixed বাংলা–English ID, সংখ্যা, narrow screen ও ২০০% zoom পরীক্ষা করো। <code>Save</code> সুন্দর দেখালেও “পরিবর্তন সংরক্ষণ করুন” button থেকে বেরিয়ে যেতে পারে।</p>
+<p><strong>নিজে করো—Q06:</strong> timeout-এর পর input মুছে “Failed” দেখানো কেন ক্ষতিকর হতে পারে? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="07-api-contract"><p class="small">আচরণ</p><h1>০৭ · API-এর প্রতিশ্রুতি পড়তে শেখা</h1>
+<p>API হলো দুই পক্ষের যোগাযোগের নিয়ম। একটি successful request সেই নিয়মের একটি উদাহরণ; সব বৈধ input, failure ও ordering-এর পূর্ণ তালিকা নয়।</p>
+<h2>একটি প্রস্তাবিত create contract</h2>
+<p><img alt="Request-এর address, trusted identity, operation key ও body; পাশে success, invalid title ও key conflict-এর ফল" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/21-api-envelope.svg"></p>
+<p>খামটি খুলে চারটি অংশ আলাদা করো। <code>ws_a</code> বলে কাজটি কোথায়; trusted session বলে কে করছেন; <code>k1</code> বলে কোন operation; body বলে কী তৈরি হবে। একই title হলেও <code>k2</code> হলে সেটি আরেকটি submission হতে পারে।</p>
+<pre><code class="language-http">POST /api/workspaces/ws_a/tickets
+Content-Type: application/json
+Idempotency-Key: op-001
+
+{"title":"Login failure"}
+</code></pre>
+<pre><code class="language-json">{
+  "id": "ticket_001",
+  "workspace_id": "ws_a",
+  "title": "Login failure",
+  "status": "open",
+  "version": 1
+}
+</code></pre>
+<p>এটি আমাদের API design example। বইয়ের Python lab সরাসরি service function চালায়; এই HTTP route চালু করে না। <code>Idempotency-Key</code> এখানে বেছে নেওয়া application contract; প্রতিটি server স্বয়ংক্রিয়ভাবে এটি সমর্থন করে না।</p>
+<h2>Request-এর বাইরে যে প্রশ্নগুলো থাকে</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>বিষয়</th>
+<th>নির্দিষ্ট প্রশ্ন</th>
+<th>উদাহরণ সিদ্ধান্ত</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity</td>
+<td>actor কোথা থেকে আসে?</td>
+<td>trusted session context</td>
+</tr>
+<tr>
+<td>Validation</td>
+<td>whitespace title বৈধ?</td>
+<td>trim-এর পরে ১–১২০ character</td>
+</tr>
+<tr>
+<td>Replay</td>
+<td>একই key-তে payload বদলালে?</td>
+<td>conflict</td>
+</tr>
+<tr>
+<td>Ordering</td>
+<td>একই timestamp হলে sort?</td>
+<td><code>(created_at, id)</code> tie-breaker</td>
+</tr>
+<tr>
+<td>Pagination</td>
+<td>cursor পুরোনো হলে?</td>
+<td>contract অনুযায়ী error/continuation</td>
+</tr>
+<tr>
+<td>Errors</td>
+<td>machine-readable code আছে?</td>
+<td><code>version_conflict</code></td>
+</tr>
+<tr>
+<td>Compatibility</td>
+<td>unknown field কী হবে?</td>
+<td>গ্রহণ/ignore/reject লিখে দাও</td>
+</tr>
+</tbody>
+</table></div>
+<p>Character limit মানে bytes, Unicode code points, নাকি user-perceived grapheme clusters—এটিও contract। Lab-এর Python <code>len()</code> Unicode code points গুনছে; বাংলা যুক্তাক্ষরের দৃশ্যমান দৈর্ঘ্যের সমান নাও হতে পারে।</p>
+<h2>Status code যথেষ্ট নয়</h2>
+<p>HTTP-এর idempotent method semantics intended server effect নিয়ে কথা বলে; একই response body ফেরত আসবেই—এমন দাবি নয়। <code>POST</code>-এর duplicate safety তোমার operation contract দিয়ে যোগ করতে হতে পারে। Conditional request-এ <code>If-Match</code> precondition ব্যর্থ হলে 412-এর মতো নির্দিষ্ট semantics আছে। <a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110</a>।</p>
+<p>আমাদের service lab <code>version_conflict</code> দেয়। HTTP adapter লিখলে body-level expected version-এর জন্য 409 বেছে নিতে পারো; <code>If-Match</code> ব্যবহার করলে তার protocol semantics মানতে হবে। Code mapping যেন কেবল পছন্দের সংখ্যা না হয়।</p>
+<pre><code class="language-json">{
+  "type": "https://example.invalid/problems/version-conflict",
+  "title": "Ticket version conflict",
+  "status": 409,
+  "detail": "Read the current ticket before applying this change.",
+  "instance": "/requests/req_007",
+  "code": "version_conflict"
+}
+</code></pre>
+<p>এটি Problem Details ধরনে error উদাহরণ; <code>code</code> extension field। বাস্তবে HTTP status ও body status সামঞ্জস্যপূর্ণ রাখতে হবে, sensitive internals প্রকাশ করা যাবে না। <a href="https://www.rfc-editor.org/rfc/rfc9457.html">RFC 9457</a>।</p>
+<h2>Pagination-এর ফাঁদ: হাতে গুনে দেখো</h2>
+<p>শুরুতে newest-first list: <code>[D,C,B,A]</code>। Page size ২। প্রথম page <code>[D,C]</code>। মাঝখানে <code>E</code> তৈরি হলো। Offset ২ দিয়ে পরের page নিলে <code>[C,B]</code>—C আবার এলো।</p>
+<pre><code class="language-text">আগে:      [ D  C ]  B  A       ← প্রথম page শেষ
+নতুন E:   E  D  [ C  B ]  A    ← offset 2 এখন এখানে
+                    ↑
+                  C আবার!
+</code></pre>
+<p>Array-তে আঙুল দিয়ে দুই ঘর সরিয়ে দেখো। Offset একই থাকলেও তালিকার অবস্থান বদলে গেছে।</p>
+<p>Cursor <code>(created_at,id)</code>-এর পরে continuation দিতে পারে। কিন্তু cursor ব্যবহার করলেই snapshot consistency নিশ্চিত নয়। Update/delete বা backdated record-এর policy আলাদা করে নির্ধারণ করতে হয়। “Pagination আছে” বলার চেয়ে “একই record দুবার আসবে কি?” ভালো প্রশ্ন।</p>
+<h2>Boundary test menu</h2>
+<pre><code class="language-text">Title lengths: 0, 1, 120, 121
+Whitespace-only / wrong type / missing field
+Member / nonmember / revoked member
+Same key same payload / same key different payload
+No records / one page / exact full page / last partial page
+</code></pre>
+<p><strong>নিজে করো—Q07:</strong> একই idempotency key দিয়ে title বদলে দিলে পুরোনো success ফেরত দেওয়া কেন বিভ্রান্তিকর? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="08-domain-rules"><p class="small">আচরণ</p><h1>০৮ · ব্যবসার নিয়মকে পরীক্ষাযোগ্য করা</h1>
+<p>Database-এ status string রাখা সহজ। কোন actor কখন কোন status দিতে পারেন, সেটিই business logic। <code>UPDATE tickets SET status = ...</code> নিজে কোনো product policy জানে না।</p>
+<h2>তিনটি আলাদা যন্ত্র</h2>
+<p><img alt="Ticket status-এর metro map: open থেকে in_progress, resolved, closed; resolved থেকে ফিরে কাজ করা যায়, open থেকে closed shortcut নিষিদ্ধ" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/22-state-metro.svg"></p>
+<p>আরিফ <code>open</code> ticket-কে এক লাফে <code>closed</code> করতে চায়। ছবির লাল shortcut-টি আমাদের lab-এ বন্ধ। কিন্তু <code>resolved</code> থেকে আবার <code>in_progress</code>-এ ফেরা যায়। একই “status change” কথার মধ্যে তাই বৈধ ও অবৈধ—দুই ধরনের move আছে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>যন্ত্র</th>
+<th>প্রশ্ন</th>
+<th>উদাহরণ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>State machine</td>
+<td>কোথা থেকে কোথায় যাব?</td>
+<td>open → in_progress</td>
+</tr>
+<tr>
+<td>Invariant</td>
+<td>কোন শর্ত ভাঙা যাবে না?</td>
+<td>ticket-এর workspace অবশ্যই নির্দিষ্ট</td>
+</tr>
+<tr>
+<td>Decision table</td>
+<td>একাধিক শর্তে সিদ্ধান্ত কী?</td>
+<td>valid actor + current version + allowed transition</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lab-এর transition contract:</p>
+<pre><code class="language-text">open → in_progress → resolved → closed
+                       │
+                       └────────→ in_progress
+</code></pre>
+<p>Closed terminal। Reopen করতে হলে নতুন product decision ও test প্রয়োজন। Original product-এ closed reopen হতে পারে; এই teaching rule-কে তার ওপর চাপানো যাবে না।</p>
+<h2>Transition table থেকে test</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>From</th>
+<th>To</th>
+<th>Lab-এর ফল</th>
+<th>কেন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>open</td>
+<td>in_progress</td>
+<td>allow</td>
+<td>কাজ শুরু</td>
+</tr>
+<tr>
+<td>open</td>
+<td>closed</td>
+<td>reject</td>
+<td>মধ্যবর্তী নিয়ম এড়িয়ে যায়</td>
+</tr>
+<tr>
+<td>resolved</td>
+<td>in_progress</td>
+<td>allow</td>
+<td>পুনরায় কাজ প্রয়োজন</td>
+</tr>
+<tr>
+<td>closed</td>
+<td>open</td>
+<td>reject</td>
+<td>terminal contract</td>
+</tr>
+<tr>
+<td>in_progress</td>
+<td>in_progress</td>
+<td>reject</td>
+<td>self-transition সংজ্ঞায়িত নয়</td>
+</tr>
+</tbody>
+</table></div>
+<p>একই state আবার set করলে no-op হবে, event হবে, নাকি reject হবে—তিনটিই সম্ভাব্য design। না লিখলে agent নিজের মতো বেছে নেবে। এই lab reject করেছে।</p>
+<h2>Decision table: ভুলের অগ্রাধিকার</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Actor member?</th>
+<th>Resource in requested workspace?</th>
+<th>Version current?</th>
+<th>Transition valid?</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>না</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>forbidden</td>
+</tr>
+<tr>
+<td>হ্যাঁ</td>
+<td>না</td>
+<td>—</td>
+<td>—</td>
+<td>not_found</td>
+</tr>
+<tr>
+<td>হ্যাঁ</td>
+<td>হ্যাঁ</td>
+<td>না</td>
+<td>—</td>
+<td>version_conflict</td>
+</tr>
+<tr>
+<td>হ্যাঁ</td>
+<td>হ্যাঁ</td>
+<td>হ্যাঁ</td>
+<td>না</td>
+<td>invalid_transition</td>
+</tr>
+<tr>
+<td>হ্যাঁ</td>
+<td>হ্যাঁ</td>
+<td>হ্যাঁ</td>
+<td>হ্যাঁ</td>
+<td>update + version increment</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>—</code> মানে ওই সিদ্ধান্তের জন্য আর পরীক্ষা দরকার নেই। এই precedence আমাদের design। একটি request-এ একাধিক ভুল থাকলে কোন error দেখানো হবে, সেটিও observable behavior।</p>
+<h2>Invariant: scope না বললে বাক্য অসম্পূর্ণ</h2>
+<p>“একই request-এ একটিই ticket”—কোন request identity? Lab-এ scope হলো <code>(actor, workspace, key)</code>। একই title দিয়ে নতুন key দিলে নতুন ticket বৈধ। Title-কে duplicate identity করলে দুইজনের একই সমস্যা report করা আটকে যাবে।</p>
+<p>“Version বাড়বে”—সব read-এ নয়; accepted transition-এ এক বাড়বে। Failed transition-এ state অপরিবর্তিত থাকবে। এই negative condition test-এ লেখা জরুরি।</p>
+<pre><code class="language-text">Given: ticket open, version=1, actor authorized
+When: expected_version=1 দিয়ে in_progress করা হয়
+Then: status=in_progress, version=2
+And: expected_version=1 দিয়ে পরের update প্রত্যাখ্যাত
+And: failed update version বা status বদলায় না
+</code></pre>
+<h2>নতুন তথ্য এলে নিয়ম বদলাও</h2>
+<p>ধরা যাক, real observation-এ closed ticket-এ comment করলে reopen হয়। তাহলে <code>comment</code> শুধু CRUD নয়; status transition trigger। Inventory, state machine, audit behavior ও regression test—সবগুলো update করতে হবে। একটি জায়গায় code patch করলেই knowledge model সঠিক হয় না।</p>
+<p><strong>নিজে করো—Q08:</strong> “Ticket delete হলে আর দেখা যাবে না”—বাক্যটির কোন তিনটি scope নির্দিষ্ট করা প্রয়োজন? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="09-data-lifecycle"><p class="small">আচরণ</p><h1>০৯ · ডেটার মালিক, কপি ও বিদায়</h1>
+<p>নীরা প্রশ্ন করল, “Ticket কোথায়?” আরিফ বলল, “Database-এ।” কিন্তু title ছিল browser cache-এ, search index-এ, email-এ, backup-এও। একই তথ্যের অনেক জীবন আছে।</p>
+<p><img alt="Ticket-এর authoritative store এবং cache, search, dashboard, notification-এর সম্পর্ক" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/05-data-map.svg"></p>
+<p><strong>ছবি পড়ো:</strong> তীর মানে তথ্যের প্রবাহ; সব store সমান authority নয়। এটি candidate replacement model, original physical schema নয়।</p>
+<h2>Conceptual model আগে</h2>
+<pre><code class="language-text">User ── Membership ── Workspace ── Ticket ── Comment
+                                     └──── Attachment
+Ticket change ── Activity / Outbox ── Derived views
+</code></pre>
+<p>একজন user একাধিক workspace-এর member হতে পারেন। তাই user table-এ একটিমাত্র <code>workspace_id</code> বসানো আমাদের এই requirement পূরণ করবে না। UI-তে workspace switcher আছে বলে exact schema জানা যায় না; তবে বহু workspace membership-এর আচরণ model করা যায়।</p>
+<h2>একটি assignment-এর তিনটি ঘড়ি</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">সময়</th>
+<th>Durable ticket</th>
+<th>Details cache</th>
+<th>Search projection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">t=0</td>
+<td>arif, v7</td>
+<td>arif, v7</td>
+<td>arif, v7</td>
+</tr>
+<tr>
+<td style="text-align: right;">t=100ms</td>
+<td>nira, v8</td>
+<td>arif, v7</td>
+<td>arif, v7</td>
+</tr>
+<tr>
+<td style="text-align: right;">t=150ms</td>
+<td>nira, v8</td>
+<td>nira, v8</td>
+<td>arif, v7</td>
+</tr>
+<tr>
+<td style="text-align: right;">t=1500ms</td>
+<td>nira, v8</td>
+<td>nira, v8</td>
+<td>nira, v8</td>
+</tr>
+</tbody>
+</table></div>
+<p>এটি বানানো timeline। এই সময়গুলো benchmark নয়। এখানে stale search দিয়ে database failure ঘোষণা করা ভুল; আবার search latency contract ভাঙলে “database ঠিক আছে” বলেও user impact অস্বীকার করা যাবে না।</p>
+<h2>Delete একটি বহু-ধাপের ঘটনা</h2>
+<p><img alt="Delete-এর পরে primary store, search, attachment ও backup-এ ticket-এর আলাদা অবস্থা" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/23-delete-shadows.svg"></p>
+<p>Primary store-এ <code>deleted v10</code>, অথচ search-এ পুরোনো title। এবার worker দেরিতে <code>updated v9</code> পেল। Version না দেখে সেটি লিখলে ticket আবার “জীবিত” দেখাতে পারে। ছবির চারটি ঘরের জন্য আলাদা cleanup বা retention rule লাগবে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>কপি</th>
+<th>সম্ভাব্য প্রয়োজন</th>
+<th>যাচাই</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary record</td>
+<td>tombstone বা hard delete</td>
+<td>normal read-এ unavailable</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>document removal</td>
+<td>query-তে আর ফেরে না</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>invalidate বা expiry</td>
+<td>পুরোনো response আর accessible নয়</td>
+</tr>
+<tr>
+<td>Attachment</td>
+<td>access revoke / purge policy</td>
+<td>direct URL-এর access</td>
+</tr>
+<tr>
+<td>Audit</td>
+<td>প্রয়োজনীয় সীমিত history</td>
+<td>sensitive payload minimization</td>
+</tr>
+<tr>
+<td>Backup</td>
+<td>retention ও restore handling</td>
+<td>restore-এর পরে deletion পুনঃপ্রয়োগের policy</td>
+</tr>
+</tbody>
+</table></div>
+<p>Retention product ও প্রযোজ্য requirements অনুযায়ী ঠিক করতে হয়; এখানে নির্দিষ্ট আইন বা সময়সীমা নির্ধারণ করা হচ্ছে না। “Soft delete আছে” মানে privacy lifecycle সম্পন্ন নয়।</p>
+<h2>Out-of-order event-এর dry run</h2>
+<p>Worker প্রথমে <code>ticket.updated v9</code> পেল, পরে দেরিতে <code>v8</code>। যদি প্রতিবার অন্ধভাবে projection overwrite করে, search পিছিয়ে যাবে। একটি design হলো per-ticket version দেখে পুরোনো update উপেক্ষা করা। তবে partial event payload হলে “বড় version পেলেই যথেষ্ট” সব সময় ঠিক নয়; snapshot event বনাম delta event-এর semantics জানতে হবে।</p>
+<p>Delete tombstone-এর version ১০। দেরিতে version ৯-এর update এলে deleted ticket আবার জীবিত করা যাবে না। এই resurrection bug সাধারণ create/read test-এ ধরা পড়ে না।</p>
+<h2>কোন প্রশ্ন agent-কে করবে</h2>
+<p>“এই field-এর source of truth কোনটি? কোন কপি rebuild করা যায়? কোন event হারালে data irrecoverable? Deletion হলে derived copy কীভাবে পরিষ্কার হবে?” উত্তরগুলো data ownership design-এর ভিত্তি।</p>
+<p><strong>নিজে করো—Q09:</strong> database থেকে ticket মুছে search-এ রেখে দিলে কী কী mismatch হয়? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="10-time-concurrency"><p class="small">গভীরতা</p><h1>১০ · একই সময়ে দুজন: সময়ের ফাঁদ</h1>
+<p>আরিফ আর নীরা একই ticket খুলল। দুজনের কাছে version ১। নীরা status বদলাল; আরিফ পুরোনো form থেকে title বদলে পুরো object পাঠাল। Title ঠিক হলো, status আবার পুরোনো। Software-এ time travel ঘটেছে, কিন্তু product requirement-এ ছিল না।</p>
+<h2>১০.১ Lost update হাতে চালাও</h2>
+<p><img alt="অন্ধ overwrite এবং version-শর্তযুক্ত update-এর পাশাপাশি timeline" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/06-concurrency.svg"></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ধাপ</th>
+<th>আরিফ</th>
+<th>নীরা</th>
+<th>Durable state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>১</td>
+<td>পড়ে: open, v1</td>
+<td></td>
+<td>open, v1</td>
+</tr>
+<tr>
+<td>২</td>
+<td></td>
+<td>পড়ে: open, v1</td>
+<td>open, v1</td>
+</tr>
+<tr>
+<td>৩</td>
+<td></td>
+<td>in_progress save</td>
+<td>in_progress, v2</td>
+</tr>
+<tr>
+<td>৪</td>
+<td>v1 copy পাঠায়</td>
+<td></td>
+<td>conflict অথবা lost update</td>
+</tr>
+</tbody>
+</table></div>
+<p>Version-based design-এ update condition হবে current version == expected version।</p>
+<pre><code class="language-sql">UPDATE tickets
+SET status = :new_status, version = version + 1
+WHERE id = :ticket_id
+  AND workspace = :workspace
+  AND version = :expected_version;
+</code></pre>
+<p>Affected row ০ হলে কারণ জানতে হবে: stale version, missing resource, নাকি scope mismatch? Lab membership ও lookup আগে করে, transaction-এর মধ্যে compare করে; update-এর row count-ও পরীক্ষা করে। SQL fragment একা পূর্ণ authorization implementation নয়।</p>
+<p>একটি গুরুত্বপূর্ণ ফাঁদ: <code>SELECT version</code> করে transaction/atomic condition ছাড়া পরে unconditional <code>UPDATE</code> করলে মাঝের সময়ে আরেক write ঢুকতে পারে। Check এবং effect-এর সম্পর্কই correctness নির্ধারণ করে।</p>
+<p><strong>গভীর সীমা:</strong> প্রতি-record version check সব multi-record invariant রক্ষা করে না। “দুই doctor-এর অন্তত একজন on-call থাকবেন” নিয়মে দুজন আলাদা row update করলে প্রত্যেকে নিজের version ঠিক পেয়েও যৌথ নিয়ম ভাঙতে পারেন। Isolation, locks বা constraint কী লাগবে তা invariant অনুযায়ী ঠিক করতে হয়। PostgreSQL-এর isolation level ও serialization retry সম্পর্কে তার নিজস্ব semantics পড়তে হবে; SQLite lab-এর ফল সেখানে সরাসরি প্রতিস্থাপন করা যায় না। <a href="https://www.postgresql.org/docs/current/transaction-iso.html">PostgreSQL transaction isolation</a>।</p>
+<h2>১০.২ Idempotency: click count নয়, logical operation</h2>
+<p><img alt="চারটি request-এর রসিদ: k1 ও একই payload replay, k1 ও বদলানো payload conflict, k2 নতুন ticket" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/24-retry-receipts.svg"></p>
+<p>একটি রসিদ হারিয়ে আবার তার copy চাইলে নতুন কেনাকাটা হয় না। ছবির দ্বিতীয় row-তে সেটাই হচ্ছে। তৃতীয় row-তে একই রসিদে অন্য জিনিস চাওয়া হয়েছে; চতুর্থ row-তে রসিদই নতুন। এবার key ও payload-এর আলাদা ভূমিকা দেখা যাচ্ছে।</p>
+<p><strong>ছবির ফল ঢেকে বলো:</strong> <code>k1 / Changed title</code>-কে চুপচাপ <code>t_101</code> ফেরত দিলে user কী ভুল বুঝবেন? তিনি ভাবতে পারেন নতুন title-টি সংরক্ষিত হয়েছে।</p>
+<p>Lab identity = <code>(actor, workspace, key)</code>। Fingerprint = normalized title payload-এর hash।</p>
+<pre><code class="language-text">alice / ws_a / k1 / title=A → create t1, store original response
+alice / ws_a / k1 / title=A → replay t1
+alice / ws_a / k1 / title=B → conflict
+alice / ws_a / k2 / title=A → create t2
+bob   / ws_b / k1 / title=A → separate operation
+</code></pre>
+<p>Key browser refresh-এ বদলে ফেললে timeout retry নতুন operation হয়ে যাবে। আবার প্রতিটি আলাদা submission-এ একই key পুনর্ব্যবহার করলেও ভুল। User intent থেকে key lifecycle তৈরি করতে হবে।</p>
+<p><strong>আরও চারটি contract প্রশ্ন:</strong> key কতদিন রাখা হবে? In-flight duplicate এলে wait নাকি conflict? প্রথম failure replay হবে কি? Actor permission revoke হলে পুরোনো response replay করা যাবে কি? Lab-এ replay-এর আগেও membership check আছে; key expiry নেই। এটি ছোট lab-এর সীমা।</p>
+<p>Lab original response সংরক্ষণ করে। Create-এর পরে status version ২ হয়ে গেলেও create replay version ১-এর response দিতে পারে; current resource জানতে read করবে। “Replay result” ও “current state” আলাদা endpoint semantics হতে পারে।</p>
+<h2>১০.৩ Outbox: দুই write-এর মাঝের গর্ত</h2>
+<p>খারাপ sequence: ticket commit → process crash → notification event কখনো তৈরি হলো না। Transactional outbox-এ ticket ও outbox row একই local transaction-এ লেখা হয়। Commit হলে দুটো থাকে; rollback হলে কোনোটিই থাকে না। তারপর worker external delivery চেষ্টা করে। <a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html">AWS transactional outbox guidance</a>।</p>
+<p><img alt="Outbox transaction, worker, provider ও acknowledgement gap" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/07-outbox.svg"></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Crash point</th>
+<th>Ticket</th>
+<th>Outbox</th>
+<th>External effect</th>
+<th>Recovery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>commit-এর আগে</td>
+<td>নেই</td>
+<td>নেই</td>
+<td>নেই</td>
+<td>নতুন করে চেষ্টা</td>
+</tr>
+<tr>
+<td>commit-এর পরে, send-এর আগে</td>
+<td>আছে</td>
+<td>pending</td>
+<td>নেই</td>
+<td>worker retry</td>
+</tr>
+<tr>
+<td>send-এর পরে, mark-এর আগে</td>
+<td>আছে</td>
+<td>pending</td>
+<td>হয়েছে</td>
+<td>duplicate-safe retry দরকার</td>
+</tr>
+<tr>
+<td>delivered mark-এর পরে</td>
+<td>আছে</td>
+<td>delivered</td>
+<td>হয়েছে</td>
+<td>সাধারণত শেষ</td>
+</tr>
+</tbody>
+</table></div>
+<p>শেষের আগের row-টাই “exactly once” দাবিকে কঠিন করে। শুধু local <code>processed=true</code> যথেষ্ট নয়। আগে mark করলে send হারাতে পারে; পরে mark করলে send duplicate হতে পারে।</p>
+<p>Lab-এর fake provider <strong>নিজের durable receipt table-এ event ID deduplicate করে</strong>। তাই retry-এ effect count এক থাকে। বাস্তব email provider ওই guarantee না দিলে একই নিশ্চয়তা পাওয়া যায় না; reconciliation বা duplicate গ্রহণের policy প্রয়োজন হতে পারে।</p>
+<h2>১০.৪ অনুশীলন চালাও</h2>
+<pre><code class="language-bash">python3 lab/run_lab.py
+python3 -m unittest discover -s lab -p 'test_*.py' -v
+</code></pre>
+<p>এই lab-এ দুই thread, দুই database connection এবং barrier দিয়ে overlapping request পরীক্ষা আছে। SQLite <code>BEGIN IMMEDIATE</code> writers serialize করে। এটি বাস্তব network, multi-region deployment বা অসংখ্য interleaving-এর proof নয়। <a href="#16-vertical-lab">পূর্ণ lab guide</a>।</p>
+<p><strong>নিজে করো—Q10:</strong> Outbox থাকলে external side effect ঠিক একবার হবে—এই দাবির counterexample বলো। <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="11-network"><p class="small">গভীরতা</p><h1>১১ · নেটওয়ার্কের চিহ্ন কী বলে</h1>
+<p>“Response-এ nginx আছে, তাহলে পুরো architecture জানি।” নীরা বলল, “বাড়ির gate-এর কোম্পানি দেখে রান্নাঘরের recipe বোঝা যায়?”</p>
+<h2>Fingerprint থেকে fact নয়</h2>
+<p><img alt="Browser-এর সামনে nginx edge বা proxy দেখা যায়; তার পেছনের origin app প্রশ্নচিহ্ন দিয়ে অজানা রাখা" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/25-network-curtain.svg"></p>
+<p>গেটের নামটি পড়া যাচ্ছে; ভেতরের application language-টি নয়। একটি header-এর record তাই লিখতে পারো: <code>observed: Server=nginx; origin_language: unknown</code>। Unknown ঘর খালি রাখলে পরের তদন্তের জায়গাটি পরিষ্কার থাকে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>চিহ্ন</th>
+<th>সরাসরি observation</th>
+<th>সম্ভাব্য ব্যাখ্যা</th>
+<th>যা অজানা</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Server</code> header</td>
+<td>একটি value এসেছে</td>
+<td>edge/proxy/origin যোগ করেছে</td>
+<td>application language</td>
+</tr>
+<tr>
+<td>এক IP</td>
+<td>ওই request একটি address-এ গেছে</td>
+<td>load balancer বা single server</td>
+<td>backend instance count</td>
+</tr>
+<tr>
+<td>chunked/streamed output</td>
+<td>data ধাপে এসেছে</td>
+<td>streaming application/proxy buffering</td>
+<td>exact model বা worker topology</td>
+</tr>
+<tr>
+<td>long delay</td>
+<td>end-to-end অপেক্ষা</td>
+<td>network, queue, computation</td>
+<td>কোন অংশ দায়ী</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fingerprint spoofed, omitted বা intermediary থেকে আসতে পারে। অতএব architecture drawing-এ uncertain node-কে “candidate” লিখবে।</p>
+<h2>Request-এর যাত্রা</h2>
+<pre><code class="language-text">Client → DNS result → TLS endpoint → Edge / Gateway → Application
+                                                  → Data / Dependencies
+</code></pre>
+<p>এটি observation-এর checklist; সব request-এ এই exact topology পাওয়া যাবে না। DNS, TLS, headers, redirects ও timing আলাদা evidence source। Browser network panel-এর একটি request থেকে origin database schema পাওয়া যায় না।</p>
+<h2>Streaming-এর ছোট dry run</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>সময়</th>
+<th>Observable event</th>
+<th>প্রশ্ন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>t0</td>
+<td>request শুরু</td>
+<td>request identity কী?</td>
+</tr>
+<tr>
+<td>t1</td>
+<td>headers</td>
+<td>HTTP success body complete বোঝায়? না</td>
+</tr>
+<tr>
+<td>t2</td>
+<td>প্রথম chunk</td>
+<td>partial result UI-তে safe?</td>
+</tr>
+<tr>
+<td>t3</td>
+<td>connection কেটে গেল</td>
+<td>server task এখনও চলছে?</td>
+</tr>
+<tr>
+<td>t4</td>
+<td>reconnect</td>
+<td>resume cursor আছে, নাকি নতুন task?</td>
+</tr>
+</tbody>
+</table></div>
+<p>Client disconnect মানে server operation cancel হয়েছে—এটি পরীক্ষা ছাড়া বলা যায় না। Side effect চললে duplicate task সৃষ্টি হতে পারে। Streaming output-এর completion marker ও operation state আলাদা model করা ভালো।</p>
+<h2>ছোট investigation protocol</h2>
+<ol start="১">
+<li>নিজের/অনুমোদিত test target ও account ঠিক করো।  </li>
+<li>একটি প্রশ্ন নাও: redirect-এ authentication context থাকে কি?  </li>
+<li>Redacted request/response sequence রাখো।  </li>
+<li>Version, environment ও সময় লিখো।  </li>
+<li>Inaccessible internals unknown রেখেই observable contract লেখো।</li>
+</ol>
+<p>লক্ষ্য protocol বোঝা; evidence ছাড়াই বড় infrastructure diagram বানালে decision ভুল দিকে যেতে পারে।</p>
+<p><strong>নিজে করো—Q11:</strong> response আসতে ২ সেকেন্ড লাগল। “Database slow” বলার আগে কোন দুটি measurement চাইবে? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="12-security"><p class="small">গভীরতা</p><h1>১২ · পরিচয় আছে, অনুমতি আছে কি</h1>
+<p>Authentication বলে তুমি কে। Authorization বলে তুমি <strong>এই resource-এ এই কাজ</strong> করতে পারো কি না। অফিসের ID card থাকলেই সব আলমারির চাবি পাওয়া যায় না।</p>
+<h2>আমাদের test cast</h2>
+<p><img alt="Alice workspace A-এর এবং Bob workspace B-এর member; Bob-এর A-এর ticket পড়ার পথ server-এ বন্ধ" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/26-workspace-doors.svg"></p>
+<p>Bob-কে <code>t_A</code>-এর সঠিক ID দেওয়া হলো। এখন অনুমতি মিলেছে? না—ঠিকানা জানা আর দরজা খোলার অনুমতি আলাদা। Request পাঠিয়ে denial দেখবে; তারপর Alice দিয়ে আবার পড়ে নিশ্চিত হবে ticket-ও বদলায়নি।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Actor</th>
+<th>Membership</th>
+<th>Resource</th>
+<th>Intended result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>alice</td>
+<td>ws_a</td>
+<td>ws_a/t1 read</td>
+<td>allow</td>
+</tr>
+<tr>
+<td>bob</td>
+<td>ws_b</td>
+<td>ws_a/t1 read</td>
+<td>deny</td>
+</tr>
+<tr>
+<td>bob</td>
+<td>ws_b</td>
+<td>ws_a/t1 update</td>
+<td>deny</td>
+</tr>
+<tr>
+<td>alice, membership revoked</td>
+<td>none</td>
+<td>ws_a/t1 read</td>
+<td>deny</td>
+</tr>
+</tbody>
+</table></div>
+<p>Button লুকিয়ে রাখা presentation behavior। Server-side enforcement প্রয়োজন; request-এর client-supplied <code>actor_id</code>-কে সত্য ধরে নেওয়া যাবে না। Permission প্রতিটি প্রাসঙ্গিক request ও resource boundary-তে যাচাই করা উচিত। <a href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html">OWASP authorization guidance</a>।</p>
+<h2>Boundary ধরে ভাবো</h2>
+<pre><code class="language-text">Untrusted client input
+        ↓
+Authenticated server context
+        ↓
+Permission + resource scope
+        ↓
+Domain operation → persistence
+</code></pre>
+<p>Lab-এ actor string সরাসরি function-এ দেওয়া হয়। কারণ lab authentication শেখায় না; caller-কে trusted ধরে authorization logic দেখায়। HTTP server বানালে body থেকে ওই string নিয়ে পাশ করানো নিরাপদ implementation হবে না।</p>
+<h2>শুধু happy path test নয়</h2>
+<pre><code class="language-text">Given: bob কেবল ws_b-এর member
+And: t1 ws_a-এর ticket
+When: bob t1 পড়তে বা update করতে চায়
+Then: request rejected
+And: response-এ title/description প্রকাশিত নয়
+And: ticket version ও state অপরিবর্তিত
+</code></pre>
+<p>Denied response এলো, কিন্তু write ইতিমধ্যে হয়ে গেছে—এমন bug ধরতে <code>And</code> অংশ দরকার। ID guessed হলেও denial চাই; ID random হওয়া authorization-এর বিকল্প নয়।</p>
+<h2>Permission কোথায় ছড়িয়ে থাকে</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>পথ</th>
+<th>সাধারণ ভুল</th>
+<th>কী পরীক্ষা</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Detail endpoint</td>
+<td>unscoped ID lookup</td>
+<td>অন্য workspace ID</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>global index result</td>
+<td>tenant filter bypass নয়, scoped result check</td>
+</tr>
+<tr>
+<td>Attachment</td>
+<td>public download URL</td>
+<td>revoked actor access</td>
+</tr>
+<tr>
+<td>Export</td>
+<td>worker context হারায়</td>
+<td>export job-এর owner scope</td>
+</tr>
+<tr>
+<td>WebSocket</td>
+<td>connect-এ একবার check</td>
+<td>revoke-এর পরে নতুন event/edit</td>
+</tr>
+</tbody>
+</table></div>
+<p>আগে ডাউনলোড করা তথ্য user-এর device থেকে জাদুর মতো ফিরিয়ে নেওয়া যায় না। Revocation policy-তে future server access, open connection ও local cache আলাদা করে আলোচনা করতে হয়।</p>
+<h2>Original-এর দুর্বলতা পেলে</h2>
+<p>Observation লিখবে; replacement-এর জন্য নিরাপদ আচরণ বেছে নিলে fidelity difference-টিও লিখবে। “সঠিকভাবে clone” করার নামে sensitive data leak পুনরায় তৈরি করার প্রয়োজন নেই। তদন্তে অনুমোদিত account ও synthetic data ব্যবহার করলে ফল review করাও সহজ হয়।</p>
+<p><strong>নিজে করো—Q12:</strong> Search API tenant-scoped কিন্তু export worker global query করে। Detail API test পাস করলেও কী ঝুঁকি থাকে? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="13-observability"><p class="small">গভীরতা</p><h1>১৩ · সিস্টেমের গল্প শোনার যন্ত্র</h1>
+<p>“Save ধীর”—এটি একটি বাস্তব user symptom। “Database খারাপ”—এটি একটি hypothesis। মাঝের পথটি telemetry দিয়ে তৈরি করতে হয়। নীরা আরিফকে বলল, “প্রথমে stopwatch; পরে detective music।”</p>
+<h2>তিনটি signal, তিনটি প্রশ্ন</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>কী প্রশ্নের উত্তর দেয়</th>
+<th>RelayDesk উদাহরণ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Log</td>
+<td>নির্দিষ্ট ঘটনায় কী হয়েছে?</td>
+<td>req_7-এ version conflict</td>
+</tr>
+<tr>
+<td>Metric</td>
+<td>অনেক ঘটনায় trend কী?</td>
+<td>গত interval-এ error ratio</td>
+</tr>
+<tr>
+<td>Trace</td>
+<td>একটি operation কোন ধাপ পেরিয়েছে?</td>
+<td>auth → DB → response</td>
+</tr>
+</tbody>
+</table></div>
+<p>Trace-এ spans operation-এর অংশ বোঝায়; parent/child relationship ও context propagation দিয়ে related কাজ যুক্ত হয়। Queue-তে পাঠানো কাজের trace context হারালে API ও worker-এর সম্পর্ক খুঁজে পাওয়া কঠিন। <a href="https://opentelemetry.io/docs/concepts/signals/traces/">OpenTelemetry traces</a>।</p>
+<p><img alt="একই timeline-এ API request, database span ও পরে চলা worker" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/08-trace.svg"></p>
+<p><strong>ছবি পড়ো:</strong> এখানে HTTP request ১২০ ms-এ শেষ; worker ৩০০ ms-এ শুরু, ৩৭০ ms-এ শেষ। সব সংখ্যা synthetic। Worker-এর সময় HTTP latency-র মধ্যে যোগ করলে metric-এর অর্থ বদলে যাবে। পাশাপাশি চলা span-এর duration যোগ করলেও end-to-end latency পাওয়া যায় না।</p>
+<h2>একটি incident-এর dry run</h2>
+<ol start="১">
+<li>User বলে ticket তৈরি হয়েছে, notification আসেনি।  </li>
+<li>Request log-এ ticket commit সফল।  </li>
+<li>Outbox pending count বাড়ছে।  </li>
+<li>Worker log-এ provider timeout।  </li>
+<li>তাই create endpoint rewrite করার আগে delivery path পরীক্ষা করবে।</li>
+</ol>
+<pre><code class="language-json">{
+  "event": "notification_attempt_failed",
+  "request_id": "req_007",
+  "operation_id": "op_031",
+  "event_id": "evt_019",
+  "attempt": 3,
+  "reason_code": "provider_timeout",
+  "duration_ms": 2000
+}
+</code></pre>
+<p>এটি illustrative log। Password, token বা ticket-এর পুরো private body এখানে প্রয়োজন নেই। Request ID log/trace-এ উপযোগী হলেও প্রতিটি request ID-কে metric label করলে cardinality অস্বাভাবিকভাবে বাড়তে পারে। Metric-এ সাধারণত bounded labels বেছে নাও।</p>
+<h2>SLI থেকে SLO: সংখ্যা দিয়ে পরিষ্কার হও</h2>
+<p>Toy requirement: “এই demo observation window-এ valid create attempt-এর অন্তত ৯৯% durable success হবে।”</p>
+<pre><code class="language-text">SLI = durable_success / eligible_create_attempts
+Window: নির্দিষ্ট ২৪ ঘণ্টা
+Excluded: পূর্বনির্ধারিত invalid-input requests
+Unknown outcomes: বাদ নয়; reconciliation শেষে শ্রেণিবদ্ধ
+</code></pre>
+<p>১০,০০০ eligible request-এর ৯,৯৫০ সফল হলে SLI = ৯৯.৫%। ৯৯% objective হলে ওই window-এ error budget ১০০ request; ব্যবহার হয়েছে ৫০। এটি একটি বানানো calculation, universal target নয়। পরে denominator বদলে bad requests বাদ দিয়ে SLO সুন্দর করা যাবে না।</p>
+<p>Latency, traffic, errors ও saturation একসঙ্গে দেখা diagnosis-এ সাহায্য করে; average-এর পাশাপাশি distribution দেখার প্রয়োজনও আছে। <a href="https://sre.google/sre-book/monitoring-distributed-systems/">Google SRE monitoring</a>।</p>
+<h2>Alert-এ action চাই</h2>
+<p>“CPU ৮০%” সব সময় user impact নয়। “১০ মিনিট ধরে oldest pending notification বয়স contract ছাড়িয়েছে”—এতে affected outcome ও action স্পষ্ট। Alert-এর সঙ্গে owner, dashboard, diagnostic query এবং runbook রাখো। অন্যদিকে telemetry না আসা মানে error শূন্য—এমন সিদ্ধান্তও ভুল; signal pipeline-এর health জানতে হবে।</p>
+<p><strong>নিজে করো—Q13:</strong> API success ১০০%, notification backlog বাড়ছে। User journey সম্পূর্ণ বলা যাবে কি? কোন দ্বিতীয় SLI দরকার? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="14-performance"><p class="small">গভীরতা</p><h1>১৪ · গড়ের আড়ালে ধীর মানুষগুলো</h1>
+<p>আরিফ বলল, “Average latency মাত্র ১৭৫ ms!” নীরা বলল, “শেষ পাঁচজন user-এর মুখটাও দেখি।” গড় সংখ্যার একটি অভ্যাস আছে: খুব খারাপ অভিজ্ঞতাকে ভিড়ের মধ্যে লুকিয়ে ফেলতে পারে।</p>
+<h2>১৪.১ একশটি request হাতে গুনে দেখো</h2>
+<p><img alt="১০০ বিন্দুর মধ্যে ৯০ সবুজ request ১০০ ms, পাঁচ হলুদ ২০০ ms এবং পাঁচ লাল ১৫০০ ms" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/27-hundred-requests.svg"></p>
+<p>আগে শুধু বিন্দুগুলো দেখো। শেষ row-এর লাল পাঁচজনও user। এখন ১৭৫ ms average শুনলে তাদের অপেক্ষার কথাটি মনে থাকবে। নিচের অঙ্ক একই ছবির হিসাব।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">Request সংখ্যা</th>
+<th style="text-align: right;">প্রতি request latency</th>
+<th style="text-align: right;">মোট সময়</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">৯০</td>
+<td style="text-align: right;">১০০ ms</td>
+<td style="text-align: right;">৯,০০০ ms</td>
+</tr>
+<tr>
+<td style="text-align: right;">৫</td>
+<td style="text-align: right;">২০০ ms</td>
+<td style="text-align: right;">১,০০০ ms</td>
+</tr>
+<tr>
+<td style="text-align: right;">৫</td>
+<td style="text-align: right;">১,৫০০ ms</td>
+<td style="text-align: right;">৭,৫০০ ms</td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>১০০</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>১৭,৫০০ ms</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Mean = ১৭,৫০০ ÷ ১০০ = ১৭৫ ms। <strong>Nearest-rank</strong> পদ্ধতিতে sorted array-এর <code>ceil(p × n)</code> নম্বর value নেওয়া হচ্ছে, যেখানে p হলো ০–১। তাই p50 = ১০০, p95 = ২০০, p99 = ১,৫০০ ms।</p>
+<p><img alt="Histogram ও mean/p50/p95/p99 তুলনা" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/09-latency.svg"></p>
+<p><strong>ছবি পড়ো:</strong> sample-এর ৫% request ১.৫ সেকেন্ড নিয়েছে। এই নির্দিষ্ট sample-এর p95 ২০০ হওয়া ওই পাঁচটির কষ্ট মুছে দেয় না। অন্য percentile interpolation ব্যবহার করলে সংখ্যাটি আলাদা হতে পারে; report-এ method লিখবে। n=100 থেকে production-এর স্থির p99 পাওয়া গেছে—এমন দাবি নয়।</p>
+<p>Raw data: <a href="#resource-pack" title="Companion resource: data/latency.csv" class="source-link">latency.csv</a>। Calculations: <a href="#resource-pack" title="Companion resource: data/summary.json" class="source-link">summary.json</a>। এগুলো fixed teaching data, real benchmark নয়।</p>
+<h2>১৪.২ Queue-এর অঙ্ক</h2>
+<p>প্রতি মিনিটে ১২ job আসে, worker সর্বোচ্চ ১০টি শেষ করে। শুরুতে backlog ০। দশ মিনিটে backlog ২০। এরপর arrival ৪ হলে backlog প্রতি মিনিটে সর্বোচ্চ ৬ কমতে পারে।</p>
+<pre><code class="language-text">processed[t] = min(backlog[t] + arrivals[t], capacity[t])
+backlog[t+1] = backlog[t] + arrivals[t] - processed[t]
+</code></pre>
+<p><img alt="আগে বাড়তে থাকা এবং arrival কমার পরে নামতে থাকা queue backlog" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/10-queue.svg"></p>
+<p><strong>ছবি পড়ো:</strong> backlog-এর count একা যথেষ্ট নয়; oldest job age-ও দেখবে। দশটি দীর্ঘ job বনাম একশটি tiny job-এর user impact ভিন্ন। এই toy model-এ job-এর service cost সমান, retry বা priority নেই।</p>
+<h2>১৪.৩ Retry দিয়ে আগুনে বাতাস দিও না</h2>
+<p>৪০ client একই সময়ে fail করল। সবাই ১, তারপর ২, তারপর ৪ সেকেন্ড অপেক্ষা করলে retry burst হয় cumulative ১, ৩, ৭ সেকেন্ডে। Full jitter-এ প্রতিবার ওই cap-এর মধ্যে random wait নেওয়ায় retries ছড়িয়ে পড়ে।</p>
+<p><img alt="একই backoff-এ clustered retry এবং jitter-এ ছড়ানো retry" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/11-retries.svg"></p>
+<p><strong>ছবি পড়ো:</strong> দুই policy-তেই ১২০ retry; chart retry কমানোর দাবি করে না। সময়ের concentration কমছে। Network delay ও request duration এখানে শূন্য ধরে model করা হয়েছে। Seed ৪২।</p>
+<p>Retry-তে timeout, bounded attempts, backoff, jitter এবং operation-এর duplicate safety একসঙ্গে ভাবতে হয়। Failure overload থেকে হলে aggressive retry আরও চাপ দিতে পারে। <a href="https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/">AWS timeouts, retries and jitter</a>।</p>
+<h2>১৪.৪ Benchmark report-এর ন্যূনতম পরিচয়</h2>
+<pre><code class="language-json">{
+  "kind": "benchmark_plan_not_result",
+  "workload": "create 70%, read 30%",
+  "dataset": "10000 synthetic tickets",
+  "concurrency": 20,
+  "duration_seconds": 300,
+  "cache_policy": "warm after documented warmup",
+  "report": ["throughput", "latency_distribution", "errors", "resource_usage"],
+  "execution": "NOT_RUN"
+}
+</code></pre>
+<p>Original remote server ও replacement laptop-এর latency তুলনা করলে network/hardware confounder আছে। Fast failure response-কে successful request latency-র সঙ্গে মিশিয়ে দিলে broken system-ও “দ্রুত” দেখাতে পারে। Client-side measurement model-ও লিখবে: fixed arrival rate নাকি previous response-এর পরে next request? Slow system-এ দ্বিতীয়টি কম load পাঠিয়ে চাপ আড়াল করতে পারে।</p>
+<p><strong>নিজে করো—Q14:</strong> mean ১৭৫ ms দেখে “সব user দ্রুত response পান” বলা কেন ভুল? Queue chart-এ ১১তম মিনিট শেষে backlog কত? <a href="#B-workbook">উত্তর</a>।</p>
+<div class="print-widget"><h3>Latency playground · স্থির পাঠ</h3>
+<p>HTML-এর interactive উদাহরণের তিনটি অবস্থা এখানে পাশাপাশি দেখানো হলো। মোট ১০০ request; মাঝারি ৫টি ২০০ ms, ধীর request ১,৫০০ ms, বাকিগুলো ১০০ ms।</p>
+<table><thead><tr><th>ধীর request</th><th>Mean</th><th>p95</th><th>p99</th></tr></thead><tbody>
+<tr><td>০</td><td>১০৫ ms</td><td>১০০ ms</td><td>২০০ ms</td></tr>
+<tr><td>৫</td><td>১৭৫ ms</td><td>২০০ ms</td><td>১,৫০০ ms</td></tr>
+<tr><td>২০</td><td>৩৮৫ ms</td><td>১,৫০০ ms</td><td>১,৫০০ ms</td></tr>
+</tbody></table><p class="small">Nearest-rank percentile; synthetic teaching data। Slider-টি ব্যবহার করতে book.html খুলুন।</p></div></section><section class="chapter" id="15-architecture"><p class="small">নির্মাণ</p><h1>১৫ · প্রয়োজন থেকে স্থাপত্য</h1>
+<p>আরিফের shopping list: Kubernetes, message bus, service mesh, সাতটি database। নীরা জিজ্ঞেস করল, “কোন requirement-এর জন্য কোনটি?” Shopping list থেকে architecture হয় যখন responsibility ও trade-off বোঝানো যায়।</p>
+<h2>তিনটি বিকল্প, তিন ধরনের খরচ</h2>
+<p><img alt="এক deploy-এর মধ্যে চারটি module বনাম আলাদা deploy-এর মধ্যে network communication" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/28-architecture-rooms.svg"></p>
+<p>বাম বাড়িতেও Ticket ও Notify আলাদা ঘর। ডানদিকে তারা আলাদা deploy। এখন Notify ধীর হলে সেটিকে আলাদা scale করার প্রয়োজন আছে কি না দেখো। প্রয়োজন থাকলে boundary বদলানোর কারণ পাওয়া গেল; শুধু চারটি ঘর আছে বলে চারটি service লাগছে না।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Design</th>
+<th>সুবিধার সম্ভাবনা</th>
+<th>নতুন খরচ</th>
+<th>সিদ্ধান্তের কারণ হতে পারে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modular monolith</td>
+<td>এক deploy, সহজ local transaction</td>
+<td>independent scaling কম সরল</td>
+<td>ছোট team, পরিষ্কার module boundary</td>
+</tr>
+<tr>
+<td>Services</td>
+<td>আলাদা ownership/deploy/scale</td>
+<td>network failure, data consistency, operations</td>
+<td>বাস্তব independent requirements</td>
+</tr>
+<tr>
+<td>Async processing</td>
+<td>response path থেকে ধীর কাজ সরানো</td>
+<td>retry, ordering, lag, recovery</td>
+<td>delayed completion গ্রহণযোগ্য</td>
+</tr>
+</tbody>
+</table></div>
+<p>এগুলো পরস্পর সম্পূর্ণ exclusive নয়। Modular monolith-এর outbox worker থাকতে পারে। “Monolith” মানে সব code একটি file-এ রাখা নয়।</p>
+<h2>Teaching lab-এর ADR</h2>
+<pre><code class="language-text">Decision: SQLite + service functions + fake provider
+Context: একজন reader যেন Python দিয়েই failure sequence চালাতে পারেন
+Alternative A: in-memory dict — reopen persistence দেখাতে দুর্বল
+Alternative B: real DB + broker — setup ও external dependencies বাড়ে
+Trade-off: distributed deployment ও throughput পরীক্ষা হবে না
+Revisit: real multi-instance service বা provider integration scope-এ এলে
+</code></pre>
+<p>Machine-readable record: <a href="#resource-pack" title="Companion resource: examples/adr.json" class="source-link">adr.json</a>। এই সিদ্ধান্ত original-এর architecture আবিষ্কার নয়; শেখার উদ্দেশ্যে replacement design।</p>
+<h2>Boundary আঁকার বাস্তব পদ্ধতি</h2>
+<p>Ticket module durable ticket state-এর owner। Notification module delivery status জানে। API controller input/output mapping করে। Controller-এর ভেতর একই সঙ্গে SQL, email retry ও permission policy ঢোকালে behavior test করা কঠিন হয়। তবে ছোট কাজের জন্য দশটি pass-through abstraction-ও দরকার নেই।</p>
+<p>প্রতিটি boundary-র জন্য বলো:</p>
+<ol>
+<li>কোন data-এর ownership আছে?</li>
+<li>কী input/output contract?</li>
+<li>কোন failure বাইরে দেখা যাবে?</li>
+<li>কোন change স্বাধীনভাবে করা যায়?</li>
+<li>Boundary ভাঙলে কোন test ধরবে?</li>
+</ol>
+<h2>সিদ্ধান্ত বদলানোর dry run</h2>
+<p>আজ: দুই developer, low traffic, এক deployment। Modular monolith যথেষ্ট।</p>
+<p>পরে: notification provider rate limit-এর কারণে worker scale ও release আলাদা দরকার। প্রথমে worker আলাদা deploy করা যায়; সব domain-কে microservice করতে হয় না। Extract করার আগে event schema, retry ownership ও compatibility ঠিক করতে হবে।</p>
+<p>Architecture তখনই ভালো, যখন প্রয়োজনীয় behavior পূরণ করে এবং team তা চালাতে পারে। শুধু “industry standard” বললে reason অসম্পূর্ণ।</p>
+<p><strong>নিজে করো—Q15:</strong> কোন observable requirement একটি async worker যোগ করার যুক্তি হতে পারে? কোন নতুন verification লাগবে? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="16-vertical-lab"><p class="small">নির্মাণ</p><h1>১৬ · একটি সম্পূর্ণ slice ও চলমান lab</h1>
+<p>Vertical slice হলো একটি ছোট outcome-এর সম্পূর্ণ পথ। “সব screen বানানো” horizontal কাজ; “একজন অনুমোদিত user একটি ticket তৈরি করে reload-এর পরও পান” একটি outcome।</p>
+<h2>Slice-এর anatomy</h2>
+<pre><code class="language-text">Input → validation → authorization → domain rule
+      → transaction → response → visible confirmation
+      → failure path → recovery → verification
+</code></pre>
+<p>পূর্ণ UI application-এ input form ও browser interaction থাকবে। <strong>এই repository-র lab service-level slice</strong>: UI, HTTP adapter এবং real login বাদ। Contract, persistence, conflict ও side effect recovery এখানে চালানো যায়। একে full production application বলা হবে না।</p>
+<h2>প্রথম চালানো: কোনো package install নয়</h2>
+<p>Repository root-এ terminal খোলো। Python 3.10+ এবং standard <code>sqlite3</code> module প্রয়োজন।</p>
+<pre><code class="language-bash">python3 lab/run_lab.py --output reports/lab-results.json
+python3 -m unittest discover -s lab -p 'test_*.py' -v
+</code></pre>
+<p>Windows-এ command <code>python</code> বা <code>py -3</code> হতে পারে। Chart rebuild-এর package lab-এর জন্য দরকার নেই। Script temporary directory-তে SQLite database তৈরি করে শেষে পরিষ্কার করে; কোনো email বা network call করে না। Python-এর <code>sqlite3</code> দিয়ে file database-এ সংযোগ করা যায়; connection বন্ধ করা ও transaction commit আলাদা দায়িত্ব। <a href="https://docs.python.org/3/library/sqlite3.html">Python sqlite3 documentation</a>।</p>
+<h2>কোন file কী কাজ করে</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>কাজ</th>
+<th>আগে পড়বে কেন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#resource-pack" title="Companion resource: lab/relaydesk.py" class="source-link">relaydesk.py</a></td>
+<td>service, transaction, fake provider</td>
+<td>behavior-এর implementation</td>
+</tr>
+<tr>
+<td><a href="#resource-pack" title="Companion resource: lab/run_lab.py" class="source-link">run_lab.py</a></td>
+<td>ধারাবাহিক demonstration</td>
+<td>story-এর সঙ্গে ফল মেলানো</td>
+</tr>
+<tr>
+<td><a href="#resource-pack" title="Companion resource: lab/test_relaydesk.py" class="source-link">test_relaydesk.py</a></td>
+<td>১৪টি contract test</td>
+<td>claims-এর সীমা বোঝা</td>
+</tr>
+<tr>
+<td><a href="#resource-pack" title="Companion resource: reports/lab-results.json" class="source-link">lab-results.json</a></td>
+<td>চালানো demo-এর output</td>
+<td>expected বনাম actual মেলানো</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Report-এর আগে নিজে predict করো</h2>
+<p><img alt="Executed local lab-এর তিন ফল: duplicate create-এ এক ticket; send-এর পরে crash-এ effect ১ pending ১; retry-এর পরে effect ১ pending ০" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/29-lab-snapshots.svg"></p>
+<p>মাঝের card-এ একটু থামো: provider-এর কাজ হয়েছে, কিন্তু আমাদের outbox এখনও pending। এখন worker আবার চললে কী হবে? ডান card-এ fake provider একই event চিনেছে বলে effect আর বাড়েনি। Report-এর বড় JSON-টি এই তিনটি ছবিরই বিস্তারিত খাতা।</p>
+<pre><code class="language-json">{
+  "duplicate_submission": {"same_id": true, "ticket_count": 1},
+  "reopen": {"persisted": true},
+  "cross_workspace": {"error": "forbidden"},
+  "changed_payload": {"error": "key_payload_mismatch"},
+  "stale_update": {"error": "version_conflict", "version": 2},
+  "ack_gap": {"provider_effects": 1, "pending_events": 1},
+  "worker_retry": {"provider_effects": 1, "pending_events": 0}
+}
+</code></pre>
+<p>এটি demo output-এর বাছাই করা expected অংশ। সংরক্ষিত report-এ actual run দেখবে। <code>ack_gap</code>-এ pending ১ অথচ provider effect-ও ১—এই অবস্থাটি বুঝতে পারলে distributed failure-এর একটি বড় অংশ বুঝেছ।</p>
+<h2>Create operation line-by-line যুক্তি</h2>
+<ol start="১">
+<li>Title type ও normalized length validate।  </li>
+<li><code>BEGIN IMMEDIATE</code> দিয়ে transaction শুরু।  </li>
+<li>Actor ওই workspace-এর member কি না check।  </li>
+<li>Scoped key আগেই আছে কি? থাকলে fingerprint মেলাও।  </li>
+<li>নতুন হলে ticket, outbox, stored response লিখো।  </li>
+<li>সব ঠিক থাকলে commit; injected exception হলে rollback।  </li>
+<li>Original response ফেরত দাও।</li>
+</ol>
+<p>Hash identity-এর বিকল্প নয়; এটি payload equality check-এর সহায়ক। JSON normalization ও included fields স্থির রাখতে হবে। নতুন field যোগ করে fingerprint-এ বাদ দিলে changed intent-ও replay হয়ে যেতে পারে।</p>
+<h2>Test matrix খুলে পড়ো</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Test</th>
+<th>যে ভুল ধরতে চায়</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>connection reopen-এ data হারানো</td>
+</tr>
+<tr>
+<td>02–03</td>
+<td>duplicate create / changed-payload replay</td>
+</tr>
+<tr>
+<td>04</td>
+<td>workspace boundary ভেঙে read বা write</td>
+</tr>
+<tr>
+<td>05–06</td>
+<td>stale version বা invalid transition গ্রহণ</td>
+</tr>
+<tr>
+<td>07</td>
+<td>ticket লেখা কিন্তু outbox/request record অসম্পূর্ণ</td>
+</tr>
+<tr>
+<td>08</td>
+<td>external side effect-এর পরে crash-এ duplicate</td>
+</tr>
+<tr>
+<td>09</td>
+<td>provider failure-এ pending কাজ হারানো</td>
+</tr>
+<tr>
+<td>10–11</td>
+<td>overlapping create/update-এ contract ভাঙা</td>
+</tr>
+<tr>
+<td>12</td>
+<td>title-এর boundary input</td>
+</tr>
+<tr>
+<td>13</td>
+<td>আলাদা actor/workspace-এর key সংঘর্ষ</td>
+</tr>
+<tr>
+<td>14</td>
+<td>replay response-কে current state ভেবে ফেলা</td>
+</tr>
+</tbody>
+</table></div>
+<p>Test 10–11-এ দুই thread একই barrier পার হয়ে operation চালায়। SQLite writer serialization গুরুত্বপূর্ণ; এ দিয়ে সব database-এর concurrency model প্রমাণ হয় না। Test 07 ও 08 <strong>exception-based failure injection</strong>, OS process kill বা power-loss experiment নয়।</p>
+<h2>Lab-এর সীমা চিনে উন্নত করো</h2>
+<p>এখানে নেই: real HTTP authentication, role hierarchy, request-key expiry, multiple worker claim/lease, notification provider integration, telemetry pipeline, load benchmark বা production migration। Status transition-এ activity/outbox event তৈরি করা হয়নি; শুধু create-এর event আছে।</p>
+<p>এগুলো লুকানো defect নয়, ঘোষিত scope। পরের exercise হিসেবে যেকোনো একটি যোগ করলে আগে contract লেখো। “Production-ready করে দাও” বললে scope আবার অসীম হয়ে যাবে।</p>
+<h2>তিনটি পরিবর্তনের challenge</h2>
+<p><strong>সহজ:</strong> whitespace-normalized title-এর replay test যোগ করো। <code>" A "</code> এবং <code>"A"</code> একই normalized payload কি না যাচাই করো।</p>
+<p><strong>মাঝারি:</strong> membership revoke operation ও replay-after-revoke test যোগ করো। পুরোনো successful response permission bypass করতে পারবে না।</p>
+<p><strong>গভীর:</strong> দুই worker-এর claim/lease model ডিজাইন করো। একজন external send-এর পরে crash করলে lease expiry ও provider deduplication কীভাবে একসঙ্গে কাজ করবে, লিখে তারপর implement করো।</p>
+<p><strong>নিজে করো—Q16:</strong> ১৪টি test পাসের পরে কোন তিনটি production claim করা যাবে না? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="17-verification"><p class="small">নির্মাণ</p><h1>১৭ · দুই সিস্টেমের মুখোমুখি পরীক্ষা</h1>
+<p>“আমার code চলছে”—একটি claim। “Reference-এর agreed behavior-এর সঙ্গে মেলে”—আরেকটি। দ্বিতীয়টির জন্য প্রথমটির বাইরে comparison দরকার।</p>
+<h2>একই প্রশ্ন, তুলনাযোগ্য condition</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>বিষয়</th>
+<th>Reference</th>
+<th>Replacement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Actor</td>
+<td>permitted member A</td>
+<td>equivalent permission fixture</td>
+</tr>
+<tr>
+<td>Initial state</td>
+<td>open ticket, version X</td>
+<td>corresponding open ticket</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>valid assignment</td>
+<td>semantically same assignment</td>
+</tr>
+<tr>
+<td>Observe</td>
+<td>response, reload, list, history</td>
+<td>একই observable surfaces</td>
+</tr>
+<tr>
+<td>Timing</td>
+<td>known wait condition</td>
+<td>equivalent wait condition</td>
+</tr>
+</tbody>
+</table></div>
+<p>Literal ID আলাদা হতে পারে। তাই <code>t_ref_99</code> ও <code>t_local_17</code> mapping করে compare করো। কিন্তু workspace ID বা assignee identity নির্বিচারে মুছে দিলে permission mismatch লুকিয়ে যাবে।</p>
+<h2>Oracle কী</h2>
+<p>যার সঙ্গে actual ফল তুলনা করছ, সেটিই test oracle। এটি verified reference observation, agreed specification বা invariant হতে পারে। Generated implementation-এর response নিজেই snapshot করে “এটাই expected” বললে ভুল behavior-ও স্থায়ী test হয়ে যায়।</p>
+<pre><code class="language-python"># শিক্ষামূলক normalization; পূর্ণ comparison framework নয়
+def comparable(ticket):
+    return {
+        "title": ticket["title"],
+        "status": ticket["status"],
+        "workspace": ticket["workspace"]
+    }
+</code></pre>
+<p>এই function version বাদ দিয়েছে। Version contract যাচাইয়ের test-এ এটি যথেষ্ট নয়। Normalization কী বাদ দিল এবং কেন—review-এ তা স্পষ্ট থাকতে হবে।</p>
+<p><img alt="Feature ও verification dimension-এর synthetic heatmap" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/12-verification.svg"></p>
+<p><strong>ছবি পড়ো:</strong> Create-এর happy path pass হওয়া recovery test-এর <code>NOT RUN</code> ঘরকে সবুজ করে না। Chart-এর ফল কাল্পনিক; বাস্তবে চালানো lab test-এর ফল <a href="#resource-pack" title="Companion resource: reports/verification.md" class="source-link">verification report</a>-এ আলাদা থাকবে।</p>
+<h2>একটি discrepancy-র জীবন</h2>
+<p><img alt="সংশোধনের আগে list-এ আরিফ এবং details-এ নীরা; সংশোধনের পরে দুটিতেই নীরা" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/30-cache-before-after.svg"></p>
+<p>বাঁয়ের ছবিতে API response বদলানো ছাড়াও bug হতে পারে: details নতুন state নিয়েছে, list পুরোনো cache দেখাচ্ছে। Fix করার পরে ডানের ছবি পেয়েছ—এবার reload-ও দাও। দুই check মিলে সাময়িক UI patch ও স্থায়ী ফল আলাদা করতে সাহায্য করবে।</p>
+<pre><code class="language-text">D-014
+Expected: assignment-এর পরে details ও list একই assignee দেখায়
+Actual: details=nira, list=arif
+Reproduce: fixture v7 → assign → return to list
+Evidence: screenshot pair + response + cache inspection
+Suspected cause: list cache stale
+Confirmed cause: successful mutation path list key invalidate করে না
+Fix: সংশ্লিষ্ট cache update/invalidate
+Regression: assign → list → reload → assert same assignee
+Status: fixed; rerun না হওয়া পর্যন্ত verified নয়
+</code></pre>
+<p><code>suspected</code> ও <code>confirmed</code> cause আলাদা রাখলে investigation সৎ থাকে। Cache invalidate করার পরে symptom সরে গেলেও root cause-এর সব ব্যাখ্যা স্বয়ংক্রিয়ভাবে প্রমাণিত হয় না; relevant execution path পরীক্ষা করো।</p>
+<h2>Comparison-এর আরও তিন ধরনের পরীক্ষা</h2>
+<p><strong>Boundary:</strong> title ১২০ বনাম ১২১ code point।<br>
+<strong>Metamorphic:</strong> একই valid create retry করলে ticket count না বাড়া; exact random ID জানা লাগে না।<br>
+<strong>Failure:</strong> external provider বন্ধ হলেও committed ticket থাকা এবং কাজ pending থাকা।</p>
+<p>কোনো captured reference আর live reference একই build নয়? Result-এ version mismatch limitation লেখো। Nondeterministic model output হলে exact string equality-এর বদলে task-specific rubric লাগবে; orchestration permission-এর মতো deterministic boundary তবু exact test করা যায়।</p>
+<p><strong>নিজে করো—Q17:</strong> সব timestamp বাদ দিলে কখন test সহজ হয় এবং কখন bug চাপা পড়ে? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="18-four-worlds"><p class="small">প্রয়োগ</p><h1>১৮ · দোকান, সম্পাদক, AI ও অফলাইন জীবন</h1>
+<h2>১৮.১ E-commerce: টাকা, stock, order—তিনটি খাতা</h2>
+<p><img alt="চারটি case: stock ১ buyer ২; CAT-এ concurrent edit; agent draft থেকে send-এর permission; offline save-এর পরে restart" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/31-four-worlds.svg"></p>
+<p>চারটি frame-এ চারবার pause দাও। Checkout-এ টাকা ও stock, editor-এ পুরোনো position, agent-এ অনুমতি, mobile-এ local data—প্রতিটিতে আলাদা কিছু হারানোর আশঙ্কা আছে। নিচে একটি করে ঘটনা খুলে দেখি।</p>
+<p>আরিফ ভাবল checkout মানে cart-এর নিচে সুন্দর button। নীরা তিনটি খাতা খুলল: order, payment, inventory। “এই তিনজন সব সময় একই খবর জানে না।”</p>
+<pre><code class="language-text">Order: created → payment_pending → confirmed → shipped
+Payment: initiated → succeeded / failed / unknown
+Stock: available → reserved → consumed / released
+</code></pre>
+<p>একটি order-এর status দিয়ে তিনটি lifecycle-এর সব অর্থ প্রকাশ করতে গেলে ambiguity হয়। Payment timeout হলে payment <code>unknown</code> হতে পারে; order সঙ্গে সঙ্গে <code>cancelled</code> করা business policy ভাঙতে পারে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ধাপ</th>
+<th>ঘটনা</th>
+<th>দরকারি প্রশ্ন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>১</td>
+<td>order request op_1</td>
+<td>duplicate identity কী?</td>
+</tr>
+<tr>
+<td>২</td>
+<td>stock reserved</td>
+<td>reservation expiry কত?</td>
+</tr>
+<tr>
+<td>৩</td>
+<td>provider charge successful</td>
+<td>durable provider reference কোথায়?</td>
+</tr>
+<tr>
+<td>৪</td>
+<td>response হারাল</td>
+<td>retry একই payment intent ব্যবহার করে?</td>
+</tr>
+<tr>
+<td>৫</td>
+<td>webhook দুবার এলো</td>
+<td>webhook event ID deduplicate হয়?</td>
+</tr>
+<tr>
+<td>৬</td>
+<td>reconciliation চলে</td>
+<td>order/payment mismatch মেরামত হয়?</td>
+</tr>
+</tbody>
+</table></div>
+<p>এখানে কোনো payment SDK-এর exact behavior ধরে নেওয়া হয়নি। বাস্তব integration-এ provider-এর current contract যাচাই করতে হবে।</p>
+<p><strong>Invariant উদাহরণ:</strong> একটি successful payment reference অনিচ্ছাকৃতভাবে দুই order-এ প্রয়োগ হবে না। Stock ১ থাকা অবস্থায় দুই buyer-এর parallel reservation আলাদা test। “শেষ order confirmation page সুন্দর” এসব invariant-এর প্রমাণ নয়।</p>
+<p><strong>খাতায় চালাও:</strong> stock <code>1</code>। A পড়লেন <code>1</code>, B-ও পড়লেন <code>1</code>। দুজন আলাদা করে “একটি reserve” করলে দুই success চলে আসতে পারে। তাই test-এর expected ফল লিখবে: মোট successful reservation <code>1</code>, বাকি buyer-এর জন্য নির্দিষ্ট unavailable outcome।</p>
+<p><strong>Agent নির্দেশ:</strong> “শুধু synthetic provider দিয়ে timeout-after-charge scenario বানাও। Durable reference, retry identity এবং reconciliation test দাও। কোনো বাস্তব charge পাঠাবে না।”</p>
+<h2>১৮.২ Collaborative editor: final text এক হলেই সব ঠিক?</h2>
+<p>শুরু: <code>CAT</code>। User A প্রথমে <code>X</code> যোগ করলেন। User B একই পুরোনো revision থেকে প্রথম অক্ষর delete করলেন। Naive positional edit হলে B কোন অক্ষর মুছবেন—C, নাকি নতুন X? Operation-এর intent, ordering ও transformation/merge rules দরকার।</p>
+<pre><code class="language-text">দুজনের শুরু:        C A T
+A-এর insert:      X C A T
+B যা মুছতে চেয়েছেন:  C
+নতুন position 0:  X          ← পুরোনো position-এর অর্থ বদলেছে
+</code></pre>
+<p>এখানে সম্ভাব্য intended ফল <code>XAT</code>; অন্ধভাবে নতুন position 0 মুছলে <code>CAT</code> হয়। কোন ফল product-এর contract পূরণ করে, সেটি ঠিক করে তারপর algorithm বেছে নেবে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>প্রশ্ন</th>
+<th>পরীক্ষা</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Same location edits</td>
+<td>দুই session-এ delay দিয়ে edit</td>
+</tr>
+<tr>
+<td>Offline merge</td>
+<td>একজন offline, দুজন edit, reconnect</td>
+</tr>
+<tr>
+<td>Undo ownership</td>
+<td>A undo করলে B-এর কাজ মুছে যায়?</td>
+</tr>
+<tr>
+<td>Persistence</td>
+<td>দুজন reload-এর পরে কী দেখেন?</td>
+</tr>
+<tr>
+<td>Revocation</td>
+<td>edit permission সরালে pending change কী হয়?</td>
+</tr>
+</tbody>
+</table></div>
+<p>OT, CRDT, serialized server বা explicit conflict—বিভিন্ন design সম্ভব। শুধু concurrent typing দেখেই original-এর algorithm জানা যায় না। দুটি client একই ভুল text-এ converge করলেও user intent হারাতে পারে। তাই convergence, intended edit preservation এবং undo semantics আলাদা acceptance criterion।</p>
+<pre><code class="language-json">{
+  "operation_id": "edit_A_17",
+  "document_id": "doc_demo",
+  "base_revision": 12,
+  "operation": {"kind":"insert", "position":0, "text":"X"}
+}
+</code></pre>
+<p>এটি illustrative protocol, production collaborative algorithm নয়। Unicode grapheme, selection, rich-text structure ও ordering যোগ হলে contract আরও বিস্তৃত হয়।</p>
+<h2>১৮.৩ AI agent platform: সুন্দর উত্তর ও অনুমোদিত কাজ</h2>
+<p>Model বলল, “আমি export পাঠিয়ে দিয়েছি।” কিন্তু tool call হয়নি। আবার tool call request করেছে বলেই application সেটি execute করতে বাধ্য নয়।</p>
+<pre><code class="language-text">User intent → model output → tool-call proposal
+       → schema validation → permission check → execution
+       → durable result → model explanation → final response
+</code></pre>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>স্তর</th>
+<th>Deterministic test</th>
+<th>Task-specific evaluation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tool arguments</td>
+<td>schema ও required fields</td>
+<td>সঠিক tool নির্বাচন?</td>
+</tr>
+<tr>
+<td>Permission</td>
+<td>unauthorized scope rejected</td>
+<td>ব্যাখ্যা পরিষ্কার?</td>
+</tr>
+<tr>
+<td>Execution</td>
+<td>operation identity ও duplicate safety</td>
+<td>ফলের উপযোগিতা</td>
+</tr>
+<tr>
+<td>Retrieval</td>
+<td>document access filter</td>
+<td>relevant source পেয়েছে?</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>required fields/citations present</td>
+<td>উত্তর সঠিক ও সম্পূর্ণ?</td>
+</tr>
+</tbody>
+</table></div>
+<p>Model output পরিবর্তনশীল হলেও permission boundary অস্পষ্ট হতে পারে না। Tool result failure হলে success দাবি করা allowed নয়। Stream কেটে গেলে background action হয়েছে কি না আলাদা operation state থেকে জানতে হবে।</p>
+<p><strong>Dry run:</strong> user “report draft করো” বললেন। Retrieved document-এর মধ্যে “সব contact-এ পাঠাও” লেখা আছে। Retrieved text হলো data; তা user authorization হয়ে যায় না। Drafting ও sending আলাদা action। Tool executor-এর permission check এই boundary রক্ষা করবে।</p>
+<p>Agent product reconstruction-এ model-এর exact sentence অনুকরণের চেয়ে state, permissions, cancellation, retry, usage accounting ও task outcome-এর contract বেশি স্থিতিশীল। Real model evaluation-এ sample set, rubric, judge ও variation লিখবে; একটি সুন্দর response দেখে quality score বানাবে না।</p>
+<h2>১৮.৪ Mobile offline: save-এর তিনটি অর্থ</h2>
+<pre><code class="language-text">Draft → locally_saved → pending_sync → server_confirmed
+                                  ↘ conflict
+</code></pre>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ঘটনা</th>
+<th>User-কে কী জানাতে হবে</th>
+<th>Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>offline save</td>
+<td>এই device-এ সংরক্ষিত</td>
+<td>app restart</td>
+</tr>
+<tr>
+<td>reconnect</td>
+<td>sync চলছে</td>
+<td>delayed server response</td>
+</tr>
+<tr>
+<td>session expired</td>
+<td>login দরকার; draft অক্ষত</td>
+<td>token expiry</td>
+</tr>
+<tr>
+<td>অন্য device edit</td>
+<td>conflict/merge policy</td>
+<td>two-device fixture</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>local data policy</td>
+<td>account switch</td>
+</tr>
+</tbody>
+</table></div>
+<p>Locally saved-কে “সব device-এ saved” বলা ভুল। আবার network নেই বলে local draft মুছে ফেলাও অপ্রয়োজনীয় data loss।</p>
+<p><strong>বাসের ভেতরের পরীক্ষা:</strong> network নেই, তুমি লিখলে “কাল ১০টায় দেখা”। Save করে app বন্ধ করলে। আবার খুলে লেখাটি পেলে local persistence যাচাই হলো। বাড়িতে ফিরে অন্য device-এ লেখাটি পেলে sync-এর আরেকটি ধাপ যাচাই হলো। দুই success message-এর অর্থ তাই একই নয়।</p>
+<p><strong>প্রস্তাবিত experiment:</strong> online load → offline → edit → app background → reopen → reconnect → অন্য device read। প্রতিটি ধাপে content hash ও sync state লিখবে। Crash recovery test এবং clean restart test আলাদা রাখবে।</p>
+<h2>চার পৃথিবীর সাধারণ সূত্র</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Product</th>
+<th>সবচেয়ে জরুরি hidden question</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Commerce</td>
+<td>partial success-এর পরে money/stock মিলবে কীভাবে?</td>
+</tr>
+<tr>
+<td>Editor</td>
+<td>concurrency-তে intent ও history থাকবে কীভাবে?</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>প্রস্তাবিত action অনুমোদিত ও সত্যিই executed কি?</td>
+</tr>
+<tr>
+<td>Offline app</td>
+<td>local ও remote confirmation আলাদা কি?</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>নিজে করো—Q18:</strong> চারটির একটি বেছে একটি invariant, একটি failure timeline ও একটি honest limitation লেখো। <a href="#B-workbook">নমুনা উত্তর</a>।</p></section><section class="chapter" id="19-agent-direction"><p class="small">প্রয়োগ</p><h1>১৯ · AI agent-কে কার্যকরভাবে পরিচালনা</h1>
+<p>আরিফ AI-কে বলল, “Make it production-ready.” Agent অনেক file লিখল। নীরা জিজ্ঞেস করল, “কোন user outcome পাস করেছে?” File count নীরব রইল।</p>
+<h2>Prompt-এর পাঁচটি কাজ</h2>
+<p><img alt="অস্পষ্ট production-ready নির্দেশ থেকে নির্দিষ্ট retry contract এবং agent-এর evidence-সহ handoff-এ যাওয়া conversation" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/32-agent-conversation.svg"></p>
+<p>দ্বিতীয় message-টি পড়লে agent জানে কোন operation বদলাবে, কোন ফল চাই এবং কী পরীক্ষা চালাবে। শেষ message-এ তুমি শুধু “done” শুনছ না—কাজের সীমাটিও দেখতে পাচ্ছ। নিজের পরের prompt-এ একটি outcome ও একটি rejection case দিয়ে শুরু করো।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>অংশ</th>
+<th>তুমি কী নির্ধারণ করবে</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Outcome</td>
+<td>user শেষ পর্যন্ত কী করতে পারবেন</td>
+</tr>
+<tr>
+<td>Context</td>
+<td>কোন code, evidence, contract পড়বে</td>
+</tr>
+<tr>
+<td>Boundaries</td>
+<td>কোন files/operations scope-এ</td>
+</tr>
+<tr>
+<td>Acceptance</td>
+<td>কীভাবে কাজ সঠিক প্রমাণ হবে</td>
+</tr>
+<tr>
+<td>Handoff</td>
+<td>actual result ও unknown কোথায় লিখবে</td>
+</tr>
+</tbody>
+</table></div>
+<h2>একটি কাজের prompt</h2>
+<pre><code class="language-text">লক্ষ্য: Create Ticket service-এ duplicate submission সামলাও।
+আগে পড়ো: existing service, tests, API contract ও unknowns register।
+Contract: একই actor/workspace/key ও normalized payload এক ticket তৈরি করবে।
+অন্য payload-এ একই key conflict হবে; অন্য tenant-এর key আলাদা থাকবে।
+Ticket, idempotency record ও outbox একই transaction-এ লিখবে।
+Existing architecture অনুসরণ করো; নতুন abstraction প্রয়োজন হলে কারণ লেখো।
+Verify: sequential replay, overlapping requests, payload mismatch,
+pre-commit failure এবং reopen persistence।
+শেষে: changed files, actual test command/result, limitations ও next action দাও।
+Original behavior-এর evidence না থাকলে এটিকে replacement decision বলো।
+</code></pre>
+<p>এই prompt থেকে প্রথম দুটি test সরাসরি পাওয়া যায়: একই payload দিয়ে retry করলে একই ticket ID; key রেখে payload বদলালে conflict।</p>
+<h2>Agent ভুল পথে গেলে steering</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Agent-এর বক্তব্য</th>
+<th>তোমার কার্যকর follow-up</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“Everything complete”</td>
+<td>“Requirement-wise result ও executed commands দেখাও।”</td>
+</tr>
+<tr>
+<td>“Original Redis ব্যবহার করে”</td>
+<td>“কোন evidence? না থাকলে inference/unknown আলাদা করো।”</td>
+</tr>
+<tr>
+<td>“Tests updated to match output”</td>
+<td>“Expected behavior-এর oracle কী ছিল?”</td>
+</tr>
+<tr>
+<td>“Rewrite simpler হবে”</td>
+<td>“প্রমাণিত defect ও existing behavior inventory আগে দাও।”</td>
+</tr>
+<tr>
+<td>“Login works”</td>
+<td>“Cross-workspace read/write এবং revoke test কোথায়?”</td>
+</tr>
+</tbody>
+</table></div>
+<p>একটি button-এর spacing বদলালে screenshot দিয়েই review হতে পারে। Retry বা permission বদলালে সংশ্লিষ্ট আচরণের test result-ও লাগবে।</p>
+<h2>Multi-agent: যখন সত্যিই লাভ হয়</h2>
+<p>স্বাধীন evidence analysis, UI observation ও API contract review parallel করা যায়। একই core service file তিনজনকে edit করতে দিলে merge conflict-এর বাইরেও semantic contradiction হয়। Role ভাগের সঙ্গে ownership ও shared contract চাই।</p>
+<pre><code class="language-json">{
+  "task_id": "TASK-API-01",
+  "question": "Assignment error contract কী?",
+  "inputs": ["evidence/E-017.json", "spec/assignment.md"],
+  "write_scope": ["spec/api-errors.md"],
+  "deliverable": "status/body matrix with evidence links",
+  "done_when": "observed ও proposed behavior আলাদা; unknowns listed",
+  "handoff": ["findings", "limitations", "conflicts", "next_experiment"]
+}
+</code></pre>
+<p>এটি task contract উদাহরণ, এই tutorial বানাতে agent delegation হয়েছে—এমন দাবি নয়। Integration lead shared spec ঠিক রাখবেন, contradictory findings reconcile করবেন এবং integrated tests দেখবেন।</p>
+<h2>Contradiction মেটানোর গল্প</h2>
+<p>Agent A বলল assignment failure 403। Agent B বলল 404। কে বেশি আত্মবিশ্বাসী, তা irrelevant। A nonmember actor দিয়ে পরীক্ষা করেছে; B member actor দিয়ে nonexistent ID দিয়েছে। Context আলাদা বলে দুই observation-ই সত্য হতে পারে।</p>
+<p>একই context-এ contradictory ফল হলে version, cache, policy rollout ও test data দেখো। Evidence delete করে consensus বানাবে না।</p>
+<h2>Context হারালে কী থাকবে</h2>
+<pre><code class="language-text">Current scope → evidence → accepted decisions → implemented slices
+             → executed verification → unresolved gaps → next actions
+</code></pre>
+<p>এই তথ্য repository artifacts-এ থাকলে নতুন agent-ও শুরু করতে পারেন। Chat transcript-ই একমাত্র memory হলে long task ভঙ্গুর হয়। <a href="#resource-pack" title="Companion resource: templates/project-control.md" class="source-link">কপি করার control template</a> এবং <a href="#C-prompts">prompt cookbook</a> ব্যবহার করতে পারো।</p>
+<p><strong>নিজে করো—Q19:</strong> “Clone this app perfectly” prompt-কে পাঁচ লাইনের executable assignment-এ বদলাও। <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="20-production"><p class="small">প্রয়োগ</p><h1>২০ · চালু হয়েছে থেকে চালিয়ে রাখা</h1>
+<p>আরিফ বলল, “Backup configured।” নীরা বলল, “Restore-এর পরে record পড়েছ?” Backup একটি promise; restore drill সেই promise পরীক্ষা করে।</p>
+<h2>Production প্রশ্নের বাস্তব deliverable</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ক্ষেত্র</th>
+<th>শুধু configuration</th>
+<th>কার্যকর evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Build</td>
+<td>Dockerfile আছে</td>
+<td>clean environment-এ reproducible artifact</td>
+</tr>
+<tr>
+<td>Migration</td>
+<td>SQL file আছে</td>
+<td>representative old data-তে upgrade result</td>
+</tr>
+<tr>
+<td>Rollback</td>
+<td>পুরোনো image আছে</td>
+<td>নতুন schema-র সঙ্গে old app compatible</td>
+</tr>
+<tr>
+<td>Backup</td>
+<td>schedule আছে</td>
+<td>isolated restore + integrity check</td>
+</tr>
+<tr>
+<td>Health</td>
+<td>process alive</td>
+<td>critical synthetic journey passes</td>
+</tr>
+<tr>
+<td>Alert</td>
+<td>rule লেখা</td>
+<td>controlled failure-এ signal ও response</td>
+</tr>
+</tbody>
+</table></div>
+<p>সব app-এ একই infrastructure লাগবে না। কিন্তু যে guarantee দিচ্ছ, তার verification লাগবে। এই tutorial lab production readiness পরীক্ষা করেনি।</p>
+<h2>Migration: expand → migrate → contract</h2>
+<p><img alt="Schema migration-এর তিন ধাপ: দুই field যোগ রাখা, backfill ও consumer switch, তারপর পুরোনো field সরানো" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/33-migration-bridge.svg"></p>
+<p>তৃতীয় frame-টি ঢেকে রাখো। Web app নতুন <code>display_name</code> পড়ছে, কিন্তু একটি পুরোনো worker এখনও <code>name</code> পড়ে। এখন column drop করলে worker ভাঙবে। ওই consumer-এর খবর না পাওয়া পর্যন্ত দ্বিতীয় frame-এই থাকো।</p>
+<p>ধরা যাক, <code>name</code> field বদলে <code>display_name</code> করতে চাও। এক deploy-তে পুরোনো column drop করলে এখনও চলা old worker ভেঙে যেতে পারে। একটি সম্ভাব্য sequence:</p>
+<ol>
+<li>নতুন compatible field যোগ করো।</li>
+<li>Mixed-version period-এর read/write policy ঠিক করে deploy করো।</li>
+<li>Existing data backfill করো; নতুন write miss হচ্ছে কি না যাচাই করো।</li>
+<li>Consumers নতুন field ব্যবহার করছে নিশ্চিত করো।</li>
+<li>Compatibility window শেষ হলে old field সরাও।</li>
+</ol>
+<p>এটি pattern, প্রতিটি migration-এর ready-made solution নয়। Dual writes নিজেই inconsistency আনতে পারে; backfill idempotent কি না, source of truth কোন field, failure হলে কোথা থেকে resume—এসব নির্দিষ্ট করবে।</p>
+<h2>Restore drill-এর dry run</h2>
+<pre><code class="language-text">Input: নির্দিষ্ট backup snapshot + restore procedure
+Environment: isolated test database
+Check 1: expected row counts এবং domain invariants
+Check 2: application read/write
+Check 3: deletion/retention policy পুনঃপ্রয়োগ দরকার কি না
+Measure: restore duration এবং latest recovered data time
+Output: command log, result, discrepancy, recovery estimate
+</code></pre>
+<p>RPO হলো কতদূর পর্যন্ত data loss গ্রহণযোগ্য লক্ষ্য; RTO হলো recovery কত সময়ে করতে চাই। Backup interval একা achieved RPO প্রমাণ করে না—failed backup, replication lag ও restore point availability বিবেচনা করতে হয়। লক্ষ্য ও measured drill result আলাদা রাখবে।</p>
+<h2>Release-এর পরে failure timeline</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>সময়</th>
+<th>ঘটনা</th>
+<th>করণীয়</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>১০:০০</td>
+<td>app v2 deploy</td>
+<td>smoke journey</td>
+</tr>
+<tr>
+<td>১০:০৩</td>
+<td>worker v1 নতুন event parse করতে পারে না</td>
+<td>backlog/parse error দেখো</td>
+</tr>
+<tr>
+<td>১০:০৫</td>
+<td>rollback বিবেচনা</td>
+<td>schema ও event compatibility যাচাই</td>
+</tr>
+<tr>
+<td>১০:১০</td>
+<td>compatible worker restore</td>
+<td>backlog drain পর্যবেক্ষণ</td>
+</tr>
+<tr>
+<td>পরে</td>
+<td>incident review</td>
+<td>cause, missing check, regression</td>
+</tr>
+</tbody>
+</table></div>
+<p>“Rollback” একটি verb; তার সফলতা old binary, new schema, pending event ও external side effect-এর সম্পর্কের ওপর নির্ভর করে। External email ইতিমধ্যে গেছে—code rollback করে সেটি unsend করা যাবে না।</p>
+<p><strong>নিজে করো—Q20:</strong> backup job সবুজ, কিন্তু restore drill হয়নি। কোন status ও next action লিখবে? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="21-fidelity"><p class="small">দক্ষতা</p><h1>২১ · কতটা হলো: সৎ হিসাবের ভাষা</h1>
+<p>“আমরা ৯৯% done।” নীরা জিজ্ঞেস করল, “৯৯ কিসের মধ্যে? শেষ ১% কি button shadow, নাকি tenant isolation?” একই percentage-এর business অর্থ অনেক আলাদা।</p>
+<h2>তিনটি আলাদা খাতা</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>খাতা</th>
+<th>Status উদাহরণ</th>
+<th>কী বোঝায়</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Evidence</td>
+<td>observed, inferred, unknown</td>
+<td>claim কোথা থেকে এসেছে</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>implemented, partial, not implemented</td>
+<td>code/feature-এর অবস্থা</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td>pass, fail, blocked, not run</td>
+<td>নির্দিষ্ট scenario-এর execution</td>
+</tr>
+</tbody>
+</table></div>
+<p>মূল লেখার milestone status—<code>VERIFIED</code>, <code>PARTIALLY VERIFIED</code>, <code>IMPLEMENTED, UNVERIFIED</code>, <code>ASSUMED</code>, <code>BLOCKED</code>, <code>NOT IMPLEMENTED</code>—summary-তে রাখা যায়। তবে test result-এর <code>FAIL</code>-কে <code>UNKNOWN</code> লিখে লুকাবে না। Agreed <strong>out of scope</strong> item-কে failed implementation হিসেবেও গুনবে না; exclusion আলাদা report করবে।</p>
+<h2>Denominator হাতে হিসাব</h2>
+<p><img alt="৫০টি নির্ধারিত scenario-এর ৪২ pass, ৩ fail, ২ blocked ও ৩ not implemented" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/13-fidelity.svg"></p>
+<pre><code class="language-text">Defined acceptance scenarios = 50
+PASS = 42; FAIL = 3; BLOCKED = 2; NOT IMPLEMENTED = 3
+Coverage of defined set = 42 / 50 = 84%
+Executed set = 45; pass within executed set = 42 / 45 ≈ 93.33%
+</code></pre>
+<p>দুটো ratio ভিন্ন প্রশ্নের উত্তর দেয়। দ্বিতীয়টি বললে nonexecuted পাঁচটির অবস্থাও জানাতে হবে। কোনোটিই পুরো অজানা software-এর “৮৪%/৯৩% exact clone” প্রমাণ করে না। Chart-এর সংখ্যা teaching example; lab-এর ১৪টি test result নয়।</p>
+<h2>Release gate aggregate-এর ওপরে</h2>
+<p><img alt="দশটি visual check সবুজ হলেও tenant isolation ব্যর্থ হওয়ায় release gate বন্ধ" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/34-release-gate.svg"></p>
+<p>এই board দেখে আর একটি মোট percentage হিসাব করার দরকার নেই। লাল ঘরটি অন্য workspace-এর data leak। আগে সেটি ঠিক হবে; দশটি সবুজ button check তার গুরুত্ব কমাচ্ছে না।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Critical?</th>
+<th>Result</th>
+<th>সিদ্ধান্ত</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Create reload</td>
+<td>হ্যাঁ</td>
+<td>pass</td>
+<td>এই condition verified</td>
+</tr>
+<tr>
+<td>Tenant isolation</td>
+<td>হ্যাঁ</td>
+<td>fail</td>
+<td>release gate failed</td>
+</tr>
+<tr>
+<td>Hover animation</td>
+<td>না</td>
+<td>pass</td>
+<td>cosmetic match</td>
+</tr>
+</tbody>
+</table></div>
+<p>একশটি cosmetic pass একটি data leak cancel করতে পারে না। Weighted score ব্যবহার করলে weight ও critical gates প্রকাশ করতে হবে; score দিয়ে explicit failure ঢেকে রাখা যাবে না।</p>
+<h2>একটি সৎ milestone report</h2>
+<pre><code class="language-text">Scope: create/read/assignment; export excluded by agreement
+Verified: create persistence, sequential replay
+Failed: stale assignment overwrites current assignee
+Blocked: reference offline; new UI capture unavailable
+Unknown: original queue vendor
+Accepted difference: safer workspace authorization
+Next actions:
+1. stale write conflict fix
+2. rerun concurrent assignment + regression
+3. reference access এলে UI comparison
+</code></pre>
+<p>Unknown queue vendor critical blocker নাও হতে পারে, যদি behavior contract পূরণ করা যায়। কিন্তু unresolved stale write integrity issue release আটকে দিতে পারে। Completion judgment হলো requirement ও risk-এর বিচার।</p>
+<h2>কখন থামবে</h2>
+<p>Agreed journey ও critical invariant-এর evidence আছে; necessary operational checks হয়েছে; remaining differences প্রকাশিত; responsible decision-maker scope ও residual risk জানেন—তখন milestone শেষ হতে পারে। অসীম investigation নয়; আবার সময় শেষকে verification বলা নয়।</p>
+<p><strong>নিজে করো—Q21:</strong> ৪২/৫০ এবং ৪২/৪৫—কোন বাক্যে কোন ratio ব্যবহার করবে? <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="22-practice-plan"><p class="small">দক্ষতা</p><h1>২২ · ৩০ দিনের কাজভিত্তিক অনুশীলন</h1>
+<p>৩০ দিনে সর্বজ্ঞ হওয়ার প্রতিশ্রুতি নেই। লক্ষ্য হলো একটি repeatable engineering loop হাতে পাওয়া। প্রতিদিনের সময় তোমার সুবিধামতো; একটি phase-এর artifact দুর্বল থাকলে calendar-এর জন্য পরের phase-এ দৌড়ানোর দরকার নেই।</p>
+<p><img alt="৩০ দিনের আটটি phase ও নির্দিষ্ট deliverable-এর সময়সূচি" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/14-practice.svg"></p>
+<h2>দিনভিত্তিক কাজ</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>দিন</th>
+<th>কাজ</th>
+<th>দিনের শেষে দেখানোর জিনিস</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>১</td>
+<td>ছোট অনুমোদিত target বাছাই</td>
+<td>scope paragraph</td>
+</tr>
+<tr>
+<td>২</td>
+<td>তিন user journey দেখো</td>
+<td>route/state notes</td>
+</tr>
+<tr>
+<td>৩</td>
+<td>repository baseline</td>
+<td>commands + actual results</td>
+</tr>
+<tr>
+<td>৪</td>
+<td>দশটি observation লেখো</td>
+<td>evidence ledger</td>
+</tr>
+<tr>
+<td>৫</td>
+<td>পাঁচটি unknown বাছো</td>
+<td>impact + next experiment</td>
+</tr>
+<tr>
+<td>৬</td>
+<td>একটি controlled experiment</td>
+<td>hypothesis/result/limit</td>
+</tr>
+<tr>
+<td>৭</td>
+<td>create UI states</td>
+<td>state table</td>
+</tr>
+<tr>
+<td>৮</td>
+<td>happy API request</td>
+<td>request/response contract</td>
+</tr>
+<tr>
+<td>৯</td>
+<td>error ও boundary cases</td>
+<td>error matrix</td>
+</tr>
+<tr>
+<td>১০</td>
+<td>reload ও keyboard journey</td>
+<td>capture + discrepancy</td>
+</tr>
+<tr>
+<td>১১</td>
+<td>entity ownership</td>
+<td>conceptual data map</td>
+</tr>
+<tr>
+<td>১২</td>
+<td>state transitions</td>
+<td>valid/invalid pairs</td>
+</tr>
+<tr>
+<td>১৩</td>
+<td>decision table</td>
+<td>permission/rule cases</td>
+</tr>
+<tr>
+<td>১৪</td>
+<td>deletion ও concurrency</td>
+<td>failure timelines</td>
+</tr>
+<tr>
+<td>১৫</td>
+<td>architecture alternatives</td>
+<td>ছোট ADR</td>
+</tr>
+<tr>
+<td>১৬</td>
+<td>ছোট slice implementation</td>
+<td>callable behavior</td>
+</tr>
+<tr>
+<td>১৭</td>
+<td>durable persistence</td>
+<td>reopen check</td>
+</tr>
+<tr>
+<td>১৮</td>
+<td>slice verification</td>
+<td>executed tests + limits</td>
+</tr>
+<tr>
+<td>১৯</td>
+<td>reference comparison</td>
+<td>matching conditions</td>
+</tr>
+<tr>
+<td>২০</td>
+<td>discrepancy diagnosis</td>
+<td>suspected/confirmed cause</td>
+</tr>
+<tr>
+<td>২১</td>
+<td>fix ও regression</td>
+<td>failing-before/passing-after evidence</td>
+</tr>
+<tr>
+<td>২২</td>
+<td>verification matrix</td>
+<td>unknown ঘর দৃশ্যমান</td>
+</tr>
+<tr>
+<td>২৩</td>
+<td>workspace boundary</td>
+<td>negative tests</td>
+</tr>
+<tr>
+<td>২৪</td>
+<td>retry/concurrency</td>
+<td>same-key ও stale-version cases</td>
+</tr>
+<tr>
+<td>২৫</td>
+<td>dependency failure</td>
+<td>pending/recovery report</td>
+</tr>
+<tr>
+<td>২৬</td>
+<td>observability ও restore plan</td>
+<td>diagnostic/recovery artifact</td>
+</tr>
+<tr>
+<td>২৭</td>
+<td>clean build/migration rehearsal</td>
+<td>result অথবা explicit blocker</td>
+</tr>
+<tr>
+<td>২৮</td>
+<td>release gates</td>
+<td>critical scenario status</td>
+</tr>
+<tr>
+<td>২৯</td>
+<td>fidelity report</td>
+<td>denominator + limitations</td>
+</tr>
+<tr>
+<td>৩০</td>
+<td>আরেকজনকে teach-back</td>
+<td>demo + next three actions</td>
+</tr>
+</tbody>
+</table></div>
+<h2>তিনটি checkpoint</h2>
+<p><strong>দিন ৬:</strong> একটি unknown কেন unknown, এবং পরের experiment কোন explanation আলাদা করবে—ব্যাখ্যা করতে পারছ? না পারলে আরও code নয়, question design অনুশীলন করো।</p>
+<p><strong>দিন ১৮:</strong> user outcome-এর durable ফল আছে? শুধু screenshot হলে slice অসম্পূর্ণ। Backend-only lab হলে UI বাদ দেওয়া scope-এ লেখা আছে কি?</p>
+<p><strong>দিন ৩০:</strong> অন্য reader artifact দেখে claim যাচাই করতে পারবেন? Report-এ “trust me” দরকার হলে traceability উন্নত করো।</p>
+<h2>Spaced recall</h2>
+<p>একটি concept পড়ার দিন, তিন দিন পরে এবং এক সপ্তাহ পরে বই বন্ধ করে ব্যাখ্যা করো। তিন প্রশ্ন: “কী?”, “কেন ভুল হয়?”, “কী experiment?” নিজের ভুল উত্তর লিখে পরে সংশোধন করো। Progress chart-এ পড়া page-এর চেয়ে produced artifact ও corrected misconception বেশি কাজের।</p>
+<p><strong>নিজে করো—Q22:</strong> তোমার available সময় কম হলে কোন phase বাদ না দিয়ে ছোট করবে? নিজের সাত দিনের mini-plan লেখো। <a href="#B-workbook">নমুনা</a>।</p></section><section class="chapter" id="23-daily-loop"><p class="small">দক্ষতা</p><h1>২৩ · প্রতিদিনের ছোট engineering সভা</h1>
+<p>সকালবেলা agent-কে “continue” বললে সে গতকালের সবচেয়ে গুরুত্বপূর্ণ unresolved বিষয় ধরবে—এমন নিশ্চয়তা নেই। একটি ছোট handoff file অনেক দীর্ঘ prompt-এর চেয়ে কাজে আসতে পারে।</p>
+<h2>কাজ শুরুর পাঁচ প্রশ্ন</h2>
+<p><img alt="তিনটি ডেস্ক-নোট: কী দেখা গেছে, কী অজানা এবং পরের ছোট পরীক্ষা" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/35-daily-workbench.svg"></p>
+<p>আজ সকালে এই তিনটি নোটই যথেষ্ট শুরু। দুপুরে যদি missing invalidation পাওয়া যায়, মাঝের নোটে উত্তর বসবে; ডানের নোট হবে “fix-এর পরে list + reload test”। এভাবেই handoff বদলাতে থাকে।</p>
+<ol>
+<li><strong>জানা:</strong> কোন claim evidence-backed?</li>
+<li><strong>অজানা:</strong> কোন uncertainty ভুল হলে সবচেয়ে বেশি ক্ষতি?</li>
+<li><strong>পরের কাজ:</strong> experiment, implementation, নাকি verification?</li>
+<li><strong>শেষের শর্ত:</strong> কী result পেলে এই task done?</li>
+<li><strong>হিসাবের জায়গা:</strong> কোন artifact update হবে?</li>
+</ol>
+<h2>একই দিনের dry run</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>সময়</th>
+<th>Finding</th>
+<th>সিদ্ধান্ত</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>০৯:০০</td>
+<td>list stale হওয়ার অভিযোগ</td>
+<td>reproduce before refactor</td>
+</tr>
+<tr>
+<td>০৯:২০</td>
+<td>API নতুন assignee দেয়</td>
+<td>server write failure কম সম্ভাব্য</td>
+</tr>
+<tr>
+<td>০৯:৩৫</td>
+<td>list cache পুরোনো</td>
+<td>mutation/cache path inspect</td>
+</tr>
+<tr>
+<td>১০:১০</td>
+<td>missing invalidation confirmed</td>
+<td>ছোট fix</td>
+</tr>
+<tr>
+<td>১০:৩০</td>
+<td>regression pass</td>
+<td>discrepancy verified</td>
+</tr>
+<tr>
+<td>১০:৪০</td>
+<td>concurrent update অদেখা</td>
+<td>নতুন unknown, আলাদা task</td>
+</tr>
+</tbody>
+</table></div>
+<p>শেষ row-টি গুরুত্বপূর্ণ। একটি bug fix হওয়ার পরে “সব assignment safe” বলা scope বাড়িয়ে দেওয়া।</p>
+<h2>Useful handoff</h2>
+<pre><code class="language-text">Current outcome: assignment list/details consistency
+Verified: normal update + reload
+Changed: cache invalidation in mutation success path
+Actual tests: command এবং saved report path
+Still unknown: two simultaneous assignees changing same ticket
+Next: version conflict scenario; expected result লিখে শুরু করো
+Do not assume: original uses the same cache library
+</code></pre>
+<h2>সপ্তাহের শেষে ছোট review</h2>
+<p>যে tool call নতুন evidence দিচ্ছে না, তা বন্ধ করো। যে assumption design-কে নিয়ন্ত্রণ করছে, তা experiment বা ADR দিয়ে পরিষ্কার করো। যে fixture real integration সেজে আছে, তাকে আলাদা চিহ্নিত করো। যে test বারবার flaky, তার timing, isolation ও oracle পরীক্ষা করো। শুধু retry দিয়ে green করা diagnosis নয়।</p>
+<p>আত্মবিশ্বাস নয়, uncertainty কমার ইতিহাস দেখো। আজ একটি গুরুত্বপূর্ণ ভুল ধারণা বাদ দিতে পারলে সেটিও progress।</p>
+<p><strong>নিজে করো—Q23:</strong> “আজ অনেক code লিখেছি” বাক্যটি তিনটি evidence-backed progress statement-এ বদলাও। <a href="#B-workbook">উত্তর</a>।</p></section><section class="chapter" id="24-field-guide"><p class="small">দক্ষতা</p><h1>২৪ · মাঠের খাতা: ২৫টি স্মরণসূত্র</h1>
+<h2>দেখার পাঁচটি নিয়ম</h2>
+<p><img alt="ছয়টি স্মরণকার্ড: কী দেখেছি, source of truth কোথায়, কার অনুমতি, retry হলে কী, মাঝে থামলে কী এবং কী পরীক্ষা হয়েছে" src="file:///mnt/c/users/user/onedrive/desktop/revrs_skls/rev-rev-rev/assets/figures/36-memory-postcards.svg"></p>
+<p>একটি পরিচিত app-এর একটি button বেছে নাও। ছয়টি card ধরে তার গল্প বলো। কোথাও উত্তর আটকে গেলে সেটিই তোমার পরের প্রশ্ন। নিচের ২৫টি নিয়ম চাইলে পরে reference হিসেবে খুলবে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>স্মরণসূত্র</th>
+<th>Agent-কে প্রশ্ন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">১</td>
+<td>Screenshot সাক্ষী, পূর্ণ specification নয়</td>
+<td>কোন state capture করা হয়নি?</td>
+</tr>
+<tr>
+<td style="text-align: right;">২</td>
+<td>Header একটি চিহ্ন</td>
+<td>এটি origin-এর evidence কি?</td>
+</tr>
+<tr>
+<td style="text-align: right;">৩</td>
+<td>Observation-এর context আছে</td>
+<td>version, actor, environment কী?</td>
+</tr>
+<tr>
+<td style="text-align: right;">৪</td>
+<td>Unknown-ও কাজের বস্তু</td>
+<td>পরের পরীক্ষা কী?</td>
+</tr>
+<tr>
+<td style="text-align: right;">৫</td>
+<td>Confidence-এর ভিত্তি চাই</td>
+<td>alternative explanation কী?</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Model করার পাঁচটি নিয়ম</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>স্মরণসূত্র</th>
+<th>Agent-কে প্রশ্ন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">৬</td>
+<td>Page list-এর নিচে journey</td>
+<td>failure/recovery কোথায়?</td>
+</tr>
+<tr>
+<td style="text-align: right;">৭</td>
+<td>State transition মানে নিয়ম</td>
+<td>forbidden transition কী?</td>
+</tr>
+<tr>
+<td style="text-align: right;">৮</td>
+<td>Data copy-এর owner আলাদা</td>
+<td>source of truth কোনটি?</td>
+</tr>
+<tr>
+<td style="text-align: right;">৯</td>
+<td>Delete-এর পরে ছায়া থাকে</td>
+<td>cache/index/attachment কী হবে?</td>
+</tr>
+<tr>
+<td style="text-align: right;">১০</td>
+<td>Architecture-এর কারণ চাই</td>
+<td>কোন requirement এই component চায়?</td>
+</tr>
+</tbody>
+</table></div>
+<h2>নির্মাণের পাঁচটি নিয়ম</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>স্মরণসূত্র</th>
+<th>Agent-কে প্রশ্ন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">১১</td>
+<td>Rewrite-এর আগে baseline</td>
+<td>কোন existing behavior রাখতে হবে?</td>
+</tr>
+<tr>
+<td style="text-align: right;">১২</td>
+<td>ছোট সম্পূর্ণ slice</td>
+<td>durable user outcome কোথায়?</td>
+</tr>
+<tr>
+<td style="text-align: right;">১৩</td>
+<td>UI disable server guarantee নয়</td>
+<td>alternate client retry করলে?</td>
+</tr>
+<tr>
+<td style="text-align: right;">১৪</td>
+<td>Timeout মানে ফল অজানা হতে পারে</td>
+<td>operation reconcile হবে কীভাবে?</td>
+</tr>
+<tr>
+<td style="text-align: right;">১৫</td>
+<td>Outbox সব gap বন্ধ করে না</td>
+<td>send-এর পরে crash হলে?</td>
+</tr>
+</tbody>
+</table></div>
+<h2>যাচাইয়ের পাঁচটি নিয়ম</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>স্মরণসূত্র</th>
+<th>Agent-কে প্রশ্ন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">১৬</td>
+<td>Login permission নয়</td>
+<td>actor-resource-action test আছে?</td>
+</tr>
+<tr>
+<td style="text-align: right;">১৭</td>
+<td>Mock-এর label থাকবে</td>
+<td>কোন integration বাস্তব?</td>
+</tr>
+<tr>
+<td style="text-align: right;">১৮</td>
+<td>Expected বদলে bug লুকিও না</td>
+<td>oracle কোথা থেকে এসেছে?</td>
+</tr>
+<tr>
+<td style="text-align: right;">১৯</td>
+<td>এক run সব interleaving নয়</td>
+<td>concurrency-এর সীমা কী?</td>
+</tr>
+<tr>
+<td style="text-align: right;">২০</td>
+<td>Average-এর বাইরে মানুষ আছে</td>
+<td>distribution ও errors কী?</td>
+</tr>
+</tbody>
+</table></div>
+<h2>রিপোর্টের পাঁচটি নিয়ম</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>স্মরণসূত্র</th>
+<th>Agent-কে প্রশ্ন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">২১</td>
+<td>Config মানে exercised নয়</td>
+<td>restore চালানো হয়েছে?</td>
+</tr>
+<tr>
+<td style="text-align: right;">২২</td>
+<td>Percentage-এর denominator চাই</td>
+<td>কোন enumerated set?</td>
+</tr>
+<tr>
+<td style="text-align: right;">২৩</td>
+<td>Critical failure average-এ হারায় না</td>
+<td>release gate pass?</td>
+</tr>
+<tr>
+<td style="text-align: right;">২৪</td>
+<td>Persistent artifacts shared memory</td>
+<td>পরের agent কোথা থেকে শুরু করবে?</td>
+</tr>
+<tr>
+<td style="text-align: right;">২৫</td>
+<td>Completion একটি যুক্তিসহ দাবি</td>
+<td>scope, result, remaining risk কী?</td>
+</tr>
+</tbody>
+</table></div>
+<h2>শেষ দৃশ্য</h2>
+<p>কয়েক সপ্তাহ পরে আবার রাত ২টা ১৭। আরিফের screen-এ এবারও সুন্দর app। কিন্তু পাশে evidence ledger, executed report আর তিনটি unresolved question আছে। নীরা জিজ্ঞেস করল, “সব জানো?”</p>
+<p>আরিফ বলল, “না। তবে কোনটা দেখেছি, কোনটা ধরে নিয়েছি, কোনটা পরীক্ষা করেছি, আর কোনটা জানি না—সেগুলো আলাদা করতে পারি।”</p>
+<p>নীরা খাতা বন্ধ করল। “তাহলে কাল প্রথমে কোনটা?” আরিফ একটি প্রশ্নে দাগ দিল: provider ফিরে এলে pending notification পাঠানো হচ্ছে কি না। আজকের কাজ সেখানেই শেষ।</p>
+<p><strong>নিজে করো—Q24:</strong> বই বন্ধ করে নিজের পাঁচটি নিয়ম লেখো। প্রতিটির জন্য একটি ভুল implementation এবং একটি ধরার পরীক্ষা বলো। <a href="#B-workbook">মূল্যায়নের নির্দেশনা</a>।</p></section><section class="chapter" id="A-glossary"><p class="small">পরিশিষ্ট</p><h1>পরিশিষ্ট A · বাংলা–ইংরেজি ধারণার অভিধান</h1>
+<p>একই শব্দ ভিন্ন tool-এ সামান্য ভিন্ন অর্থে ব্যবহৃত হতে পারে। এখানে বইয়ের অর্থ দেওয়া হলো। Definition-এর সঙ্গে একটি প্রশ্ন মনে রাখলে মুখস্থের বোঝা কমে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>শব্দ</th>
+<th>এই বইয়ে অর্থ</th>
+<th>নিজেকে প্রশ্ন</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reverse engineering</td>
+<td>evidence দিয়ে অজানা system-এর model তৈরি</td>
+<td>কী জানলাম, কী অজানা?</td>
+</tr>
+<tr>
+<td>Reconstruction</td>
+<td>প্রয়োজনীয় আচরণ পূরণ করে replacement তৈরি</td>
+<td>কোন contract পূরণ হলো?</td>
+</tr>
+<tr>
+<td>Fidelity</td>
+<td>নির্ধারিত ক্ষেত্রে reference-এর সঙ্গে মিল</td>
+<td>কোন dimension-এ মিল?</td>
+</tr>
+<tr>
+<td>Observable behavior</td>
+<td>বাইরে থেকে দেখা ফল/interaction</td>
+<td>কোন account ও condition-এ?</td>
+</tr>
+<tr>
+<td>Evidence</td>
+<td>claim মূল্যায়নের artifact/observation</td>
+<td>অন্য কেউ যাচাই করতে পারবেন?</td>
+</tr>
+<tr>
+<td>Provenance</td>
+<td>তথ্য কোথা থেকে এসেছে তার ইতিহাস</td>
+<td>source ও method কী?</td>
+</tr>
+<tr>
+<td>Observation</td>
+<td>সরাসরি দেখা ঘটনা</td>
+<td>ব্যাখ্যা মিশে গেছে কি?</td>
+</tr>
+<tr>
+<td>Inference</td>
+<td>evidence থেকে সম্ভাব্য ব্যাখ্যা</td>
+<td>অন্য ব্যাখ্যা আছে?</td>
+</tr>
+<tr>
+<td>Assumption</td>
+<td>কাজ এগোতে সাময়িকভাবে ধরা বিষয়</td>
+<td>ভুল হলে কী বদলাবে?</td>
+</tr>
+<tr>
+<td>Hypothesis</td>
+<td>পরীক্ষা দিয়ে মূল্যায়নযোগ্য ব্যাখ্যা</td>
+<td>কী ফল predict করে?</td>
+</tr>
+<tr>
+<td>Controlled experiment</td>
+<td>relevant variables নিয়ন্ত্রিত রেখে পরীক্ষা</td>
+<td>কোন variable বদলেছে?</td>
+</tr>
+<tr>
+<td>Confounder</td>
+<td>ফলের বিকল্প কারণ তৈরি করা factor</td>
+<td>network/hardware আলাদা?</td>
+</tr>
+<tr>
+<td>Information gain</td>
+<td>অনিশ্চয়তা কমানোর ক্ষমতা</td>
+<td>কোন hypothesis আলাদা হবে?</td>
+</tr>
+<tr>
+<td>Traceability</td>
+<td>evidence থেকে result পর্যন্ত সম্পর্ক</td>
+<td>requirement-এর test কোথায়?</td>
+</tr>
+<tr>
+<td>Contract</td>
+<td>input, outcome, errors ও শর্তের প্রতিশ্রুতি</td>
+<td>failure-এ কী হবে?</td>
+</tr>
+<tr>
+<td>Acceptance criterion</td>
+<td>গ্রহণযোগ্য ফলের পরীক্ষাযোগ্য শর্ত</td>
+<td>pass/fail বলা যায়?</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>expected behavior নির্ধারণের ভিত্তি</td>
+<td>expected কে ঠিক করেছে?</td>
+</tr>
+<tr>
+<td>Invariant</td>
+<td>নির্দিষ্ট scope-এ বজায় রাখার শর্ত</td>
+<td>কোন operation ভাঙতে পারে?</td>
+</tr>
+<tr>
+<td>State machine</td>
+<td>state ও allowed transition-এর model</td>
+<td>কোন move নিষিদ্ধ?</td>
+</tr>
+<tr>
+<td>Authoritative state</td>
+<td>কোনো বিষয়ের নির্ধারিত সত্যের উৎস</td>
+<td>conflict-এ কাকে মানবে?</td>
+</tr>
+<tr>
+<td>Projection</td>
+<td>অন্য state থেকে তৈরি representation</td>
+<td>rebuild করা যায়?</td>
+</tr>
+<tr>
+<td>Cache invalidation</td>
+<td>stale copy পুনর্ব্যবহার বন্ধ করা</td>
+<td>কোন cache key প্রভাবিত?</td>
+</tr>
+<tr>
+<td>Eventual consistency</td>
+<td>delay-এর পরে specified convergence-এর model</td>
+<td>delay ও failure-এর policy কী?</td>
+</tr>
+<tr>
+<td>Transaction</td>
+<td>এক unit হিসেবে commit/rollback হওয়া কাজ</td>
+<td>atomic boundary কোথায়?</td>
+</tr>
+<tr>
+<td>Race condition</td>
+<td>timing/ordering অনুযায়ী ফল বদলানো</td>
+<td>কোন interleaving ক্ষতিকর?</td>
+</tr>
+<tr>
+<td>Lost update</td>
+<td>এক update অন্য update ঢেকে হারানো</td>
+<td>stale copy overwrite করেছে?</td>
+</tr>
+<tr>
+<td>Optimistic concurrency</td>
+<td>expected version মেলালে write</td>
+<td>conflict কীভাবে প্রকাশিত?</td>
+</tr>
+<tr>
+<td>Idempotency</td>
+<td>replay-এ intended effect অনিচ্ছাকৃতভাবে না বাড়া</td>
+<td>logical operation identity কী?</td>
+</tr>
+<tr>
+<td>Deduplication</td>
+<td>একই identity-র duplicate চিনে সামলানো</td>
+<td>scope ও retention কী?</td>
+</tr>
+<tr>
+<td>Outbox</td>
+<td>domain change-এর সঙ্গে durable outgoing record</td>
+<td>send/ack gap কীভাবে সামলাবে?</td>
+</tr>
+<tr>
+<td>At-least-once delivery</td>
+<td>delivery পুনরায় হতে পারে এমন guarantee</td>
+<td>consumer duplicate-safe?</td>
+</tr>
+<tr>
+<td>Reconciliation</td>
+<td>আলাদা খাতার state মিলিয়ে repair</td>
+<td>source of truth কোনটি?</td>
+</tr>
+<tr>
+<td>Backoff</td>
+<td>retry-এর আগে বিরতি বাড়ানো</td>
+<td>bounded আছে?</td>
+</tr>
+<tr>
+<td>Jitter</td>
+<td>retry delay-তে randomness</td>
+<td>synchronized burst কমছে?</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>actor identity প্রতিষ্ঠা</td>
+<td>তুমি কে?</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>resource/action-এর অনুমতি</td>
+<td>এই কাজ করতে পারো?</td>
+</tr>
+<tr>
+<td>Tenant</td>
+<td>data/permission-এ আলাদা customer boundary</td>
+<td>query scope ঠিক?</td>
+</tr>
+<tr>
+<td>Trust boundary</td>
+<td>ভিন্ন আস্থার অংশের সংযোগ</td>
+<td>input কোথায় যাচাই?</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>internal behavior বোঝার signal ব্যবস্থা</td>
+<td>complaint থেকে cause খুঁজবে?</td>
+</tr>
+<tr>
+<td>Span</td>
+<td>trace-এর একটি timed operation</td>
+<td>parent/link সঠিক?</td>
+</tr>
+<tr>
+<td>SLI</td>
+<td>service behavior-এর মাপ</td>
+<td>numerator/denominator কী?</td>
+</tr>
+<tr>
+<td>SLO</td>
+<td>SLI-এর নির্দিষ্ট target ও window</td>
+<td>লক্ষ্য, না achieved result?</td>
+</tr>
+<tr>
+<td>Tail latency</td>
+<td>distribution-এর ধীর দিকের সময়</td>
+<td>p95/p99 কোন method-এ?</td>
+</tr>
+<tr>
+<td>Throughput</td>
+<td>সময়প্রতি সম্পন্ন কাজ</td>
+<td>success ও failure আলাদা?</td>
+</tr>
+<tr>
+<td>Saturation</td>
+<td>resource capacity-র ওপর চাপ</td>
+<td>queue/connection pool ভরছে?</td>
+</tr>
+<tr>
+<td>Vertical slice</td>
+<td>একটি outcome-এর প্রয়োজনীয় সব layer</td>
+<td>end-to-end result আছে?</td>
+</tr>
+<tr>
+<td>Mock/Fake</td>
+<td>নিয়ন্ত্রিত test substitute</td>
+<td>কোন reality বাদ যাচ্ছে?</td>
+</tr>
+<tr>
+<td>Differential test</td>
+<td>reference ও replacement-এর তুলনা</td>
+<td>equivalent condition আছে?</td>
+</tr>
+<tr>
+<td>Regression test</td>
+<td>আগের bug ফিরে এলে ধরার পরীক্ষা</td>
+<td>symptom নয়, contract যাচাই?</td>
+</tr>
+<tr>
+<td>ADR</td>
+<td>decision ও rationale-এর সংক্ষিপ্ত record</td>
+<td>কখন পুনর্বিবেচনা?</td>
+</tr>
+<tr>
+<td>RPO</td>
+<td>গ্রহণযোগ্য data-loss window-এর লক্ষ্য</td>
+<td>recoverable point কী?</td>
+</tr>
+<tr>
+<td>RTO</td>
+<td>recovery সময়ের লক্ষ্য</td>
+<td>drill-এ কত লেগেছে?</td>
+</tr>
+<tr>
+<td>Runbook</td>
+<td>নির্দিষ্ট incident-এর কাজের নির্দেশ</td>
+<td>কে কী করবেন?</td>
+</tr>
+</tbody>
+</table></div></section><section class="chapter" id="B-workbook"><p class="small">পরিশিষ্ট</p><h1>পরিশিষ্ট B · অনুশীলন, উত্তর ও capstone rubric</h1>
+<p>আগে নিজে লিখে তারপর উত্তর খোলো। কোনো উত্তর হুবহু মুখস্থ করা জরুরি নয়; reasoning ও scope ঠিক থাকা জরুরি। Markdown viewer <code>&lt;details&gt;</code> সমর্থন না করলে নিচের উত্তর সরাসরি দেখা যেতে পারে।</p>
+<h2>অধ্যায়ের ২৪টি প্রশ্নের উত্তর</h2>
+<div class="answer">
+<div class="answer-title">Q01 · Toast-এর পরে persistence যাচাই</div>
+
+একবার reload করে একই resource পড়ো; তারপর অন্য অনুমোদিত session বা নতুন connection থেকে পড়ো। প্রথমটি client-only state বাদ দিতে সাহায্য করে, দ্বিতীয়টি একই cache-এর ওপর নির্ভরতা কমায়। তবু disk failure recovery বা database vendor প্রমাণ হয় না।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q02 · দ্বিতীয় service বানানোর আগে</div>
+
+Existing service-এর contract/callers, tests ও প্রমাণিত defect জানতে হবে। Reuse বা ছোট fix যথেষ্ট কি না দেখো। শুধু নাম পছন্দ হচ্ছে না বলে parallel implementation বানালে policy divergence হতে পারে।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q03 · nginx থেকে Python?</div>
+
+Header value হলো observed; Python backend claim evidence-বিহীন hypothesis/assumption। nginx Python, Java, Go বা অন্য origin-এর সামনে থাকতে পারে। এটি supported inference-ও নয়, যদি অতিরিক্ত evidence না থাকে।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q04 · Search-এর hidden work</div>
+
+সম্ভাব্য dependency: tenant filtering, indexing/projection, cache ও pagination। Failure: stale result এবং revoked user-এর result leak। Exact index vendor না জেনেও freshness ও isolation-এর contract লেখা যায়।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q05 · Cache না index?</div>
+
+Authorized fresh detail read, search response, client cache-bypass observation এবং পাওয়া গেলে index/worker telemetry তুলনা করবে। Browser refresh-এর পরও delay থাকলে কিছু client-only explanation দুর্বল হয়। শুধু delay দিয়ে Elasticsearch বা queue architecture নিশ্চিত করা যায় না।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q06 · Timeout-এর পরে input মুছে দেওয়া</div>
+
+Server ইতিমধ্যে commit করে থাকতে পারে। User আবার নতুন operation পাঠালে duplicate হয়; input মুছলে unresolved কাজের context-ও হারায়। Pending intent ও operation identity রাখো, ফল reconcile করো, তারপর confirmation দেখাও।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q07 · Changed payload, same key</div>
+
+User নতুন title চেয়েছেন অথচ পুরোনো success পেলে তিনি নতুন intent সম্পন্ন হয়েছে ভাবতে পারেন। Scoped key-এর সঙ্গে payload fingerprint মেলানো এবং mismatch-এ নির্দিষ্ট conflict দেওয়া একটি পরিষ্কার contract।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q08 · Delete-এর scope</div>
+
+কার কাছে অদৃশ্য—সাধারণ user না admin? কোথায়—detail, search, export, attachment? কখন—commit-এর সঙ্গে সঙ্গে না documented delay-এর পরে? Audit ও backup-এর retention policy আলাদা বিষয়।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q09 · Database delete, search remains</div>
+
+Search মৃত resource দেখাতে পারে; title/body leak করতে পারে; dashboard count mismatch হতে পারে। Detail endpoint deny করলেও search snippet-এ তথ্য প্রকাশিত হতে পারে। Tombstone/version ও derived cleanup-এর contract যাচাই করো।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q10 · Outbox-এর counterexample</div>
+
+Worker provider-এ email পাঠাল; delivered mark লেখার আগে crash। Outbox pending, তাই retry আবার send করতে পারে। Provider deduplication বা অন্য explicit delivery policy ছাড়া exactly-once external effect দাবি করা যাবে না।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q11 · ২ সেকেন্ড response</div>
+
+Client-side network timing ও server trace-এর operation spans চাইবে। Database query/lock timing থাকলে DB hypothesis মূল্যায়ন করা যায়। Server span দ্রুত কিন্তু client wait দীর্ঘ হলে network/proxy/client দিকও দেখবে।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q12 · Export worker-এর global query</div>
+
+Background path tenant boundary এড়িয়ে private data export করতে পারে। Actor/tenant context durable job payload বা trusted lookup থেকে নিয়ে worker-এ permission policy প্রয়োগ করতে হবে। Detail endpoint pass এই আলাদা পথ verify করে না।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q13 · API success বনাম notification</div>
+
+Create outcome complete হতে পারে, কিন্তু notification-সহ journey অসম্পূর্ণ। Eligible notification-এর delivery success/freshness, oldest pending age এবং failure ratio আলাদা SLI হতে পারে। প্রতিটির window ও denominator লিখবে।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q14 · Mean এবং backlog</div>
+
+শেষ পাঁচটি request ১,৫০০ ms নিয়েছে, যা mean আড়াল করেছে। ১০ মিনিট শেষে backlog ২০; ১১তম মিনিটে ৪ আসে, ১০টি process হয়; শেষে ১৪। Chart-এর recurrence থেকে হিসাবটি পুনরায় করা যায়।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q15 · Async worker কেন</div>
+
+Ticket save-এর response দ্রুত চাই, আর email কয়েক মুহূর্ত পরে গ্রহণযোগ্য—এটি সম্ভাব্য requirement। নতুন tests: pending durability, duplicate delivery, retry, provider outage, ordering ও recovery। Queue যোগ করলেই এগুলো পাওয়া যায় না।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q16 · ১৪ test পাসে যা বলা যাবে না</div>
+
+Real authentication secure, production throughput sufficient, real email exactly once—কোনোটিই পরীক্ষিত নয়। Power loss recovery, browser accessibility ও multi-region concurrency-ও lab-এর scope-এর বাইরে।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q17 · Timestamp normalization</div>
+
+Independent run-এ generated creation time আলাদা হওয়া expected হলে raw equality বাদ দেওয়া উপযোগী। কিন্তু expiry, ordering, deadline, timezone বা freshness contract পরীক্ষায় timestamp মুছে দিলে মূল bug লুকাবে।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q18 · একটি scenario-এর নমুনা</div>
+
+Offline note: invariant—acknowledged local save clean app restart-এ হারাবে না। Timeline—offline edit → local save → restart → reconnect → server confirm। Limitation—device storage corruption বা uninstall পরীক্ষা হয়নি।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q19 · পাঁচ লাইনের assignment</div>
+
+১. Scope: create/read ticket slice। ২. Context: existing service ও observed contract পড়ো। ৩. Invariant: workspace isolation ও durable persistence। ৪. Verify: reload, invalid actor, timeout replay; actual results দাও। ৫. Handoff: changed files, remaining unknown, next three actions।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q20 · Backup সবুজ</div>
+
+Backup job configured/executed বলা যেতে পারে, যদি log থাকে। Recovery capability `IMPLEMENTED, UNVERIFIED` অথবা `NOT RUN` verification status পাবে। Next action: isolated restore drill, integrity check ও measured recovery time।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q21 · দুই denominator</div>
+
+“৫০টি defined scenario-এর ৪২টি pass”—৮৪%। “চালানো ৪৫টির মধ্যে ৪২টি pass”—প্রায় ৯৩.৩৩%। দ্বিতীয় বাক্যের সঙ্গে ২ blocked ও ৩ not implemented জানাবে। Critical failed scenario-ও আলাদা বলবে।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q22 · সাত দিনের mini-plan</div>
+
+১ scope; ২ evidence/unknown; ৩ UI/API contract; ৪ state/data; ৫ ছোট slice; ৬ failure/permission tests; ৭ discrepancy ও report। Feature সংখ্যা কমাও, evidence→verification loop বাদ দিও না।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q23 · Progress statement</div>
+
+“REQ-01 reopen test পাস করেছে”; “D-03 stale list bug reproduce ও root cause confirmed”; “U-07 original retry behavior এখনও অজানা, EXP-04 প্রস্তুত।” প্রতিটির পাশে artifact path ও actual run context যোগ করলে report reviewable হবে।
+</div>
+
+<div class="answer">
+<div class="answer-title">Q24 · পাঁচ নিয়মের মূল্যায়ন</div>
+
+প্রতিটি নিয়মের জন্য একটি concrete failure এবং সেটি ধরার observable test থাকা চাই। “ভালো code লিখব” যথেষ্ট নয়। “Same-key retry-এ count বাড়বে না; দুই overlapping request চালিয়ে ID ও outbox count মিলাব”—এটি কার্যকর উত্তর।
+</div>
+
+<h2>গোয়েন্দা চ্যালেঞ্জ ১: Report-এর ভুল ধরো</h2>
+<p>Agent-এর report:</p>
+<blockquote>
+<p>“সব feature 100% complete। API 200 দিয়েছে। Screenshot reference-এর মতো। Redis ব্যবহার করেছি কারণ original-এ nginx header ছিল। সব tests pass হওয়ার কথা।”</p>
+</blockquote>
+<p>নিজে অন্তত পাঁচটি সমস্যা বের করো।</p>
+<div class="answer">
+<div class="answer-title">সমাধানের ইঙ্গিত ও নমুনা</div>
+
+Denominator নেই; 200 durable outcome প্রমাণ নয়; screenshot behavior proof নয়; nginx থেকে Redis inference ভিত্তিহীন; “pass হওয়ার কথা” executed result নয়। Corrected report-এ scope, actual tests, evidence classification, remaining unknown এবং real/mock boundary চাইবে।
+</div>
+
+<h2>গোয়েন্দা চ্যালেঞ্জ ২: তিনটি failure window</h2>
+<p>একটি ticket commit হয়েছে। Worker email পাঠাচ্ছে। তিনবার আলাদা failure inject করার plan লেখো: commit-এর আগে, send-এর আগে, send-এর পরে ack-এর আগে। প্রতিটি run-এ ticket count, outbox pending ও provider effect count predict করো।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Window</th>
+<th style="text-align: right;">Ticket</th>
+<th style="text-align: right;">Pending</th>
+<th style="text-align: right;">Provider effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>commit-এর আগে exception</td>
+<td style="text-align: right;">০</td>
+<td style="text-align: right;">০</td>
+<td style="text-align: right;">০</td>
+</tr>
+<tr>
+<td>commit-এর পরে send হয়নি</td>
+<td style="text-align: right;">১</td>
+<td style="text-align: right;">১</td>
+<td style="text-align: right;">০</td>
+</tr>
+<tr>
+<td>send হয়েছে, ack হয়নি</td>
+<td style="text-align: right;">১</td>
+<td style="text-align: right;">১</td>
+<td style="text-align: right;">১</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lab-এর fake provider-এ retry-এর পরে শেষ row হয় ১, ০, ১। Real provider duplicate-safe না হলে শেষ সংখ্যা ২ হতে পারে। Table হলো expected model; execution evidence আলাদা জমা দেবে।</p>
+<h2>Capstone: ছোট support workflow পুনর্নির্মাণ</h2>
+<p><strong>Target:</strong> নিজের অনুমোদিত ছোট app অথবা এই local service lab। <strong>Outcome:</strong> দুই workspace-এর user ticket তৈরি ও valid status transition করতে পারবেন; replay duplicate তৈরি করবে না। UI যোগ করলে loading, validation, conflict ও unresolved outcome দৃশ্যমান করবে।</p>
+<h3>Deliverable pack</h3>
+<ol>
+<li>Scope: included/excluded journey, actor, environment।</li>
+<li>অন্তত আটটি evidence record; implemented behavior-এর সঙ্গে গুলিয়ে ফেলবে না।</li>
+<li>অন্তত পাঁচটি unknown; প্রতিটির impact ও next action।</li>
+<li>API/service contract, state table ও তিনটি invariant।</li>
+<li>একটি ADR, একটি verified slice, দুইটি reproduced discrepancy।</li>
+<li>Actual verification report ও source-linked handoff।</li>
+</ol>
+<h3>মূল্যায়ন rubric</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>বিষয়</th>
+<th style="text-align: right;">পয়েন্ট</th>
+<th>পূর্ণ পয়েন্টের জন্য</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scope ও evidence</td>
+<td style="text-align: right;">২০</td>
+<td>claim-এর context, artifact, limitation</td>
+</tr>
+<tr>
+<td>Contracts ও domain</td>
+<td style="text-align: right;">২০</td>
+<td>positive/negative state ও invariant</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td style="text-align: right;">২০</td>
+<td>real persistence, clear mock boundary</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td style="text-align: right;">২৫</td>
+<td>failure, permission, concurrency ও executed result</td>
+</tr>
+<tr>
+<td>Reporting ও recovery</td>
+<td style="text-align: right;">১৫</td>
+<td>honest denominator, remaining gaps, recovery plan</td>
+</tr>
+</tbody>
+</table></div>
+<p>এটি শেখার rubric; production certification নয়। <strong>Critical gate:</strong> cross-workspace data leak বা acknowledged data loss unresolved থাকলে score বেশি হলেও release-ready বলা যাবে না।</p>
+<h3>Teach-back challenge</h3>
+<p>তিন মিনিটে একজন বন্ধুকে timeout, retry ও outbox বোঝাও। তিনি যদি জিজ্ঞেস করেন “তাহলে email একবারই যাবে?”, তুমি যেন নির্দিষ্ট guarantee ও limitation দিয়ে উত্তর দিতে পারো। ব্যাখ্যা করতে গিয়ে কোথায় আটকে যাও, সেখানেই পরের learning task।</p></section><section class="chapter" id="C-prompts"><p class="small">পরিশিষ্ট</p><h1>পরিশিষ্ট C · সরাসরি ব্যবহারযোগ্য agent prompts</h1>
+<p><code>&lt;...&gt;</code> অংশ নিজের project অনুযায়ী পূরণ করো। কোনো prompt tool permission বা project access স্বয়ংক্রিয়ভাবে দেয় না; বাস্তব অনুমোদিত scope মানতে হবে। Agent-এর কাজ review করার দায়িত্ব ফল ও evidence দিয়ে পালন করবে।</p>
+<h2>১. Repository-তে প্রথম প্রবেশ</h2>
+<pre><code class="language-text">লক্ষ্য: &lt;journey&gt; বোঝা ও প্রয়োজনীয় পরিবর্তনের ভিত্তি তৈরি।
+আগে project instructions, git status, README, existing tests ও entry points পড়ো।
+একটি request-এর UI/handler/service/store call path file reference-সহ দেখাও।
+Baseline check চালিয়ে exact command ও result লেখো।
+Existing changes সংরক্ষণ করো। Rewrite-এর আগে প্রমাণিত defect ও কারণ দাও।
+Deliverable: current behavior, unknowns, smallest coherent next slice।
+</code></pre>
+<h2>২. Observation-কে evidence-এ রূপ দাও</h2>
+<pre><code class="language-text">এই artifacts পর্যালোচনা করো: &lt;paths&gt;।
+প্রতিটি finding-এ ID, question, context, method, observation ও limitation দাও।
+OBSERVED / DERIVED / INFERRED / ASSUMED / UNKNOWN / CONTRADICTED আলাদা করো।
+যে architecture এসব artifacts থেকে জানা যায় না, তা বানিয়ে পূরণ করবে না।
+প্রতিটি high-impact unknown-এর জন্য একটি discriminating experiment প্রস্তাব করো।
+</code></pre>
+<h2>৩. Screenshot থেকে behavior specification</h2>
+<pre><code class="language-text">Target journey: &lt;journey&gt;। Evidence: &lt;captures&gt;।
+Loaded screen ছাড়াও loading, empty, validation, permission, conflict,
+timeout এবং recovery state inventory করো।
+চার ধরনের state আলাদা করো: local UI, server, cache, derived।
+Keyboard ও narrow viewport-এর acceptance criteria দাও।
+Missing evidence-কে unknown রাখো; নতুন product choice আলাদা label করো।
+</code></pre>
+<h2>৪. Vertical slice implement করো</h2>
+<pre><code class="language-text">Outcome: &lt;একটি নির্দিষ্ট user outcome&gt;।
+Source contract: &lt;spec path&gt;; evidence: &lt;IDs&gt;।
+Existing architecture অনুসরণ করে validation, authorization, domain rule,
+persistence ও প্রয়োজনীয় error/recovery path implement করো।
+Mock বনাম real integration স্পষ্ট রাখো।
+Relevant happy, boundary, forbidden এবং failure cases চালাও।
+Deliverable: changed files, actual test results, unresolved gaps।
+</code></pre>
+<h2>৫. Concurrency ও retry review</h2>
+<pre><code class="language-text">এই operation review করো: &lt;operation&gt;।
+Logical operation identity, dedupe scope, payload mismatch, retention,
+in-flight duplicate এবং stale-version policy নির্ধারণ করো।
+Check-then-write race আছে কি দেখো।
+DB commit, event record, external send ও acknowledgement-এর failure windows আঁকো।
+কমপক্ষে একটি overlapping request test ও একটি ack-gap test চালাও।
+যে guarantee provider বা database-এর ওপর নির্ভর করে তা স্পষ্ট লেখো।
+</code></pre>
+<h2>৬. Differential review</h2>
+<pre><code class="language-text">Reference evidence: &lt;paths/version&gt;। Replacement: &lt;build&gt;।
+Equivalent actor, data, initial state ও timing দিয়ে &lt;scenarios&gt; তুলনা করো।
+Normalization rule আগে লেখো; semantic field বাদ দিও না।
+প্রতিটি mismatch-এ expected, actual, reproduction, severity ও evidence দাও।
+Suspected cause এবং confirmed cause আলাদা রাখো।
+Fix-এর পরে relevant regression চালিয়ে discrepancy status update করো।
+</code></pre>
+<h2>৭. Agent-এর অতিরিক্ত দাবি সংশোধন</h2>
+<pre><code class="language-text">তোমার আগের completion report-টি requirement ধরে audit করো।
+কোন tests বাস্তবে execute হয়েছে, কোন command ও environment-এ?
+যে result শুধু expected, তাকে NOT RUN হিসেবে চিহ্নিত করো।
+Original সম্পর্কে evidence-বিহীন claim-কে inference/unknown-এ সংশোধন করো।
+Pass rate-এর denominator এবং critical failed scenario আলাদা দাও।
+তারপর সর্বোচ্চ মূল্যবান পরের তিনটি কাজ নির্ধারণ করো।
+</code></pre>
+<h2>৮. Context handoff</h2>
+<pre><code class="language-text">পরের session-এর জন্য concise handoff লেখো:
+১. Agreed scope ও current outcome
+২. Evidence-backed findings এবং accepted decisions
+৩. Changed files ও actual verification result paths
+৪. Failed/blocked/unverified items এবং কারণ
+৫. Next three actions, dependencies ও definition of done
+Chat-এর অনুমানকে repository fact হিসেবে লিখবে না।
+</code></pre>
+<h2>Prompt review-এর ছোট checklist</h2>
+<ul>
+<li>Outcome কি দেখা/মাপা যায়?</li>
+<li>Existing evidence কোথায় পড়তে হবে বলা আছে?</li>
+<li>Done হওয়ার condition আছে?</li>
+<li>Error/recovery requirement প্রাসঙ্গিক হলে অন্তর্ভুক্ত?</li>
+<li>Agent কী report করবে নির্দিষ্ট?</li>
+</ul>
+<p>প্রতিটি task-এ আটটি prompt একসঙ্গে পাঠানোর প্রয়োজন নেই। যে uncertainty বা কাজ সামনে, তার জন্য যথাযথ নির্দেশটি ব্যবহার করো।</p></section><section class="chapter" id="D-sources"><p class="small">পরিশিষ্ট</p><h1>পরিশিষ্ট D · উৎস, সীমা ও মূল লেখার মানচিত্র</h1>
+<h2>এই বই কী থেকে তৈরি</h2>
+<p>প্রধান ভিত্তি তোমার দেওয়া <a href="#resource-pack" title="Companion resource: INSTRUCTION.md" class="source-link">INSTRUCTION.md</a>—তার ২৪ অধ্যায়, আরিফ–নীরার গল্প, RelayDesk case study এবং evidence-driven reconstruction দর্শন। মূল ফাইল অক্ষত রাখা হয়েছে। এই সংস্করণে নতুন dry run, concrete contract, executable lab, Python figure, workbook ও reading interface যোগ হয়েছে।</p>
+<p>মূল লেখার idea ও নতুন implementation আলাদা: SQLite schema, <code>actor/workspace/key</code> deduplication, status transition policy এবং fake provider এই tutorial-এর design। কোনো বাস্তব reference application থেকে এগুলো আবিষ্কৃত হয়নি।</p>
+<h2>মূল অধ্যায় থেকে নতুন অধ্যায়ে</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>মূল লেখার বিষয়</th>
+<th>নতুন পাঠ</th>
+<th>যোগ হওয়া অনুশীলন/উপকরণ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>১ · Surface/System</td>
+<td><a href="#01-surface-system">০১</a></td>
+<td>layered figure, scope contract</td>
+</tr>
+<tr>
+<td>২ · Investigation</td>
+<td><a href="#02-reconnaissance">০২</a></td>
+<td>৩০ মিনিটের recon ও baseline</td>
+</tr>
+<tr>
+<td>৩ · Evidence</td>
+<td><a href="#03-evidence">০৩</a></td>
+<td>JSON record, traceability figure</td>
+</tr>
+<tr>
+<td>৪ · Inventory</td>
+<td><a href="#04-product-map">০৪</a></td>
+<td>feature card ও journey matrix</td>
+</tr>
+<tr>
+<td>৫ · Scientific investigation</td>
+<td><a href="#05-experiments">০৫</a></td>
+<td>hypothesis table, priority chart</td>
+</tr>
+<tr>
+<td>৬ · UI</td>
+<td><a href="#06-ui-state">০৬</a></td>
+<td>outcome_unknown, optimistic conflict</td>
+</tr>
+<tr>
+<td>৭ · API</td>
+<td><a href="#07-api-contract">০৭</a></td>
+<td>error JSON, cursor dry run</td>
+</tr>
+<tr>
+<td>৮ · Business logic</td>
+<td><a href="#08-domain-rules">০৮</a></td>
+<td>transition ও decision table</td>
+</tr>
+<tr>
+<td>৯ · Data</td>
+<td><a href="#09-data-lifecycle">০৯</a></td>
+<td>deletion ও stale-event timeline</td>
+</tr>
+<tr>
+<td>১০ · Concurrency/queues</td>
+<td><a href="#10-time-concurrency">১০</a></td>
+<td>SQL condition, outbox crash windows</td>
+</tr>
+<tr>
+<td>১১ · Network</td>
+<td><a href="#11-network">১১</a></td>
+<td>fingerprint সীমা, stream timeline</td>
+</tr>
+<tr>
+<td>১২ · Security</td>
+<td><a href="#12-security">১২</a></td>
+<td>actor/resource tests</td>
+</tr>
+<tr>
+<td>১৩ · Observability</td>
+<td><a href="#13-observability">১৩</a></td>
+<td>trace plot, SLI arithmetic</td>
+</tr>
+<tr>
+<td>১৪ · Performance</td>
+<td><a href="#14-performance">১৪</a></td>
+<td>latency, backlog, retry plots</td>
+</tr>
+<tr>
+<td>১৫ · Architecture</td>
+<td><a href="#15-architecture">১৫</a></td>
+<td>alternatives ও teaching ADR</td>
+</tr>
+<tr>
+<td>১৬ · Implementation</td>
+<td><a href="#16-vertical-lab">১৬</a></td>
+<td>executable SQLite lab</td>
+</tr>
+<tr>
+<td>১৭ · Verification</td>
+<td><a href="#17-verification">১৭</a></td>
+<td>oracle, heatmap, discrepancy</td>
+</tr>
+<tr>
+<td>১৮ · Four scenarios</td>
+<td><a href="#18-four-worlds">১৮</a></td>
+<td>চারটি domain-specific dry run</td>
+</tr>
+<tr>
+<td>১৯ · Multi-agent</td>
+<td><a href="#19-agent-direction">১৯</a></td>
+<td>task contract ও steering</td>
+</tr>
+<tr>
+<td>২০ · Production</td>
+<td><a href="#20-production">২০</a></td>
+<td>migration ও restore rehearsal</td>
+</tr>
+<tr>
+<td>২১ · Fidelity</td>
+<td><a href="#21-fidelity">২১</a></td>
+<td>দুই denominator ও release gate</td>
+</tr>
+<tr>
+<td>২২ · ৩০ দিন</td>
+<td><a href="#22-practice-plan">২২</a></td>
+<td>প্রতিদিনের artifact, timeline</td>
+</tr>
+<tr>
+<td>২৩ · Daily loop</td>
+<td><a href="#23-daily-loop">২৩</a></td>
+<td>handoff ও incident walkthrough</td>
+</tr>
+<tr>
+<td>২৪ · Heuristics</td>
+<td><a href="#24-field-guide">২৪</a></td>
+<td>২৫টি review প্রশ্ন</td>
+</tr>
+</tbody>
+</table></div>
+<h2>প্রামাণ্য technical references</h2>
+<p>নিচের উৎসগুলো ২০২৬-১০-২৯ তারিখে দেখা হয়েছে। এগুলো নির্দিষ্ট semantics বুঝতে সাহায্য করে; RelayDesk scenario-গুলো তাদের case study নয়। পাঠে সংশ্লিষ্ট দাবির পাশেও link আছে।</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>উৎস</th>
+<th>এই বইয়ে কেন প্রাসঙ্গিক</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110: HTTP Semantics</a></td>
+<td>method semantics ও conditional requests</td>
+</tr>
+<tr>
+<td><a href="https://www.rfc-editor.org/rfc/rfc9457.html">RFC 9457: Problem Details</a></td>
+<td>machine-readable HTTP error shape</td>
+</tr>
+<tr>
+<td><a href="https://www.postgresql.org/docs/current/transaction-iso.html">PostgreSQL transaction isolation</a></td>
+<td>database-specific concurrency semantics</td>
+</tr>
+<tr>
+<td><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html">AWS transactional outbox</a></td>
+<td>dual-write gap ও duplicate delivery</td>
+</tr>
+<tr>
+<td><a href="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html">OWASP authorization</a></td>
+<td>permission enforcement principles</td>
+</tr>
+<tr>
+<td><a href="https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html">W3C keyboard accessibility</a></td>
+<td>keyboard-operable functionality</td>
+</tr>
+<tr>
+<td><a href="https://opentelemetry.io/docs/concepts/signals/traces/">OpenTelemetry traces</a></td>
+<td>spans ও related operation context</td>
+</tr>
+<tr>
+<td><a href="https://sre.google/sre-book/monitoring-distributed-systems/">Google SRE monitoring</a></td>
+<td>service signals ও diagnosis</td>
+</tr>
+<tr>
+<td><a href="https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/">AWS retries/backoff/jitter</a></td>
+<td>retries-এর চাপ ও timing</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/sqlite3.html">Python sqlite3</a></td>
+<td>local file database ও transaction API</td>
+</tr>
+</tbody>
+</table></div>
+<h2>ডেটার তিনটি পরিচয়</h2>
+<p><strong>Conceptual:</strong> layer, evidence chain, state machine, data ownership ও failure diagrams। এগুলোর geometry কোনো measurement নয়।</p>
+<p><strong>Synthetic:</strong> <code>data/</code>-র latency, queue, retry, priority, verification matrix ও fidelity counts। এগুলো শিক্ষার জন্য বানানো; real app-এর benchmark বা test report নয়।</p>
+<p><strong>Executed local result:</strong> <code>reports/lab-results.json</code> এবং verification artifacts। এগুলো এই repository-র lab ও document validation-এর ফল; real reference-এর equivalence proof নয়।</p>
+<h2>এই সংস্করণের scope</h2>
+<p>এই বই product behavior, reconstruction workflow এবং AI-agent collaboration শেখায়। Native binary analysis, assembly, firmware, advanced OT/CRDT algorithm, formal verification ও real payment integration-এর গভীর কোর্স আলাদা লাগবে। এখানে তাদের সীমা চিহ্নিত করে প্রয়োজনীয় প্রশ্ন শেখানো হয়েছে।</p>
+<p>দ্বিতীয় সংস্করণে ২২টি নতুন বাংলা দৃশ্য যোগ হয়েছে: form-এর screenshot mockup, request-এর খাম, retry-এর রসিদ, workspace-এর দরজা, before/after comparison ও ছোট conversation। এগুলো শিক্ষামূলক illustration; বাস্তব product-এর screenshot নয়। Lab snapshot-টি চালানো <code>reports/lab-results.json</code> থেকে নেওয়া। সব মিলিয়ে ৩৬টি visual আছে। Statistical chart-এর technical label ইংরেজিতে; নতুন দৃশ্যের label বাংলায়। ছবি ছাড়াও সংলগ্ন text/table-এ মূল অর্থ পাওয়া যায়।</p></section>
+<section class="resources" id="resource-pack"><h1>সংযুক্ত ব্যবহারিক উপকরণ</h1>
+<p>এই PDF-তে <code>RelayDesk-Book-Resources.zip</code> নামে একটি attachment আছে। একই ZIP PDF-এর পাশেও আলাদাভাবে দেওয়া হয়েছে। Attachment সমর্থিত PDF reader-এর Attachments panel থেকে এটি সংরক্ষণ করা যায়।</p>
+<table><thead><tr><th>ফোল্ডার / ফাইল</th><th>কী পাবে</th></tr></thead><tbody>
+<tr><td>chapters/, appendices/</td><td>সব সম্পাদনাযোগ্য বাংলা অধ্যায় ও পরিশিষ্ট</td></tr>
+<tr><td>lab/</td><td>Service implementation, demonstration ও ১৪টি contract test</td></tr>
+<tr><td>examples/, data/</td><td>JSON records, synthetic CSV, calculated summary</td></tr>
+<tr><td>templates/</td><td>নিজের project-এর জন্য control notebook</td></tr>
+<tr><td>assets/</td><td>PNG/SVG charts ও বাংলা font-এর license</td></tr>
+<tr><td>scripts/, requirements*</td><td>বই/ছবি/PDF আবার তৈরির উপকরণ</td></tr>
+<tr><td>reports/</td><td>আগে চালানো lab verification ও ফল</td></tr>
+</tbody></table><p>ZIP খুলে lab চালাতে:</p><pre><code>python3 lab/run_lab.py
+python3 -m unittest discover -s lab -p 'test_*.py' -v</code></pre>
+<p>Chart ও HTML rebuild করতে README-এর নির্দেশনা দেখো। PDF build-এর জন্য <code>requirements-pdf.txt</code> install করে <code>python3 scripts/build_pdf.py</code> চালানো যায়। Linux-এ Pango/Harfbuzz-এর system libraries-ও প্রয়োজন।</p>
+<p class="small">সংযুক্ত code কোনো network call বা বাস্তব email পাঠায় না। এটি শিক্ষামূলক service-level lab।</p></section>
+</body></html>

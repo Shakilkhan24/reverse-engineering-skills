@@ -1,0 +1,6 @@
+# Additional dependencies for scripts/make_visual_stories.py.
+# Cairo shared library is also needed. Fonts and licenses are bundled in assets/fonts/.
+cairosvg==2.9.1
+fonttools==4.68.0
+uharfbuzz==0.57.0
+pillow==13.0.0

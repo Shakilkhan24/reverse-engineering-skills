@@ -1,0 +1,105 @@
+{
+  "executed_at_utc": "2026-10-29T06:39:56.372137+00:00",
+  "python": "3.11.15 (main, Jun  2 2026, 22:26:03) [Clang 22.1.3 ]",
+  "sqlite": "3.53.1",
+  "command": "python scripts/verify_book.py",
+  "source_sha256": "0a324676ca17bab5f84d14413e2439aa747e52476b6038e726c74c5c192a30de",
+  "chapters": 24,
+  "appendices": 4,
+  "figures": 36,
+  "chapter_visuals": {
+    "01-surface-system": 2,
+    "02-reconnaissance": 1,
+    "03-evidence": 2,
+    "04-product-map": 1,
+    "05-experiments": 2,
+    "06-ui-state": 2,
+    "07-api-contract": 1,
+    "08-domain-rules": 1,
+    "09-data-lifecycle": 2,
+    "10-time-concurrency": 3,
+    "11-network": 1,
+    "12-security": 1,
+    "13-observability": 1,
+    "14-performance": 4,
+    "15-architecture": 1,
+    "16-vertical-lab": 1,
+    "17-verification": 2,
+    "18-four-worlds": 1,
+    "19-agent-direction": 1,
+    "20-production": 1,
+    "21-fidelity": 2,
+    "22-practice-plan": 1,
+    "23-daily-loop": 1,
+    "24-field-guide": 1
+  },
+  "checked_local_links": 319,
+  "parsed_json_code_blocks": 20,
+  "lab_tests": 14,
+  "test_results": [
+    {
+      "id": "test_relaydesk.ContractTests.test_01_persistence_after_reopen",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_02_same_key_replays_one_ticket_and_event",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_03_changed_payload_conflicts",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_04_cross_workspace_read_and_write_denied",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_05_stale_version_rejected",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_06_invalid_transition_preserves_state",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_07_precommit_fault_rolls_back_every_record",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_08_provider_ack_gap_survives_reopen",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_09_provider_failure_leaves_pending_work",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_10_overlapping_duplicate_requests",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_11_overlapping_versioned_updates",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_12_validation_boundaries",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_13_key_scope_is_actor_and_workspace",
+      "result": "PASS"
+    },
+    {
+      "id": "test_relaydesk.ContractTests.test_14_replay_returns_original_response_after_transition",
+      "result": "PASS"
+    }
+  ],
+  "problems": [],
+  "html_validation": "structural plus Chromium desktop/mobile interaction checks",
+  "limitations": [
+    "No real target comparison",
+    "No load benchmark",
+    "Fake external provider",
+    "Injected exceptions are not power-loss tests"
+  ]
+}

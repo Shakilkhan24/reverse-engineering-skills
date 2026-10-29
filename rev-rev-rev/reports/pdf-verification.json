@@ -1,0 +1,20 @@
+{
+  "pdf": "Reverse-Engineering-Bangla.pdf",
+  "pages": 90,
+  "chapters_and_appendices": 28,
+  "figures": 36,
+  "bookmarks": 167,
+  "internal_links": 151,
+  "embedded_bengali_fonts": [
+    "LHHHOF+BookBengali-Bold",
+    "JLXNIB+BookBengali"
+  ],
+  "attachment_files": 149,
+  "empty_pages": [],
+  "out_of_page_text": [],
+  "replacement_characters": 0,
+  "workbook_questions": "Q01–Q24 found",
+  "pdf_sha256": "ac77c74934705eb96c3bba352feb0d1203c2d1044efeb872db2f4056fe5ca730",
+  "bytes": 12857950,
+  "visual_review": "All-page overview plus full-size cover, TOC, table/code and workbook samples"
+}

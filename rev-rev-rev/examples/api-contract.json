@@ -1,0 +1,10 @@
+{
+  "kind": "illustrative_contract_not_discovered_api",
+  "operation": "create_ticket",
+  "http_proposal": {"method":"POST","path":"/api/workspaces/{workspace_id}/tickets"},
+  "request": {"title":"Login failure","idempotency_key":"op-001"},
+  "success": {"status":201,"body":{"id":"ticket_001","workspace_id":"ws_a","title":"Login failure","status":"open","version":1}},
+  "rules": ["Authenticated actor is supplied by trusted server context", "Membership required", "Title is trimmed and must contain 1..120 characters", "Same actor, workspace, key and normalized payload replays the original result", "Same scoped key with different payload is a conflict"],
+  "errors": {"not_member":403,"invalid_title":422,"key_payload_mismatch":409},
+  "lab_boundary": "Python lab implements service operations, not HTTP endpoints"
+}

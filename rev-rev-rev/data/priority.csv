@@ -1,0 +1,6 @@
+question,impact_1_to_5,uncertainty_0_to_1,effort_hours,score
+Tenant boundary,5,0.9,1,4.5
+Duplicate create,5,0.8,2,2.0
+Stale update,4,0.7,2,1.4
+Search freshness,3,0.6,2,0.8999999999999999
+Hover timing,1,0.4,1,0.4

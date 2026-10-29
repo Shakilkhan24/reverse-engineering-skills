@@ -1,0 +1,21 @@
+{
+  "kind": "synthetic_teaching_data",
+  "seed": 42,
+  "latency": {
+    "sample_count": 100,
+    "mean_ms": 175.0,
+    "p50_ms": 100,
+    "p95_ms": 200,
+    "p99_ms": 1500,
+    "percentile_method": "nearest rank"
+  },
+  "fidelity": {
+    "total": 50,
+    "passed": 42,
+    "pass_rate": 0.84
+  },
+  "queue": {
+    "peak": 20,
+    "end": 0
+  }
+}

@@ -1,0 +1,270 @@
+[
+  {
+    "file": "01-system-layers",
+    "kind": "conceptual",
+    "data": null
+  },
+  {
+    "file": "02-evidence-chain",
+    "kind": "conceptual",
+    "data": null
+  },
+  {
+    "file": "03-experiment-priority",
+    "kind": "synthetic",
+    "data": "data/priority.csv"
+  },
+  {
+    "file": "04-ui-state",
+    "kind": "conceptual",
+    "data": null
+  },
+  {
+    "file": "05-data-map",
+    "kind": "conceptual",
+    "data": null
+  },
+  {
+    "file": "06-concurrency",
+    "kind": "conceptual",
+    "data": null
+  },
+  {
+    "file": "07-outbox",
+    "kind": "conceptual",
+    "data": null
+  },
+  {
+    "file": "08-trace",
+    "kind": "synthetic",
+    "data": null
+  },
+  {
+    "file": "09-latency",
+    "kind": "synthetic",
+    "data": "data/latency.csv"
+  },
+  {
+    "file": "10-queue",
+    "kind": "synthetic",
+    "data": "data/queue.csv"
+  },
+  {
+    "file": "11-retries",
+    "kind": "synthetic",
+    "data": "data/retries.csv"
+  },
+  {
+    "file": "12-verification",
+    "kind": "synthetic",
+    "data": "data/verification.csv"
+  },
+  {
+    "file": "13-fidelity",
+    "kind": "synthetic",
+    "data": "data/fidelity.csv"
+  },
+  {
+    "file": "14-practice",
+    "kind": "synthetic",
+    "data": "data/practice-plan.csv"
+  },
+  {
+    "file": "15-refresh-reveal",
+    "kind": "conceptual",
+    "chapter": "01",
+    "language": "bn",
+    "title": "একই রকম দেখাচ্ছে। Refresh দিলে?",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "16-repository-map",
+    "kind": "conceptual",
+    "chapter": "02",
+    "language": "bn",
+    "title": "একটি bug খুঁজতে পাঁচটি জায়গা",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "17-evidence-sort",
+    "kind": "conceptual",
+    "chapter": "03",
+    "language": "bn",
+    "title": "দেখেছি, ভেবেছি, না-জানা—তিনটি আলাদা ঘর",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "18-journey-strip",
+    "kind": "conceptual",
+    "chapter": "04",
+    "language": "bn",
+    "title": "একটি ticket-এর ছোট যাত্রা",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "19-two-clicks",
+    "kind": "conceptual",
+    "chapter": "05",
+    "language": "bn",
+    "title": "দুই click দেখে সিদ্ধান্ত নয়—request-ও গুনো",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "20-ui-contact-sheet",
+    "kind": "conceptual",
+    "chapter": "06",
+    "language": "bn",
+    "title": "একই form, ছয়টি আলাদা মুহূর্ত",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "21-api-envelope",
+    "kind": "conceptual",
+    "chapter": "07",
+    "language": "bn",
+    "title": "একটি request-এর খাম খুলে দেখি",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "22-state-metro",
+    "kind": "conceptual",
+    "chapter": "08",
+    "language": "bn",
+    "title": "Ticket-এর চলার পথ",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "23-delete-shadows",
+    "kind": "conceptual",
+    "chapter": "09",
+    "language": "bn",
+    "title": "Delete চাপলে কোন কপিগুলো থাকে?",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "24-retry-receipts",
+    "kind": "conceptual",
+    "chapter": "10",
+    "language": "bn",
+    "title": "একই রসিদ, নাকি নতুন অর্ডার?",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "25-network-curtain",
+    "kind": "conceptual",
+    "chapter": "11",
+    "language": "bn",
+    "title": "Gate-এর নাম দেখে ভেতরের ঘর চেনা যায়?",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "26-workspace-doors",
+    "kind": "conceptual",
+    "chapter": "12",
+    "language": "bn",
+    "title": "দুটি workspace, দুটি দরজা",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "27-hundred-requests",
+    "kind": "synthetic",
+    "chapter": "14",
+    "language": "bn",
+    "title": "একশো request-কে একশো বিন্দু ভাবো",
+    "generator": "scripts/make_visual_stories.py",
+    "data": "data/latency.csv"
+  },
+  {
+    "file": "28-architecture-rooms",
+    "kind": "conceptual",
+    "chapter": "15",
+    "language": "bn",
+    "title": "এক বাড়ির ঘর, নাকি আলাদা বাড়ি?",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "29-lab-snapshots",
+    "kind": "executed_local_lab",
+    "chapter": "16",
+    "language": "bn",
+    "title": "Lab চালিয়ে যে সংখ্যাগুলো পাওয়া যায়",
+    "generator": "scripts/make_visual_stories.py",
+    "data": "reports/lab-results.json"
+  },
+  {
+    "file": "30-cache-before-after",
+    "kind": "conceptual",
+    "chapter": "17",
+    "language": "bn",
+    "title": "এক ticket, দুই জায়গায় দুই নাম",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "31-four-worlds",
+    "kind": "conceptual",
+    "chapter": "18",
+    "language": "bn",
+    "title": "চার product-এ চারটি ছোট প্রশ্ন",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "32-agent-conversation",
+    "kind": "conceptual",
+    "chapter": "19",
+    "language": "bn",
+    "title": "Agent-কে পরের কাজটি স্পষ্ট করে দাও",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "33-migration-bridge",
+    "kind": "conceptual",
+    "chapter": "20",
+    "language": "bn",
+    "title": "Field বদলানোর সময় দুই version-ই চলছে",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "34-release-gate",
+    "kind": "conceptual",
+    "chapter": "21",
+    "language": "bn",
+    "title": "সবুজ অনেকগুলো। তবু দরজা বন্ধ।",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "35-daily-workbench",
+    "kind": "conceptual",
+    "chapter": "23",
+    "language": "bn",
+    "title": "আজকের ডেস্কে তিনটি ছোট খাতা",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  },
+  {
+    "file": "36-memory-postcards",
+    "kind": "conceptual",
+    "chapter": "24",
+    "language": "bn",
+    "title": "বই বন্ধ করে এই ছয়টি প্রশ্ন বলো",
+    "generator": "scripts/make_visual_stories.py",
+    "data": null
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "kind": "executed_local_teaching_lab",
+  "network_calls": 0,
+  "duplicate_submission": {
+    "same_id": true,
+    "ticket_count": 1
+  },
+  "reopen": {
+    "persisted": true
+  },
+  "cross_workspace": {
+    "error": "forbidden"
+  },
+  "changed_payload": {
+    "error": "key_payload_mismatch"
+  },
+  "stale_update": {
+    "error": "version_conflict",
+    "version": 2
+  },
+  "ack_gap": {
+    "provider_effects": 1,
+    "pending_events": 1
+  },
+  "worker_retry": {
+    "provider_effects": 1,
+    "pending_events": 0
+  },
+  "limitations": [
+    "No HTTP/UI/authentication",
+    "Fake provider guarantees durable deduplication",
+    "No real email or queue",
+    "No throughput benchmark"
+  ]
+}

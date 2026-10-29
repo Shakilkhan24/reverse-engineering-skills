@@ -1,0 +1,13 @@
+{
+  "executed_at_utc": "2026-10-29T06:40:03.074944+00:00",
+  "browser": "156.0.8078.4",
+  "book_sha256": "cfcf0fab97bf4b3bec429e66c82030604498ca570c831fae2a81c65d80ae3d6a",
+  "checks": [
+    "36 images loaded; 36 accessible zoom buttons; bundled Bengali font loaded",
+    "Desktop click, zoom, fit, keyboard Enter, Escape and focus return passed",
+    "Theme toggle and chapter search passed",
+    "390px mobile viewport: no page overflow; modal zoom/pan/close passed"
+  ],
+  "errors": [],
+  "scope": "Chromium desktop and mobile viewport; image loading, zoom interaction, fonts, theme and chapter search. Screenshots saved for visual inspection."
+}

@@ -1,0 +1,4 @@
+[
+  {"id":"U-001","question":"Original কীভাবে duplicate request সামলায়?","impact":"high","state":"open","next_experiment":"অনুমোদিত test instance-এ একই key ও payload দিয়ে দুই request","replacement_decision":"actor + workspace + key scoped deduplication"},
+  {"id":"U-002","question":"Original-এর database engine কী?","impact":"low_for_behavioral_scope","state":"deferred","next_experiment":null,"replacement_decision":"শিক্ষামূলক lab-এ SQLite"}
+]

@@ -1,0 +1,5 @@
+status,count
+PASS,42
+FAIL,3
+BLOCKED,2
+NOT IMPLEMENTED,3

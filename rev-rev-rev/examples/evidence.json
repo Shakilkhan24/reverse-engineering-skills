@@ -1,0 +1,12 @@
+{
+  "id": "E-001",
+  "synthetic": true,
+  "question": "নতুন connection-এ ticket পাওয়া যায় কি?",
+  "classification": "OBSERVED",
+  "context": {"target": "local teaching lab", "actor": "alice", "workspace": "ws_a"},
+  "observation": "প্রথম connection বন্ধ করে আবার খুললে একই ticket পাওয়া গেছে।",
+  "artifact": "../reports/lab-results.json",
+  "requirement_ids": ["REQ-001"],
+  "limitations": ["বিদ্যুৎ বিভ্রাট বা disk failure পরীক্ষা নয়", "বাস্তব target-এর evidence নয়"],
+  "next_question": "Response হারানোর পর retry করলে ticket সংখ্যা কত হয়?"
+}
