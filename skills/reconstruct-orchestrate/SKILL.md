@@ -1,6 +1,6 @@
 ---
 name: reconstruct-orchestrate
-description: Coordinate evidence-driven software reconstruction across investigation, specifications, implementation, verification, and delivery. Use for rebuilding an identified reference product or resuming a reconstruction project; do not impose this lifecycle on an ordinary small code edit.
+description: Coordinate evidence-driven reverse engineering and software reconstruction across investigation, specifications, implementation, verification, and delivery. Use for analyzing, rebuilding, or resuming work on an identified reference product; an analysis-only request ends at investigated findings and coverage, not code. Do not impose this lifecycle on an ordinary small code edit.
 ---
 
 # Coordinate reconstruction
@@ -81,8 +81,8 @@ after merges. Fall back to the same sequence in one agent when delegation is abs
   `project_state.py gate <state.json>` to check recorded evidence. Its success is a finite
   ledger check, not global equivalence or automatic deployment authorization.
 
-For analysis deliverables, check question coverage and evidence limitations instead of
-pretending implementation gates passed. For partial delivery, retain the full denominator
+For analysis deliverables, deliver the surface map's explored/partial/dark coverage and
+evidence limitations instead of pretending implementation gates passed. For partial delivery, retain the full denominator
 and explain blocked/deferred requirements. End with investigated facts, code delivered,
 checks actually run, limitations/assumptions, and the next three useful actions (or state
 that no required work remains). Do not call a prototype production-ready.

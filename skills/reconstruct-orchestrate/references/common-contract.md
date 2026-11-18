@@ -77,5 +77,8 @@ slice and release criteria, not compulsory separate ceremonies for every edit.
 Distinguish completed scope from the larger target. If a critical requirement remains blocked,
 report a partial result even if other work passes. Stop unproductive investigation of
 inaccessible internals and design a documented compatible interface where appropriate.
-Finite gates validate recorded evidence and internal consistency; neither they nor this
-skill library prove total requirement discovery, honest records, or production suitability.
+For analysis, completeness means reaching the extraction ceiling of each reachable source and
+naming every region left dark by the available access; report that as explored/partial/dark
+coverage, never as a single fidelity or completeness percentage. Finite gates validate recorded
+evidence and internal consistency; neither they nor this skill library prove total requirement
+discovery, honest records, or production suitability.

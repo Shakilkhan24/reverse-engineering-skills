@@ -40,9 +40,10 @@ verification to send a bounded question back to investigation or specification.
    Do not let that slice erase unknown workflows from the inventory.
 5. Route a mismatch according to cause: absent evidence → investigate; ambiguous contract →
    specify; defect → owning implementation skill; bad fixture/environment → verify/operate.
-6. Analysis-only requests end with findings and limitations. A public screenshot supports
-   visible observations; it cannot unlock hidden service claims. A UI-only request remains
-   UI-only even if this library can build backend systems.
+6. Analysis-only requests end with the surface map's explored/partial/dark coverage, findings,
+   and limitations; they do not proceed to specify or implementation. A public screenshot
+   supports visible observations; it cannot unlock hidden service claims. A UI-only request
+   remains UI-only even if this library can build backend systems.
 
 The machine-readable [skill map](skill-map.json) inventories the same boundaries. It is
 metadata for validation and planning, not executable cross-skill invocation.
